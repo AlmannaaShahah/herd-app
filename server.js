@@ -13,7 +13,7 @@ const SECRET = process.env.JWT_SECRET || "herd_secret";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 const db = mysql.createPool(
   process.env.MYSQL_URL ||
