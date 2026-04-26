@@ -71,7 +71,7 @@ app.post("/api/register", async (req, res) => {
 
   const hash = await bcrypt.hash(password, 10);
   await db.query(
-    "INSERT INTO farmers (farm_name,owner_name,email,password_hash,status) VALUES (?,?,?,?,'pending')",
+    "INSERT INTO farmers (farm_name,owner_name,email,password_hash,status) VALUES (?,?,?,?,'active')",
     [farm_name, owner_name, email, hash]
   );
   res.json({ success: true, message: "تم التسجيل بنجاح — في انتظار موافقة الإدارة" });
