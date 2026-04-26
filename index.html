@@ -7,23 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
---bg:#f7f3ed;--s1:#ffffff;--s2:#faf7f2;--s3:#f0ebe2;
---border:#e2d9cc;--border2:#d4c8b8;
---green:#2d7a3a;--green2:#3a9648;--green3:#e8f5ea;
---gold:#b8860b;--gold2:#d4a017;--gold3:#fff8e7;
---brown:#6b4c2a;--brown2:#8b6340;--brown3:#f5ede0;
---red:#c0392b;--red2:#e74c3c;--red3:#fdecea;
---blue:#1a5276;--blue2:#2980b9;--blue3:#eaf4fb;
---text:#2c1810;--muted:#7a6555;--muted2:#b8a898;
---r:12px;
+  --bg:#f7f3ed;--s1:#ffffff;--s2:#faf7f2;--s3:#f0ebe2;
+  --border:#e2d9cc;--border2:#d4c8b8;
+  --green:#2d7a3a;--green2:#3a9648;--green3:#e8f5ea;
+  --gold:#b8860b;--gold2:#d4a017;--gold3:#fff8e7;
+  --brown:#6b4c2a;--brown2:#8b6340;--brown3:#f5ede0;
+  --red:#c0392b;--red2:#e74c3c;--red3:#fdecea;
+  --blue:#1a5276;--blue2:#2980b9;--blue3:#eaf4fb;
+  --text:#2c1810;--muted:#7a6555;--muted2:#b8a898;
+  --r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-font-family:'Tajawal',sans-serif;
-background:var(--bg);
-background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-color:var(--text);min-height:100vh;direction:rtl;
+  font-family:'Tajawal',sans-serif;
+  background:var(--bg);
+  position:relative;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color:var(--text);min-height:100vh;direction:rtl;
 }
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -32,18 +33,18 @@ color:var(--text);min-height:100vh;direction:rtl;
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(45,122,58,.1)}50%{box-shadow:0 0 40px rgba(45,122,58,.25)}}
 
 /* ─── SCREENS ─── */
-.screen{display:none;min-height:100vh;}
+.screen{display:none;min-height:100vh;position:absolute;top:0;left:0;width:100%;}
 .screen.on{display:block;}
 
 /* ─── LANDING ─── */
 #sc-land{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;}
 #land{text-align:center;max-width:560px;}
 .land-logo{
-width:90px;height:90px;margin:0 auto 20px;
-background:linear-gradient(135deg,var(--green),var(--green2));
-border-radius:24px;display:flex;align-items:center;justify-content:center;
-font-size:40px;box-shadow:0 8px 32px rgba(45,122,58,.25);
-animation:glow 3s ease-in-out infinite;
+  width:90px;height:90px;margin:0 auto 20px;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  border-radius:24px;display:flex;align-items:center;justify-content:center;
+  font-size:40px;box-shadow:0 8px 32px rgba(45,122,58,.25);
+  animation:glow 3s ease-in-out infinite;
 }
 .land-title{font-size:30px;font-weight:900;color:var(--green);margin-bottom:10px;}
 .land-sub{font-size:15px;color:var(--muted);margin-bottom:36px;line-height:1.8;}
@@ -61,17 +62,17 @@ animation:glow 3s ease-in-out infinite;
 /* ─── AUTH ─── */
 .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--bg);}
 .auth-card{
-background:var(--s1);border:1px solid var(--border);border-radius:20px;
-padding:36px 32px;width:420px;max-width:100%;
-box-shadow:0 8px 40px rgba(107,76,42,.1);animation:fadeUp .4s ease;
+  background:var(--s1);border:1px solid var(--border);border-radius:20px;
+  padding:36px 32px;width:420px;max-width:100%;
+  box-shadow:0 8px 40px rgba(107,76,42,.1);animation:fadeUp .4s ease;
 }
 .auth-card h2{font-size:20px;font-weight:900;color:var(--green);margin-bottom:22px;display:flex;align-items:center;gap:8px;}
 .af{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
 .af label{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.5px;}
 .af input,.af select{
-background:var(--s2);border:1.5px solid var(--border);border-radius:9px;
-padding:11px 14px;color:var(--text);font-family:'Tajawal',sans-serif;
-font-size:14px;outline:none;transition:.2s;
+  background:var(--s2);border:1.5px solid var(--border);border-radius:9px;
+  padding:11px 14px;color:var(--text);font-family:'Tajawal',sans-serif;
+  font-size:14px;outline:none;transition:.2s;
 }
 .af input:focus,.af select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(45,122,58,.08);}
 .af select option{background:var(--s1);}
@@ -103,11 +104,11 @@ font-size:14px;outline:none;transition:.2s;
 
 /* ─── HEADER ─── */
 .hdr{
-background:var(--s1);border-bottom:2px solid var(--border);
-padding:0 24px;height:62px;
-display:flex;align-items:center;gap:12px;
-position:sticky;top:0;z-index:50;
-box-shadow:0 2px 12px rgba(107,76,42,.08);
+  background:var(--s1);border-bottom:2px solid var(--border);
+  padding:0 24px;height:62px;
+  display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:50;
+  box-shadow:0 2px 12px rgba(107,76,42,.08);
 }
 .hdr-ico{width:38px;height:38px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;}
 .hdr-name{font-size:15px;font-weight:900;color:var(--green);}
@@ -257,304 +258,314 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 
 <!-- ══ LANDING ══ -->
 <div class="screen on" id="sc-land">
-<div id="land">
-<div class="land-logo">🐑</div>
-<div class="land-title">مواشيك</div>
-<div class="land-sub">سجّل حلالك، تابع مواشيك، وابقَ على اطلاع يومي على بياناتك</div>
-<div class="land-btns">
-<button class="btn bg" style="padding:13px 32px;font-size:15px" onclick="show('sc-login')">تسجيل الدخول</button>
-<button class="btn bbl" style="padding:13px 32px;font-size:15px" onclick="show('sc-register')">إنشاء حساب</button>
-</div>
-
-<div class="land-super" onclick="show('sc-super')">دخول الإدارة العليا</div>
-</div>
+  <div id="land">
+    <div class="land-logo">🐑</div>
+    <div class="land-title">مواشيك</div>
+    <div class="land-sub">سجّل حلالك، تابع مواشيك، وابقَ على اطلاع يومي على بياناتك</div>
+    <div class="land-btns">
+      <button class="btn bg" style="padding:13px 32px;font-size:15px" onclick="show('sc-login')">تسجيل الدخول</button>
+      <button class="btn bbl" style="padding:13px 32px;font-size:15px" onclick="show('sc-register')">إنشاء حساب</button>
+    </div>
+    
+    <div class="land-super" onclick="show('sc-super')">دخول الإدارة العليا</div>
+  </div>
 </div>
 
 <!-- ══ LOGIN ══ -->
 <div class="screen" id="sc-login">
-<div class="auth-wrap">
-<div class="auth-card">
-<h2>🔐 تسجيل الدخول</h2>
-<div class="af"><label>البريد الإلكتروني</label><input id="l-email" type="email" placeholder="example@email.com"></div>
-<div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
-<div class="auth-err" id="l-err"></div>
-<button class="btn bg btn-full" onclick="doLogin()">دخول →</button>
-<div class="auth-switch" onclick="show('sc-member-login')">دخول كـ <span>عضو في مزرعة</span></div>
-<div class="auth-back" onclick="show('sc-land')">← رجوع</div>
-</div>
-</div>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2>🔐 تسجيل الدخول</h2>
+      <div class="af"><label>البريد الإلكتروني</label><input id="l-email" type="email" placeholder="example@email.com"></div>
+      <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="auth-err" id="l-err"></div>
+      <button class="btn bg btn-full" onclick="doLogin()">دخول →</button>
+      <div class="auth-switch" onclick="show('sc-member-login')">دخول كـ <span>عضو في مزرعة</span></div>
+      <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ MEMBER LOGIN ══ -->
 <div class="screen" id="sc-member-login">
-<div class="auth-wrap">
-<div class="auth-card">
-<h2>👁️ دخول عضو</h2>
-<div class="af"><label>رقم المزرعة</label><input id="m-farmid" type="number" placeholder="رقم المزرعة (اسأل المشرف)"></div>
-<div class="af"><label>اسم المستخدم</label><input id="m-user" placeholder="اسم المستخدم"></div>
-<div class="af"><label>كلمة المرور</label><input id="m-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doMemberLogin()"></div>
-<div class="auth-err" id="m-err"></div>
-<button class="btn bg btn-full" onclick="doMemberLogin()">دخول →</button>
-<div class="auth-back" onclick="show('sc-login')">← رجوع</div>
-</div>
-</div>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2>👁️ دخول عضو</h2>
+      <div class="af"><label>رقم المزرعة</label><input id="m-farmid" type="number" placeholder="رقم المزرعة (اسأل المشرف)"></div>
+      <div class="af"><label>اسم المستخدم</label><input id="m-user" placeholder="اسم المستخدم"></div>
+      <div class="af"><label>كلمة المرور</label><input id="m-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doMemberLogin()"></div>
+      <div class="auth-err" id="m-err"></div>
+      <button class="btn bg btn-full" onclick="doMemberLogin()">دخول →</button>
+      <div class="auth-back" onclick="show('sc-login')">← رجوع</div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ REGISTER ══ -->
 <div class="screen" id="sc-register">
-<div class="auth-wrap">
-<div class="auth-card">
-<h2>🌾 إنشاء حساب مزرعة</h2>
-<div class="af"><label>اسم المزرعة / الحاشية</label><input id="r-farm" placeholder="مزرعة العمري"></div>
-<div class="af"><label>اسم صاحب المزرعة</label><input id="r-owner" placeholder="محمد العمري"></div>
-<div class="af"><label>البريد الإلكتروني</label><input id="r-email" type="email" placeholder="example@email.com"></div>
-<div class="af"><label>كلمة المرور</label><input id="r-pass" type="password" placeholder="6 أحرف على الأقل"></div>
-<div class="auth-err" id="r-err"></div>
-<div class="auth-ok" id="r-ok"></div>
-<button class="btn bg btn-full" id="r-btn" onclick="doRegister()">إنشاء الحساب</button>
-<div class="auth-back" onclick="show('sc-land')">← رجوع</div>
-</div>
-</div>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2>🌾 إنشاء حساب مزرعة</h2>
+      <div class="af"><label>اسم المزرعة / الحاشية</label><input id="r-farm" placeholder="مزرعة العمري"></div>
+      <div class="af"><label>اسم صاحب المزرعة</label><input id="r-owner" placeholder="محمد العمري"></div>
+      <div class="af"><label>البريد الإلكتروني</label><input id="r-email" type="email" placeholder="example@email.com"></div>
+      <div class="af"><label>كلمة المرور</label><input id="r-pass" type="password" placeholder="6 أحرف على الأقل"></div>
+      <div class="auth-err" id="r-err"></div>
+      <div class="auth-ok" id="r-ok"></div>
+      <button class="btn bg btn-full" id="r-btn" onclick="doRegister()">إنشاء الحساب</button>
+      <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ SUPER ADMIN LOGIN ══ -->
 <div class="screen" id="sc-super">
-<div class="auth-wrap">
-<div class="auth-card">
-<h2>👑 الإدارة العليا</h2>
-<div class="af"><label>اسم المستخدم</label><input id="sa-user" placeholder="superadmin"></div>
-<div class="af"><label>كلمة المرور</label><input id="sa-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSuperLogin()"></div>
-<div class="auth-err" id="sa-err"></div>
-<button class="btn bg btn-full" onclick="doSuperLogin()">دخول →</button>
-<div class="auth-back" onclick="show('sc-land')">← رجوع</div>
-</div>
-</div>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <h2>👑 الإدارة العليا</h2>
+      <div class="af"><label>اسم المستخدم</label><input id="sa-user" placeholder="superadmin"></div>
+      <div class="af"><label>كلمة المرور</label><input id="sa-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSuperLogin()"></div>
+      <div class="auth-err" id="sa-err"></div>
+      <button class="btn bg btn-full" onclick="doSuperLogin()">دخول →</button>
+      <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ MAIN APP ══ -->
 <div class="screen" id="sc-app">
-<header class="hdr">
-<div class="hdr-ico">🐑</div>
-<div>
-<div class="hdr-name" id="hdr-farm">—</div>
-<div class="hdr-farm" id="hdr-user">—</div>
-</div>
-<nav class="hdr-nav">
-<button class="nb on" onclick="goPage('dash',this)">📊 الرئيسية</button>
-<button class="nb" onclick="goPage('rep',this)">📋 التقارير</button>
-<button class="nb" id="nb-members" onclick="goPage('mbrs',this)" style="display:none">👥 الأعضاء</button>
-</nav>
-<div class="rbdg" id="rbdg">—</div>
-<button class="btn-out" onclick="doLogout()">خروج</button>
-</header>
+  <header class="hdr">
+    <div class="hdr-ico">🐑</div>
+    <div>
+      <div class="hdr-name" id="hdr-farm">—</div>
+      <div class="hdr-farm" id="hdr-user">—</div>
+    </div>
+    <nav class="hdr-nav">
+      <button class="nb on" onclick="goPage('dash',this)">📊 الرئيسية</button>
+      <button class="nb" onclick="goPage('rep',this)">📋 التقارير</button>
+      <button class="nb" id="nb-members" onclick="goPage('mbrs',this)" style="display:none">👥 الأعضاء</button>
+    </nav>
+    <div class="rbdg" id="rbdg">—</div>
+    <button class="btn-out" onclick="doLogout()">خروج</button>
+  </header>
 
-<div class="wrap">
-<!-- DASHBOARD -->
-<div class="page on" id="page-dash">
-<div class="notice" id="mem-notice">👁️ وضع العرض فقط — ليس لديك صلاحية التعديل</div>
-<div class="sbox">
-<div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase">🔍 بحث سريع</div>
-<div class="srow">
-<input class="si" id="s-inp" placeholder="رقم الحيوان... مثلاً: 001" onkeydown="if(event.key==='Enter')doSearch()">
-<button class="btn bg" onclick="doSearch()">بحث</button>
-<button class="btn bgh" onclick="clearSearch()">مسح</button>
-<button class="btn bgr" id="add-btn" onclick="openAdd()" style="display:none">＋ إضافة</button>
-</div>
-</div>
+  <div class="wrap">
+    <!-- DASHBOARD -->
+    <div class="page on" id="page-dash">
+      <div class="notice" id="mem-notice">👁️ وضع العرض فقط — ليس لديك صلاحية التعديل</div>
+      <div class="sbox">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase">🔍 بحث سريع</div>
+        <div class="srow">
+          <input class="si" id="s-inp" placeholder="رقم الحيوان... مثلاً: 001" onkeydown="if(event.key==='Enter')doSearch()">
+          <button class="btn bg" onclick="doSearch()">بحث</button>
+          <button class="btn bgh" onclick="clearSearch()">مسح</button>
+          <button class="btn bgr" id="add-btn" onclick="openAdd()" style="display:none">＋ إضافة</button>
+        </div>
+      </div>
 
-<div class="nfound" id="nfound"><p style="color:var(--red);font-size:14px;font-weight:800;">❌ لا يوجد حيوان بهذا الرقم</p></div>
+      <div class="nfound" id="nfound"><p style="color:var(--red);font-size:14px;font-weight:800;">❌ لا يوجد حيوان بهذا الرقم</p></div>
 
-<div class="rcard" id="rcard">
-<div class="rh">
-<div class="rava" id="r-ava">🐑</div>
-<div class="rt2"><h2 id="r-num">—</h2><p id="r-type">—</p></div>
-<div class="gbdg" id="r-gbdg">—</div>
-<div id="r-sbdg" style="margin-right:8px"></div>
-<div id="r-acts" style="display:flex;gap:6px;margin-right:8px"></div>
-</div>
-<div class="dgrid" id="r-dets"></div>
-<div class="nbox" id="r-nbox" style="display:none">
-<div class="dl">ملاحظات</div>
-<p id="r-ntxt" style="font-size:13px;line-height:1.8;margin-top:4px"></p>
-</div>
-<div class="csec" id="r-csec" style="display:none">
-<div class="stl">الأبناء</div>
-<div class="cgrid" id="r-clist"></div>
-</div>
-</div>
+      <div class="rcard" id="rcard">
+        <div class="rh">
+          <div class="rava" id="r-ava">🐑</div>
+          <div class="rt2"><h2 id="r-num">—</h2><p id="r-type">—</p></div>
+          <div class="gbdg" id="r-gbdg">—</div>
+          <div id="r-sbdg" style="margin-right:8px"></div>
+          <div id="r-acts" style="display:flex;gap:6px;margin-right:8px"></div>
+        </div>
+        <div class="dgrid" id="r-dets"></div>
+        <div class="nbox" id="r-nbox" style="display:none">
+          <div class="dl">ملاحظات</div>
+          <p id="r-ntxt" style="font-size:13px;line-height:1.8;margin-top:4px"></p>
+        </div>
+        <div class="csec" id="r-csec" style="display:none">
+          <div class="stl">الأبناء</div>
+          <div class="cgrid" id="r-clist"></div>
+        </div>
+      </div>
 
-<div class="sgrid">
-<div class="sc"><div class="si2" style="background:rgba(201,169,110,.12)">🐑</div><div><div class="sn" id="s-alive" style="color:var(--gold)">—</div><div class="sl">الأحياء</div></div></div>
-<div class="sc"><div class="si2" style="background:rgba(185,138,255,.12)">🐏</div><div><div class="sn" id="s-moms" style="color:var(--purple)">—</div><div class="sl">الأمهات</div></div></div>
-<div class="sc"><div class="si2" style="background:rgba(91,164,245,.12)">♂</div><div><div class="sn" id="s-males" style="color:var(--blue)">—</div><div class="sl">ذكور</div></div></div>
-<div class="sc"><div class="si2" style="background:rgba(61,214,140,.12)">♀</div><div><div class="sn" id="s-females" style="color:var(--green)">—</div><div class="sl">إناث</div></div></div>
-<div class="sc"><div class="si2" style="background:rgba(245,149,74,.12)">🍼</div><div><div class="sn" id="s-kids" style="color:var(--orange)">—</div><div class="sl">مواليد</div></div></div>
-<div class="sc"><div class="si2" style="background:rgba(100,116,139,.12)">💀</div><div><div class="sn" id="s-dead" style="color:#94a3b8">—</div><div class="sl">أموات</div></div></div>
-<div class="sc"><div class="si2" style="background:rgba(240,106,106,.12)">🔪</div><div><div class="sn" id="s-slau" style="color:var(--red)">—</div><div class="sl">ذبائح</div></div></div>
-</div>
+      <div class="sgrid">
+        <div class="sc"><div class="si2" style="background:rgba(201,169,110,.12)">🐑</div><div><div class="sn" id="s-alive" style="color:var(--gold)">—</div><div class="sl">الأحياء</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(185,138,255,.12)">🐏</div><div><div class="sn" id="s-moms" style="color:var(--purple)">—</div><div class="sl">الأمهات</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(91,164,245,.12)">♂</div><div><div class="sn" id="s-males" style="color:var(--blue)">—</div><div class="sl">ذكور</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(61,214,140,.12)">♀</div><div><div class="sn" id="s-females" style="color:var(--green)">—</div><div class="sl">إناث</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(245,149,74,.12)">🍼</div><div><div class="sn" id="s-kids" style="color:var(--orange)">—</div><div class="sl">مواليد</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(100,116,139,.12)">💀</div><div><div class="sn" id="s-dead" style="color:#94a3b8">—</div><div class="sl">أموات</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(240,106,106,.12)">🔪</div><div><div class="sn" id="s-slau" style="color:var(--red)">—</div><div class="sl">ذبائح</div></div></div>
+      </div>
 
-<div class="tsec">
-<div class="th2">
-<h3>📋 قائمة الحيوانات</h3>
-<div class="tabs">
-<button class="tab on" onclick="filt('all',this)">الكل</button>
-<button class="tab" onclick="filt('f',this)">إناث</button>
-<button class="tab" onclick="filt('m',this)">ذكور</button>
-<button class="tab" onclick="filt('mo',this)">أمهات</button>
-<button class="tab" onclick="filt('d',this)">💀</button>
-<button class="tab" onclick="filt('s',this)">🔪</button>
-</div>
-</div>
-<div class="tw">
-<table>
-<thead><tr>
-<th>الرقم</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
-<th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
-<th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
-<th>الحالة</th><th id="ac-th" style="display:none">إجراءات</th>
-</tr></thead>
-<tbody id="tbody"></tbody>
-</table>
-</div>
-</div>
-</div>
+      <div class="tsec">
+        <div class="th2">
+          <h3>📋 قائمة الحيوانات</h3>
+          <div class="tabs">
+            <button class="tab on" onclick="filt('all',this)">الكل</button>
+            <button class="tab" onclick="filt('f',this)">إناث</button>
+            <button class="tab" onclick="filt('m',this)">ذكور</button>
+            <button class="tab" onclick="filt('mo',this)">أمهات</button>
+            <button class="tab" onclick="filt('d',this)">💀</button>
+            <button class="tab" onclick="filt('s',this)">🔪</button>
+          </div>
+        </div>
+        <div class="tw">
+          <table>
+            <thead><tr>
+              <th>الرقم</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
+              <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
+              <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
+              <th>الحالة</th><th id="ac-th" style="display:none">إجراءات</th>
+            </tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-<!-- REPORT -->
-<div class="page" id="page-rep">
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-<div>
-<div style="font-size:18px;font-weight:900;color:var(--gold2)">📋 التقارير</div>
-<div style="font-size:12px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:6px"><span class="ldot"></span> يتحدث تلقائياً &nbsp;|&nbsp; <span id="rep-date"></span></div>
-</div>
-<button class="btn bg" onclick="window.print()">🖨️ طباعة</button>
-</div>
-<div class="rsec"><div class="rst">📊 ملخص الحاشية</div><div class="rgrid" id="rg1"></div></div>
-<div class="rsec"><div class="rst">🍼 الإنتاج والمواليد</div><div class="rgrid" id="rg2"></div></div>
-<div class="rsec"><div class="rst">💀 الأموات</div><div id="d-count" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>الجنس</th><th>العمر</th><th>سبب الوفاة</th><th>التاريخ</th></tr></thead><tbody id="d-tbody"></tbody></table></div>
-<div class="rsec"><div class="rst">🔪 الذبائح</div><div id="s-count" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>سبب الذبح</th><th>التاريخ</th></tr></thead><tbody id="s-tbody"></tbody></table></div>
-<div class="rsec"><div class="rst">🐑 توزيع الأنواع</div><table class="rt3"><thead><tr><th>النوع</th><th>الجنس</th><th>العدد</th><th>النسبة</th></tr></thead><tbody id="br-tbody"></tbody></table></div>
-<div class="rsec"><div class="rst">🏆 الأكثر إنتاجاً</div><table class="rt3"><thead><tr><th>الرقم</th><th>النوع</th><th>الأبناء</th><th>آخر مولود</th></tr></thead><tbody id="mt-tbody"></tbody></table></div>
-<div class="rsec"><div class="rst">✅ الجاهزات للإنجاب</div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>النوع</th><th>الميلاد</th></tr></thead><tbody id="rf-tbody"></tbody></table></div>
-</div>
+    <!-- REPORT -->
+    <div class="page" id="page-rep">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <div>
+          <div style="font-size:18px;font-weight:900;color:var(--gold2)">📋 التقارير</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:6px"><span class="ldot"></span> يتحدث تلقائياً &nbsp;|&nbsp; <span id="rep-date"></span></div>
+        </div>
+        <button class="btn bg" onclick="window.print()">🖨️ طباعة</button>
+      </div>
+      <div class="rsec"><div class="rst">📊 ملخص الحاشية</div><div class="rgrid" id="rg1"></div></div>
+      <div class="rsec"><div class="rst">🍼 الإنتاج والمواليد</div><div class="rgrid" id="rg2"></div></div>
+      <div class="rsec"><div class="rst">💀 الأموات</div><div id="d-count" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>الجنس</th><th>العمر</th><th>سبب الوفاة</th><th>التاريخ</th></tr></thead><tbody id="d-tbody"></tbody></table></div>
+      <div class="rsec"><div class="rst">🔪 الذبائح</div><div id="s-count" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>سبب الذبح</th><th>التاريخ</th></tr></thead><tbody id="s-tbody"></tbody></table></div>
+      <div class="rsec"><div class="rst">🐑 توزيع الأنواع</div><table class="rt3"><thead><tr><th>النوع</th><th>الجنس</th><th>العدد</th><th>النسبة</th></tr></thead><tbody id="br-tbody"></tbody></table></div>
+      <div class="rsec"><div class="rst">🏆 الأكثر إنتاجاً</div><table class="rt3"><thead><tr><th>الرقم</th><th>النوع</th><th>الأبناء</th><th>آخر مولود</th></tr></thead><tbody id="mt-tbody"></tbody></table></div>
+      <div class="rsec"><div class="rst">✅ الجاهزات للإنجاب</div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>النوع</th><th>الميلاد</th></tr></thead><tbody id="rf-tbody"></tbody></table></div>
+    </div>
 
-<!-- MEMBERS -->
-<div class="page" id="page-mbrs">
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-<div style="font-size:18px;font-weight:900;color:var(--gold2)">👥 الأعضاء</div>
-<button class="btn bgr" onclick="openAddMember()">＋ إضافة عضو</button>
-</div>
-<div id="farm-id-notice" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--muted)"></div>
-<div class="ugrid2" id="mbr-grid"></div>
-</div>
-</div>
+    <!-- MEMBERS -->
+    <div class="page" id="page-mbrs">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="font-size:18px;font-weight:900;color:var(--gold2)">👥 الأعضاء</div>
+        <button class="btn bgr" onclick="openAddMember()">＋ إضافة عضو</button>
+      </div>
+      <div id="farm-id-notice" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--muted)"></div>
+      <div class="ugrid2" id="mbr-grid"></div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ SUPER ADMIN APP ══ -->
 <div class="screen" id="sc-super-app">
-<header class="hdr">
-<div class="hdr-ico">👑</div>
-<div><div class="hdr-name">الإدارة العليا</div><div class="hdr-farm">لوحة تحكم المنصة</div></div>
-<nav class="hdr-nav">
-<button class="nb on" onclick="goSuperPage('farmers',this)">🌾 المزارعون</button>
-<button class="nb" onclick="goSuperPage('stats',this)">📊 الإحصائيات</button>
-</nav>
-<div class="rbdg rb-super">👑 سوبر أدمن</div>
-<button class="btn-out" onclick="doLogout()">خروج</button>
-</header>
-<div class="wrap">
-<div class="page on" id="sp-farmers">
-<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-<div style="font-size:18px;font-weight:900;color:var(--gold2)">🌾 المزارعون المسجلون</div>
-<button class="btn bg" onclick="loadFarmers()">🔄 تحديث</button>
-</div>
-<div class="farms-grid" id="farms-list"></div>
-</div>
-<div class="page" id="sp-stats">
-<div style="font-size:18px;font-weight:900;color:var(--gold2);margin-bottom:16px">📊 إحصائيات المنصة</div>
-<div class="sgrid" id="super-stats"></div>
-</div>
-</div>
+  <header class="hdr">
+    <div class="hdr-ico">👑</div>
+    <div><div class="hdr-name">الإدارة العليا</div><div class="hdr-farm">لوحة تحكم المنصة</div></div>
+    <nav class="hdr-nav">
+      <button class="nb on" onclick="goSuperPage('farmers',this)">🌾 المزارعون</button>
+      <button class="nb" onclick="goSuperPage('stats',this)">📊 الإحصائيات</button>
+    </nav>
+    <div class="rbdg rb-super">👑 سوبر أدمن</div>
+    <button class="btn-out" onclick="doLogout()">خروج</button>
+  </header>
+  <div class="wrap">
+    <div class="page on" id="sp-farmers">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div style="font-size:18px;font-weight:900;color:var(--gold2)">🌾 المزارعون المسجلون</div>
+        <button class="btn bg" onclick="loadFarmers()">🔄 تحديث</button>
+      </div>
+      <div class="farms-grid" id="farms-list"></div>
+    </div>
+    <div class="page" id="sp-stats">
+      <div style="font-size:18px;font-weight:900;color:var(--gold2);margin-bottom:16px">📊 إحصائيات المنصة</div>
+      <div class="sgrid" id="super-stats"></div>
+    </div>
+  </div>
 </div>
 
 <!-- MODAL: ANIMAL -->
 <div class="mo" id="mo-animal">
-<div class="mb">
-<h2 id="mo-title">إضافة حيوان</h2>
-<div class="fg">
-<div class="ff"><label>الرقم *</label><input id="f-num" placeholder="601"></div>
-<div class="ff"><label>الصنف</label><select id="f-type"><option value="غنم">غنم</option><option value="بقر">بقر</option><option value="إبل">إبل</option></select></div>
-<div class="ff full"><label>النوع / السلالة</label><select id="f-breed"><option>نجدي</option><option>عربي</option><option>نعيمي</option><option>هجين</option><option>غنمة</option><option>معزة</option><option>حرّي</option><option>بربري</option></select></div>
-<div class="ff"><label>الجنس *</label><select id="f-gender"><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
-<div class="ff full"><label>العمر</label><select id="f-age"><option value="رخلة">رخلة — شهر إلى ٤ شهور</option><option value="ثني">ثني ✅ قادرة على الإنجاب</option><option value="سديس">سديس ✅ قادرة على الإنجاب</option><option value="جامع">جامع ✅ عجوز قادرة على الإنجاب</option></select></div>
-<div class="ff"><label>لون الجسم</label><input id="f-body" placeholder="أبيض / بني..."></div>
-<div class="ff"><label>لون الإشارة</label><input id="f-ear" placeholder="بني / أسود..."></div>
-<div class="ff"><label>تاريخ الميلاد</label><input type="date" id="f-born"></div>
-<div class="ff full"><label>رقم الأم (فارغ = أم أصلية)</label><input id="f-mom" placeholder="001"></div>
-<div class="ff full"><label>ملاحظات</label><textarea id="f-notes" rows="2" style="resize:vertical"></textarea></div>
-</div>
-<div class="merr" id="mo-err"></div>
-<div class="mact"><button class="btn bgh" onclick="closeMo()">إلغاء</button><button class="btn bg" onclick="saveAnimal()">💾 حفظ</button></div>
-</div>
+  <div class="mb">
+    <h2 id="mo-title">إضافة حيوان</h2>
+    <div class="fg">
+      <div class="ff"><label>الرقم *</label><input id="f-num" placeholder="601"></div>
+      <div class="ff"><label>الصنف</label><select id="f-type"><option value="غنم">غنم</option><option value="بقر">بقر</option><option value="إبل">إبل</option></select></div>
+      <div class="ff full"><label>النوع / السلالة</label><select id="f-breed"><option>نجدي</option><option>عربي</option><option>نعيمي</option><option>هجين</option><option>غنمة</option><option>معزة</option><option>حرّي</option><option>بربري</option></select></div>
+      <div class="ff"><label>الجنس *</label><select id="f-gender"><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
+      <div class="ff full"><label>العمر</label><select id="f-age"><option value="رخلة">رخلة — شهر إلى ٤ شهور</option><option value="ثني">ثني ✅ قادرة على الإنجاب</option><option value="سديس">سديس ✅ قادرة على الإنجاب</option><option value="جامع">جامع ✅ عجوز قادرة على الإنجاب</option></select></div>
+      <div class="ff"><label>لون الجسم</label><input id="f-body" placeholder="أبيض / بني..."></div>
+      <div class="ff"><label>لون الإشارة</label><input id="f-ear" placeholder="بني / أسود..."></div>
+      <div class="ff"><label>تاريخ الميلاد</label><input type="date" id="f-born"></div>
+      <div class="ff full"><label>رقم الأم (فارغ = أم أصلية)</label><input id="f-mom" placeholder="001"></div>
+      <div class="ff full"><label>ملاحظات</label><textarea id="f-notes" rows="2" style="resize:vertical"></textarea></div>
+    </div>
+    <div class="merr" id="mo-err"></div>
+    <div class="mact"><button class="btn bgh" onclick="closeMo()">إلغاء</button><button class="btn bg" onclick="saveAnimal()">💾 حفظ</button></div>
+  </div>
 </div>
 
 <!-- MODAL: DEATH -->
 <div class="mo" id="mo-death">
-<div class="mb" style="max-width:380px">
-<h2 id="dt-title">💀 تسجيل وفاة</h2>
-<div class="fg">
-<div class="ff full"><label>سبب الوفاة *</label><input id="dt-reason" placeholder="مرض / حادث..."></div>
-<div class="ff full"><label>التاريخ</label><input type="date" id="dt-date"></div>
-</div>
-<div class="merr" id="dt-err"></div>
-<div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-death').classList.remove('on')">إلغاء</button><button class="btn brd" onclick="confDeath()">تأكيد</button></div>
-</div>
+  <div class="mb" style="max-width:380px">
+    <h2 id="dt-title">💀 تسجيل وفاة</h2>
+    <div class="fg">
+      <div class="ff full"><label>سبب الوفاة *</label><input id="dt-reason" placeholder="مرض / حادث..."></div>
+      <div class="ff full"><label>التاريخ</label><input type="date" id="dt-date"></div>
+    </div>
+    <div class="merr" id="dt-err"></div>
+    <div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-death').classList.remove('on')">إلغاء</button><button class="btn brd" onclick="confDeath()">تأكيد</button></div>
+  </div>
 </div>
 
 <!-- MODAL: SLAUGHTER -->
 <div class="mo" id="mo-slau">
-<div class="mb" style="max-width:380px">
-<h2 id="sl-title">🔪 تسجيل ذبح</h2>
-<div class="fg">
-<div class="ff full"><label>سبب الذبح</label><select id="sl-reason"><option>ذبح للأكل</option><option>أضحية</option><option>وليمة</option><option>بيع</option></select></div>
-<div class="ff full"><label>التاريخ</label><input type="date" id="sl-date"></div>
-</div>
-<div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-slau').classList.remove('on')">إلغاء</button><button class="btn bor" onclick="confSlau()">تأكيد</button></div>
-</div>
+  <div class="mb" style="max-width:380px">
+    <h2 id="sl-title">🔪 تسجيل ذبح</h2>
+    <div class="fg">
+      <div class="ff full"><label>سبب الذبح</label><select id="sl-reason"><option>ذبح للأكل</option><option>أضحية</option><option>وليمة</option><option>بيع</option></select></div>
+      <div class="ff full"><label>التاريخ</label><input type="date" id="sl-date"></div>
+    </div>
+    <div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-slau').classList.remove('on')">إلغاء</button><button class="btn bor" onclick="confSlau()">تأكيد</button></div>
+  </div>
 </div>
 
 <!-- MODAL: MEMBER -->
 <div class="mo" id="mo-member">
-<div class="mb" style="max-width:380px">
-<h2>👤 إضافة عضو جديد</h2>
-<div class="fg">
-<div class="ff full"><label>الاسم الكامل</label><input id="mbr-name" placeholder="اسم العضو"></div>
-<div class="ff full"><label>اسم الدخول *</label><input id="mbr-login" placeholder="ahmed123"></div>
-<div class="ff full"><label>كلمة المرور *</label><input type="password" id="mbr-pass" placeholder="••••••••"></div>
-<div class="ff full"><label>الدور</label><select id="mbr-role"><option value="admin">مشرف</option><option value="member">عضو</option></select></div>
-</div>
-<div class="merr" id="mbr-err"></div>
-<div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-member').classList.remove('on')">إلغاء</button><button class="btn bg" onclick="saveMember()">إضافة</button></div>
-</div>
+  <div class="mb" style="max-width:380px">
+    <h2>👤 إضافة عضو جديد</h2>
+    <div class="fg">
+      <div class="ff full"><label>الاسم الكامل</label><input id="mbr-name" placeholder="اسم العضو"></div>
+      <div class="ff full"><label>اسم الدخول *</label><input id="mbr-login" placeholder="ahmed123"></div>
+      <div class="ff full"><label>كلمة المرور *</label><input type="password" id="mbr-pass" placeholder="••••••••"></div>
+      <div class="ff full"><label>الدور</label><select id="mbr-role"><option value="admin">مشرف</option><option value="member">عضو</option></select></div>
+    </div>
+    <div class="merr" id="mbr-err"></div>
+    <div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-member').classList.remove('on')">إلغاء</button><button class="btn bg" onclick="saveMember()">إضافة</button></div>
+  </div>
 </div>
 
 <script>
 // ═══════════════════════════════════════════
-// CONFIG & STATE
+//  CONFIG & STATE
 // ═══════════════════════════════════════════
 const API = window.location.origin;
 let token="", userRole="", farmerId=null, farmName="", userName="", userType="";
 let allAnimals=[], pendId=null, editId=null, curFilt="all";
 
 // ═══════════════════════════════════════════
-// HELPERS
+//  HELPERS
 // ═══════════════════════════════════════════
-function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); document.getElementById(id).classList.add("on"); window.scrollTo({top:0,behavior:"instant"}); }
+function show(id){ 
+  document.querySelectorAll(".screen").forEach(s=>{ 
+    s.classList.remove("on"); 
+    s.style.display="none"; 
+  }); 
+  const el = document.getElementById(id);
+  el.classList.add("on"); 
+  el.style.display="block";
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
+}
 
 async function req(method,url,body){
-const r=await fetch(API+url,{method,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:body?JSON.stringify(body):undefined});
-const d=await r.json();
-if(!r.ok) throw new Error(d.error||"خطأ");
-return d;
+  const r=await fetch(API+url,{method,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:body?JSON.stringify(body):undefined});
+  const d=await r.json();
+  if(!r.ok) throw new Error(d.error||"خطأ");
+  return d;
 }
 
 function showErr(id,msg){ const e=document.getElementById(id); e.textContent=msg; e.classList.add("on"); }
@@ -565,352 +576,352 @@ const albl=a=>({رخلة:"رخلة",ثني:"ثني ✅",سديس:"سديس ✅",
 const today=()=>new Date().toISOString().split("T")[0];
 
 // ═══════════════════════════════════════════
-// AUTH
+//  AUTH
 // ═══════════════════════════════════════════
 async function doLogin(){
-hideErr("l-err");
-try{
-const d=await req("POST","/api/login/farmer",{email:document.getElementById("l-email").value.trim(),password:document.getElementById("l-pass").value});
-token=d.token; userRole="admin"; userType="farmer"; farmName=d.farm_name; userName=d.owner_name;
-try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
-localStorage.setItem("herd_token",token);
-launchApp();
-}catch(e){showErr("l-err",e.message);}
+  hideErr("l-err");
+  try{
+    const d=await req("POST","/api/login/farmer",{email:document.getElementById("l-email").value.trim(),password:document.getElementById("l-pass").value});
+    token=d.token; userRole="admin"; userType="farmer"; farmName=d.farm_name; userName=d.owner_name;
+    try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
+    localStorage.setItem("herd_token",token);
+    launchApp();
+  }catch(e){showErr("l-err",e.message);}
 }
 
 async function doMemberLogin(){
-hideErr("m-err");
-try{
-const d=await req("POST","/api/login/member",{farm_id:parseInt(document.getElementById("m-farmid").value),username:document.getElementById("m-user").value.trim(),password:document.getElementById("m-pass").value});
-token=d.token; userRole=d.role; userType="member"; farmName=d.farm_name; userName=d.full_name;
-try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
-localStorage.setItem("herd_token",token);
-launchApp();
-}catch(e){showErr("m-err",e.message);}
+  hideErr("m-err");
+  try{
+    const d=await req("POST","/api/login/member",{farm_id:parseInt(document.getElementById("m-farmid").value),username:document.getElementById("m-user").value.trim(),password:document.getElementById("m-pass").value});
+    token=d.token; userRole=d.role; userType="member"; farmName=d.farm_name; userName=d.full_name;
+    try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
+    localStorage.setItem("herd_token",token);
+    launchApp();
+  }catch(e){showErr("m-err",e.message);}
 }
 
 async function doRegister(){
-hideErr("r-err"); document.getElementById("r-ok").classList.remove("on");
-const btn=document.getElementById("r-btn"); btn.disabled=true; btn.textContent="جاري التسجيل...";
-try{
-await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
-const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح! في انتظار موافقة الإدارة."; ok.classList.add("on");
-btn.textContent="تم ✓";
-}catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
+  hideErr("r-err"); document.getElementById("r-ok").classList.remove("on");
+  const btn=document.getElementById("r-btn"); btn.disabled=true; btn.textContent="جاري التسجيل...";
+  try{
+    await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
+    const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح! في انتظار موافقة الإدارة."; ok.classList.add("on");
+    btn.textContent="تم ✓";
+  }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
 }
 
 async function doSuperLogin(){
-hideErr("sa-err");
-try{
-const d=await req("POST","/api/login/super",{username:document.getElementById("sa-user").value.trim(),password:document.getElementById("sa-pass").value});
-token=d.token; localStorage.setItem("herd_token",token);
-show("sc-super-app"); loadFarmers(); loadSuperStats();
-}catch(e){showErr("sa-err",e.message);}
+  hideErr("sa-err");
+  try{
+    const d=await req("POST","/api/login/super",{username:document.getElementById("sa-user").value.trim(),password:document.getElementById("sa-pass").value});
+    token=d.token; localStorage.setItem("herd_token",token);
+    show("sc-super-app"); loadFarmers(); loadSuperStats();
+  }catch(e){showErr("sa-err",e.message);}
 }
 
 function doLogout(){ token=""; localStorage.removeItem("herd_token"); location.reload(); }
 
 // ═══════════════════════════════════════════
-// LAUNCH APP
+//  LAUNCH APP
 // ═══════════════════════════════════════════
 function launchApp(){
-show("sc-app");
-document.getElementById("hdr-farm").textContent=farmName;
-document.getElementById("hdr-user").textContent=userName;
-const b=document.getElementById("rbdg");
-if(userType==="farmer"){b.textContent="🌾 صاحب المزرعة";b.className="rbdg rb-owner";}
-else if(userRole==="admin"){b.textContent="🛠️ مشرف";b.className="rbdg rb-admin";}
-else{b.textContent="👁️ عضو";b.className="rbdg rb-member";}
+  show("sc-app");
+  document.getElementById("hdr-farm").textContent=farmName;
+  document.getElementById("hdr-user").textContent=userName;
+  const b=document.getElementById("rbdg");
+  if(userType==="farmer"){b.textContent="🌾 صاحب المزرعة";b.className="rbdg rb-owner";}
+  else if(userRole==="admin"){b.textContent="🛠️ مشرف";b.className="rbdg rb-admin";}
+  else{b.textContent="👁️ عضو";b.className="rbdg rb-member";}
 
-const canEdit = userType==="farmer" || userRole==="admin";
-if(canEdit){
-document.getElementById("add-btn").style.display="inline-flex";
-document.getElementById("ac-th").style.display="table-cell";
-document.getElementById("nb-members").style.display="block";
-document.getElementById("farm-id-notice").innerHTML=`رقم مزرعتك: <strong style="color:var(--gold)">${farmerId}</strong> — أعطه للأعضاء عند تسجيل دخولهم`;
-} else {
-document.getElementById("mem-notice").classList.add("on");
-}
-loadAnimals();
+  const canEdit = userType==="farmer" || userRole==="admin";
+  if(canEdit){
+    document.getElementById("add-btn").style.display="inline-flex";
+    document.getElementById("ac-th").style.display="table-cell";
+    document.getElementById("nb-members").style.display="block";
+    document.getElementById("farm-id-notice").innerHTML=`رقم مزرعتك: <strong style="color:var(--gold)">${farmerId}</strong> — أعطه للأعضاء عند تسجيل دخولهم`;
+  } else {
+    document.getElementById("mem-notice").classList.add("on");
+  }
+  loadAnimals();
 }
 
 // ═══════════════════════════════════════════
-// ANIMALS
+//  ANIMALS
 // ═══════════════════════════════════════════
 async function loadAnimals(){
-allAnimals=await req("GET","/api/animals");
-renderStats(); renderTable();
+  allAnimals=await req("GET","/api/animals");
+  renderStats(); renderTable();
 }
 
 function renderStats(){
-const a=allAnimals.filter(x=>x.status==="alive");
-document.getElementById("s-alive").textContent = a.length;
-document.getElementById("s-males").textContent = a.filter(x=>x.gender==="ذكر").length;
-document.getElementById("s-females").textContent= a.filter(x=>x.gender==="أنثى").length;
-document.getElementById("s-moms").textContent = a.filter(x=>!x.mother_id&&x.gender==="أنثى"&&allAnimals.some(c=>c.mother_id===x.id)).length;
-document.getElementById("s-kids").textContent = a.filter(x=>x.mother_id).length;
-document.getElementById("s-dead").textContent = allAnimals.filter(x=>x.status==="dead").length;
-document.getElementById("s-slau").textContent = allAnimals.filter(x=>x.status==="slaughtered").length;
+  const a=allAnimals.filter(x=>x.status==="alive");
+  document.getElementById("s-alive").textContent  = a.length;
+  document.getElementById("s-males").textContent  = a.filter(x=>x.gender==="ذكر").length;
+  document.getElementById("s-females").textContent= a.filter(x=>x.gender==="أنثى").length;
+  document.getElementById("s-moms").textContent   = a.filter(x=>!x.mother_id&&x.gender==="أنثى"&&allAnimals.some(c=>c.mother_id===x.id)).length;
+  document.getElementById("s-kids").textContent   = a.filter(x=>x.mother_id).length;
+  document.getElementById("s-dead").textContent   = allAnimals.filter(x=>x.status==="dead").length;
+  document.getElementById("s-slau").textContent   = allAnimals.filter(x=>x.status==="slaughtered").length;
 }
 
 function filt(f,el){ curFilt=f; document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on")); el.classList.add("on"); renderTable(); }
 
 function renderTable(){
-const canEdit = userType==="farmer"||userRole==="admin";
-let d=[...allAnimals];
-if(curFilt==="f") d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
-if(curFilt==="m") d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
-if(curFilt==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&allAnimals.some(c=>c.mother_id===x.id));
-if(curFilt==="d") d=d.filter(x=>x.status==="dead");
-if(curFilt==="s") d=d.filter(x=>x.status==="slaughtered");
-const kc=id=>allAnimals.filter(c=>c.mother_id===id&&c.status==="alive").length;
+  const canEdit = userType==="farmer"||userRole==="admin";
+  let d=[...allAnimals];
+  if(curFilt==="f")  d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
+  if(curFilt==="m")  d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
+  if(curFilt==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&allAnimals.some(c=>c.mother_id===x.id));
+  if(curFilt==="d")  d=d.filter(x=>x.status==="dead");
+  if(curFilt==="s")  d=d.filter(x=>x.status==="slaughtered");
+  const kc=id=>allAnimals.filter(c=>c.mother_id===id&&c.status==="alive").length;
 
-document.getElementById("tbody").innerHTML=d.map(x=>{
-const k=kc(x.id);
-const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
-const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
-const nt=x.notes?x.notes.substring(0,18)+(x.notes.length>18?"...":""):"—";
-const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
-let ac="";
-if(canEdit){
-let b=`<button class="ab ae" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
-if(x.status==="alive"){b+=`<button class="ab ak2" onclick="event.stopPropagation();openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab as2" onclick="event.stopPropagation();openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
-b+=`<button class="ab adk" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
-ac=`<td><div class="ac">${b}</div></td>`;
-}
-const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":"";
-return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
-<td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
-<td>${x.animal_type||"غنم"}</td>
-<td><span style="color:${x.gender==="أنثى"?"var(--purple)":"var(--blue)"};font-weight:800">${x.gender}</span></td>
-<td>${albl(x.age_label)}</td>
-<td><span class="dot" style="background:${cdot(x.body_color)}"></span>${x.body_color||"—"}</td>
-<td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
-<td>${x.ear_color||"—"}</td><td>${mT}</td><td>${kT}</td>
-<td style="color:var(--muted);font-size:12px">${nt}</td>
-<td>${st}</td>${ac}
-</tr>`;
-}).join("");
+  document.getElementById("tbody").innerHTML=d.map(x=>{
+    const k=kc(x.id);
+    const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
+    const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
+    const nt=x.notes?x.notes.substring(0,18)+(x.notes.length>18?"...":""):"—";
+    const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
+    let ac="";
+    if(canEdit){
+      let b=`<button class="ab ae" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
+      if(x.status==="alive"){b+=`<button class="ab ak2" onclick="event.stopPropagation();openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab as2" onclick="event.stopPropagation();openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
+      b+=`<button class="ab adk" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
+      ac=`<td><div class="ac">${b}</div></td>`;
+    }
+    const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":"";
+    return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
+      <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
+      <td>${x.animal_type||"غنم"}</td>
+      <td><span style="color:${x.gender==="أنثى"?"var(--purple)":"var(--blue)"};font-weight:800">${x.gender}</span></td>
+      <td>${albl(x.age_label)}</td>
+      <td><span class="dot" style="background:${cdot(x.body_color)}"></span>${x.body_color||"—"}</td>
+      <td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
+      <td>${x.ear_color||"—"}</td><td>${mT}</td><td>${kT}</td>
+      <td style="color:var(--muted);font-size:12px">${nt}</td>
+      <td>${st}</td>${ac}
+    </tr>`;
+  }).join("");
 }
 
 // ═══════════════════════════════════════════
-// SEARCH
+//  SEARCH
 // ═══════════════════════════════════════════
 function goNum(n){ document.getElementById("s-inp").value=n; doSearch(); window.scrollTo({top:0,behavior:"smooth"}); }
 function clearSearch(){ document.getElementById("s-inp").value=""; document.getElementById("rcard").classList.remove("on"); document.getElementById("nfound").classList.remove("on"); }
 
 async function doSearch(){
-const q=document.getElementById("s-inp").value.trim();
-document.getElementById("rcard").classList.remove("on");
-document.getElementById("nfound").classList.remove("on");
-if(!q) return;
-try{
-const x=await req("GET",`/api/animals/${q}`);
-const ch=x.children||[], canEdit=userType==="farmer"||userRole==="admin";
-document.getElementById("r-ava").textContent=x.gender==="أنثى"?"🐑":"🐏";
-document.getElementById("r-num").textContent=`رقم ${x.animal_number}`;
-document.getElementById("r-type").textContent=`${x.animal_type||"غنم"} — ${x.breed||"—"}`;
-const bg=document.getElementById("r-gbdg"); bg.textContent=x.gender; bg.className="gbdg "+(x.gender==="أنثى"?"gf":"gm");
-const sb=document.getElementById("r-sbdg");
-sb.innerHTML=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason}</span>`:"";
-const ra=document.getElementById("r-acts");
-if(canEdit){
-let h=`<button class="btn bbl" style="padding:5px 10px;font-size:12px" onclick="openEdit(${x.id})">✏️</button>`;
-if(x.status==="alive"){h+=`<button class="btn" style="padding:5px 10px;font-size:12px;background:rgba(100,116,139,.12);color:#94a3b8;border:1px solid #2d3748" onclick="openDeath(${x.id},'${x.animal_number}')">💀</button><button class="btn bor" style="padding:5px 10px;font-size:12px" onclick="openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
-h+=`<button class="btn brd" style="padding:5px 10px;font-size:12px" onclick="delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
-ra.innerHTML=h;
-} else ra.innerHTML="";
-document.getElementById("r-dets").innerHTML=[
-{l:"الصنف",v:x.animal_type||"غنم"},{l:"الجنس",v:x.gender},{l:"العمر",v:albl(x.age_label)},
-{l:"لون الجسم",v:`<span class='dot' style='background:${cdot(x.body_color)}'></span>${x.body_color||"—"}`},
-{l:"لون الإشارة",v:x.ear_color||"—"},{l:"الميلاد",v:x.birth_date?.split("T")[0]||"—"},
-{l:"الأم",v:x.mother_number?`<span style='color:var(--gold);cursor:pointer;font-weight:800' onclick="goNum('${x.mother_number}')">${x.mother_number}</span>`:"أم أصلية"},
-{l:"الأبناء",v:ch.length>0?`<span style='color:var(--green)'>${ch.length}</span>`:"لا يوجد"},
-].map(i=>`<div class="di"><div class="dl">${i.l}</div><div class="dv">${i.v}</div></div>`).join("");
-const nb=document.getElementById("r-nbox");
-if(x.notes){nb.style.display="block";document.getElementById("r-ntxt").textContent=x.notes;}else{nb.style.display="none";}
-const cs=document.getElementById("r-csec");
-if(ch.length>0){cs.style.display="block";document.getElementById("r-clist").innerHTML=ch.map(c=>`<div class="ccard" onclick="goNum('${c.animal_number}')"><span style="font-size:18px">${c.gender==="أنثى"?"🐑":"🐏"}</span><div><div class="cn">${c.animal_number}</div><div class="ci">${c.animal_type||"غنم"} · ${c.gender} · ${albl(c.age_label)}</div></div></div>`).join("");}
-else cs.style.display="none";
-document.getElementById("rcard").classList.add("on");
-}catch{ document.getElementById("nfound").classList.add("on"); }
+  const q=document.getElementById("s-inp").value.trim();
+  document.getElementById("rcard").classList.remove("on");
+  document.getElementById("nfound").classList.remove("on");
+  if(!q) return;
+  try{
+    const x=await req("GET",`/api/animals/${q}`);
+    const ch=x.children||[], canEdit=userType==="farmer"||userRole==="admin";
+    document.getElementById("r-ava").textContent=x.gender==="أنثى"?"🐑":"🐏";
+    document.getElementById("r-num").textContent=`رقم ${x.animal_number}`;
+    document.getElementById("r-type").textContent=`${x.animal_type||"غنم"} — ${x.breed||"—"}`;
+    const bg=document.getElementById("r-gbdg"); bg.textContent=x.gender; bg.className="gbdg "+(x.gender==="أنثى"?"gf":"gm");
+    const sb=document.getElementById("r-sbdg");
+    sb.innerHTML=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason}</span>`:"";
+    const ra=document.getElementById("r-acts");
+    if(canEdit){
+      let h=`<button class="btn bbl" style="padding:5px 10px;font-size:12px" onclick="openEdit(${x.id})">✏️</button>`;
+      if(x.status==="alive"){h+=`<button class="btn" style="padding:5px 10px;font-size:12px;background:rgba(100,116,139,.12);color:#94a3b8;border:1px solid #2d3748" onclick="openDeath(${x.id},'${x.animal_number}')">💀</button><button class="btn bor" style="padding:5px 10px;font-size:12px" onclick="openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
+      h+=`<button class="btn brd" style="padding:5px 10px;font-size:12px" onclick="delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
+      ra.innerHTML=h;
+    } else ra.innerHTML="";
+    document.getElementById("r-dets").innerHTML=[
+      {l:"الصنف",v:x.animal_type||"غنم"},{l:"الجنس",v:x.gender},{l:"العمر",v:albl(x.age_label)},
+      {l:"لون الجسم",v:`<span class='dot' style='background:${cdot(x.body_color)}'></span>${x.body_color||"—"}`},
+      {l:"لون الإشارة",v:x.ear_color||"—"},{l:"الميلاد",v:x.birth_date?.split("T")[0]||"—"},
+      {l:"الأم",v:x.mother_number?`<span style='color:var(--gold);cursor:pointer;font-weight:800' onclick="goNum('${x.mother_number}')">${x.mother_number}</span>`:"أم أصلية"},
+      {l:"الأبناء",v:ch.length>0?`<span style='color:var(--green)'>${ch.length}</span>`:"لا يوجد"},
+    ].map(i=>`<div class="di"><div class="dl">${i.l}</div><div class="dv">${i.v}</div></div>`).join("");
+    const nb=document.getElementById("r-nbox");
+    if(x.notes){nb.style.display="block";document.getElementById("r-ntxt").textContent=x.notes;}else{nb.style.display="none";}
+    const cs=document.getElementById("r-csec");
+    if(ch.length>0){cs.style.display="block";document.getElementById("r-clist").innerHTML=ch.map(c=>`<div class="ccard" onclick="goNum('${c.animal_number}')"><span style="font-size:18px">${c.gender==="أنثى"?"🐑":"🐏"}</span><div><div class="cn">${c.animal_number}</div><div class="ci">${c.animal_type||"غنم"} · ${c.gender} · ${albl(c.age_label)}</div></div></div>`).join("");}
+    else cs.style.display="none";
+    document.getElementById("rcard").classList.add("on");
+  }catch{ document.getElementById("nfound").classList.add("on"); }
 }
 
 // ═══════════════════════════════════════════
-// ADD / EDIT
+//  ADD / EDIT
 // ═══════════════════════════════════════════
 function openAdd(){
-editId=null; document.getElementById("mo-title").textContent="➕ إضافة حيوان جديد";
-["f-num","f-body","f-ear","f-notes","f-mom"].forEach(f=>document.getElementById(f).value="");
-document.getElementById("f-born").value=""; document.getElementById("f-type").value="غنم";
-document.getElementById("f-gender").value="أنثى"; document.getElementById("f-age").value="رخلة";
-document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
+  editId=null; document.getElementById("mo-title").textContent="➕ إضافة حيوان جديد";
+  ["f-num","f-body","f-ear","f-notes","f-mom"].forEach(f=>document.getElementById(f).value="");
+  document.getElementById("f-born").value=""; document.getElementById("f-type").value="غنم";
+  document.getElementById("f-gender").value="أنثى"; document.getElementById("f-age").value="رخلة";
+  document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
 }
 function openEdit(id){
-const x=allAnimals.find(a=>a.id===id); if(!x) return;
-editId=id; document.getElementById("mo-title").textContent=`✏️ تعديل رقم ${x.animal_number}`;
-document.getElementById("f-num").value=x.animal_number; document.getElementById("f-type").value=x.animal_type||"غنم";
-document.getElementById("f-gender").value=x.gender; document.getElementById("f-age").value=x.age_label||"رخلة";
-document.getElementById("f-body").value=x.body_color||""; document.getElementById("f-ear").value=x.ear_color||"";
-document.getElementById("f-born").value=x.birth_date?.split("T")[0]||""; document.getElementById("f-notes").value=x.notes||"";
-document.getElementById("f-mom").value=x.mother_number||"";
-document.getElementById("f-breed").value=x.breed||"نجدي";
-document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
+  const x=allAnimals.find(a=>a.id===id); if(!x) return;
+  editId=id; document.getElementById("mo-title").textContent=`✏️ تعديل رقم ${x.animal_number}`;
+  document.getElementById("f-num").value=x.animal_number; document.getElementById("f-type").value=x.animal_type||"غنم";
+  document.getElementById("f-gender").value=x.gender; document.getElementById("f-age").value=x.age_label||"رخلة";
+  document.getElementById("f-body").value=x.body_color||""; document.getElementById("f-ear").value=x.ear_color||"";
+  document.getElementById("f-born").value=x.birth_date?.split("T")[0]||""; document.getElementById("f-notes").value=x.notes||"";
+  document.getElementById("f-mom").value=x.mother_number||"";
+  document.getElementById("f-breed").value=x.breed||"نجدي";
+  document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
 }
 function closeMo(){ document.getElementById("mo-animal").classList.remove("on"); }
 
 async function saveAnimal(){
-document.getElementById("mo-err").classList.remove("on");
-const body={animal_number:document.getElementById("f-num").value.trim(),animal_type:document.getElementById("f-type").value,breed:document.getElementById("f-breed").value,age_label:document.getElementById("f-age").value,gender:document.getElementById("f-gender").value,body_color:document.getElementById("f-body").value,birth_date:document.getElementById("f-born").value||null,ear_color:document.getElementById("f-ear").value,mother_number:document.getElementById("f-mom").value.trim()||null,notes:document.getElementById("f-notes").value};
-if(!body.animal_number){showErr("mo-err","⚠️ الرقم مطلوب");return;}
-try{
-if(editId) await req("PUT",`/api/animals/${editId}`,body);
-else await req("POST","/api/animals",body);
-closeMo(); await loadAnimals(); clearSearch();
-}catch(e){showErr("mo-err","⚠️ "+e.message);}
+  document.getElementById("mo-err").classList.remove("on");
+  const body={animal_number:document.getElementById("f-num").value.trim(),animal_type:document.getElementById("f-type").value,breed:document.getElementById("f-breed").value,age_label:document.getElementById("f-age").value,gender:document.getElementById("f-gender").value,body_color:document.getElementById("f-body").value,birth_date:document.getElementById("f-born").value||null,ear_color:document.getElementById("f-ear").value,mother_number:document.getElementById("f-mom").value.trim()||null,notes:document.getElementById("f-notes").value};
+  if(!body.animal_number){showErr("mo-err","⚠️ الرقم مطلوب");return;}
+  try{
+    if(editId) await req("PUT",`/api/animals/${editId}`,body);
+    else await req("POST","/api/animals",body);
+    closeMo(); await loadAnimals(); clearSearch();
+  }catch(e){showErr("mo-err","⚠️ "+e.message);}
 }
 
 async function delAnimal(id,num){
-if(!confirm(`حذف رقم ${num}؟`)) return;
-await req("DELETE",`/api/animals/${id}`); await loadAnimals(); clearSearch();
+  if(!confirm(`حذف رقم ${num}؟`)) return;
+  await req("DELETE",`/api/animals/${id}`); await loadAnimals(); clearSearch();
 }
 
 // ═══════════════════════════════════════════
-// DEATH / SLAUGHTER
+//  DEATH / SLAUGHTER
 // ═══════════════════════════════════════════
 function openDeath(id,num){ pendId=id; document.getElementById("dt-title").textContent=`💀 وفاة — رقم ${num}`; document.getElementById("dt-reason").value=""; document.getElementById("dt-date").value=today(); document.getElementById("dt-err").classList.remove("on"); document.getElementById("mo-death").classList.add("on"); }
 async function confDeath(){
-const r=document.getElementById("dt-reason").value.trim();
-if(!r){showErr("dt-err","⚠️ سبب الوفاة مطلوب");return;}
-await req("PATCH",`/api/animals/${pendId}/death`,{death_reason:r,death_date:document.getElementById("dt-date").value});
-document.getElementById("mo-death").classList.remove("on"); await loadAnimals(); clearSearch();
+  const r=document.getElementById("dt-reason").value.trim();
+  if(!r){showErr("dt-err","⚠️ سبب الوفاة مطلوب");return;}
+  await req("PATCH",`/api/animals/${pendId}/death`,{death_reason:r,death_date:document.getElementById("dt-date").value});
+  document.getElementById("mo-death").classList.remove("on"); await loadAnimals(); clearSearch();
 }
 
 function openSlau(id,num){ pendId=id; document.getElementById("sl-title").textContent=`🔪 ذبح — رقم ${num}`; document.getElementById("sl-date").value=today(); document.getElementById("mo-slau").classList.add("on"); }
 async function confSlau(){
-await req("PATCH",`/api/animals/${pendId}/slaughter`,{slaughter_reason:document.getElementById("sl-reason").value,slaughter_date:document.getElementById("sl-date").value});
-document.getElementById("mo-slau").classList.remove("on"); await loadAnimals(); clearSearch();
+  await req("PATCH",`/api/animals/${pendId}/slaughter`,{slaughter_reason:document.getElementById("sl-reason").value,slaughter_date:document.getElementById("sl-date").value});
+  document.getElementById("mo-slau").classList.remove("on"); await loadAnimals(); clearSearch();
 }
 
 // ═══════════════════════════════════════════
-// REPORT
+//  REPORT
 // ═══════════════════════════════════════════
 async function buildReport(){
-const n=new Date(); document.getElementById("rep-date").textContent=`${n.getFullYear()}/${n.getMonth()+1}/${n.getDate()} ${n.toLocaleTimeString("ar")}`;
-try{
-const r=await req("GET","/api/report"), t=r.totals;
-document.getElementById("rg1").innerHTML=[
-{i:"🐑",l:"الأحياء",v:t.alive,c:"var(--gold)"},{i:"🗂️",l:"الإجمالي",v:t.total,c:"var(--muted)"},
-{i:"🐏",l:"الأمهات",v:t.mothers,c:"var(--purple)"},{i:"♂",l:"ذكور أحياء",v:t.males,c:"var(--blue)"},
-{i:"♀",l:"إناث أحياء",v:t.females,c:"var(--green)"},{i:"✅",l:"جاهزات للإنجاب",v:r.ready.length,c:"var(--green)"},
-].map(x=>`<div class="ri"><div class="ril">${x.i} ${x.l}</div><div class="riv" style="color:${x.c}">${x.v}</div></div>`).join("");
-document.getElementById("rg2").innerHTML=[
-{i:"🍼",l:"المواليد",v:t.kids,c:"var(--orange)"},{i:"📅",l:"آخر 3 أشهر",v:r.kids3m,c:"var(--blue)"},
-].map(x=>`<div class="ri"><div class="ril">${x.i} ${x.l}</div><div class="riv" style="color:${x.c}">${x.v}</div></div>`).join("");
-document.getElementById("d-count").innerHTML=`<span style="font-size:20px;font-weight:900;color:#94a3b8">${t.dead}</span> <span style="color:var(--muted);font-size:12px">حالة وفاة</span>`;
-document.getElementById("d-tbody").innerHTML=r.dead.length?r.dead.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.gender}</td><td>${x.age_label||"—"}</td><td style="color:var(--red)">${x.death_reason||"—"}</td><td style="color:var(--muted)">${x.death_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px">لا توجد حالات وفاة</td></tr>`;
-document.getElementById("s-count").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--orange)">${t.slaughtered}</span> <span style="color:var(--muted);font-size:12px">ذبيحة</span>`;
-document.getElementById("s-tbody").innerHTML=r.slau.length?r.slau.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.age_label||"—"}</td><td style="color:var(--orange)">${x.slaughter_reason||"—"}</td><td style="color:var(--muted)">${x.slaughter_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد ذبائح</td></tr>`;
-document.getElementById("br-tbody").innerHTML=r.breeds.map(b=>`<tr><td style="font-weight:700">${b.breed||"—"}</td><td style="color:${b.gender==="أنثى"?"var(--purple)":"var(--blue)"}">${b.gender}</td><td style="color:var(--gold);font-weight:800">${b.cnt}</td><td style="color:var(--muted)">${((b.cnt/t.alive)*100).toFixed(1)}%</td></tr>`).join("");
-document.getElementById("mt-tbody").innerHTML=r.moms.map(m=>`<tr><td class="nc">🐑 ${m.animal_number}</td><td>${m.breed||"—"}</td><td style="color:var(--green);font-weight:800">${m.kids_count}</td><td style="color:var(--muted)">${m.last_birth?.split("T")[0]||"—"}</td></tr>`).join("");
-document.getElementById("rf-tbody").innerHTML=r.ready.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td style="color:var(--purple);font-weight:700">${albl(x.age_label)}</td><td>${x.breed||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join("");
-}catch(e){console.error(e);}
+  const n=new Date(); document.getElementById("rep-date").textContent=`${n.getFullYear()}/${n.getMonth()+1}/${n.getDate()} ${n.toLocaleTimeString("ar")}`;
+  try{
+    const r=await req("GET","/api/report"), t=r.totals;
+    document.getElementById("rg1").innerHTML=[
+      {i:"🐑",l:"الأحياء",v:t.alive,c:"var(--gold)"},{i:"🗂️",l:"الإجمالي",v:t.total,c:"var(--muted)"},
+      {i:"🐏",l:"الأمهات",v:t.mothers,c:"var(--purple)"},{i:"♂",l:"ذكور أحياء",v:t.males,c:"var(--blue)"},
+      {i:"♀",l:"إناث أحياء",v:t.females,c:"var(--green)"},{i:"✅",l:"جاهزات للإنجاب",v:r.ready.length,c:"var(--green)"},
+    ].map(x=>`<div class="ri"><div class="ril">${x.i} ${x.l}</div><div class="riv" style="color:${x.c}">${x.v}</div></div>`).join("");
+    document.getElementById("rg2").innerHTML=[
+      {i:"🍼",l:"المواليد",v:t.kids,c:"var(--orange)"},{i:"📅",l:"آخر 3 أشهر",v:r.kids3m,c:"var(--blue)"},
+    ].map(x=>`<div class="ri"><div class="ril">${x.i} ${x.l}</div><div class="riv" style="color:${x.c}">${x.v}</div></div>`).join("");
+    document.getElementById("d-count").innerHTML=`<span style="font-size:20px;font-weight:900;color:#94a3b8">${t.dead}</span> <span style="color:var(--muted);font-size:12px">حالة وفاة</span>`;
+    document.getElementById("d-tbody").innerHTML=r.dead.length?r.dead.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.gender}</td><td>${x.age_label||"—"}</td><td style="color:var(--red)">${x.death_reason||"—"}</td><td style="color:var(--muted)">${x.death_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px">لا توجد حالات وفاة</td></tr>`;
+    document.getElementById("s-count").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--orange)">${t.slaughtered}</span> <span style="color:var(--muted);font-size:12px">ذبيحة</span>`;
+    document.getElementById("s-tbody").innerHTML=r.slau.length?r.slau.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.age_label||"—"}</td><td style="color:var(--orange)">${x.slaughter_reason||"—"}</td><td style="color:var(--muted)">${x.slaughter_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد ذبائح</td></tr>`;
+    document.getElementById("br-tbody").innerHTML=r.breeds.map(b=>`<tr><td style="font-weight:700">${b.breed||"—"}</td><td style="color:${b.gender==="أنثى"?"var(--purple)":"var(--blue)"}">${b.gender}</td><td style="color:var(--gold);font-weight:800">${b.cnt}</td><td style="color:var(--muted)">${((b.cnt/t.alive)*100).toFixed(1)}%</td></tr>`).join("");
+    document.getElementById("mt-tbody").innerHTML=r.moms.map(m=>`<tr><td class="nc">🐑 ${m.animal_number}</td><td>${m.breed||"—"}</td><td style="color:var(--green);font-weight:800">${m.kids_count}</td><td style="color:var(--muted)">${m.last_birth?.split("T")[0]||"—"}</td></tr>`).join("");
+    document.getElementById("rf-tbody").innerHTML=r.ready.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td style="color:var(--purple);font-weight:700">${albl(x.age_label)}</td><td>${x.breed||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join("");
+  }catch(e){console.error(e);}
 }
 
 // ═══════════════════════════════════════════
-// MEMBERS
+//  MEMBERS
 // ═══════════════════════════════════════════
 async function loadMembers(){
-const m=await req("GET","/api/members");
-document.getElementById("mbr-grid").innerHTML=m.map(u=>`
-<div class="uc2">
-<div class="uav2" style="background:${u.role==="admin"?"rgba(61,214,140,.12)":"rgba(91,164,245,.12)"}">${u.role==="admin"?"🛠️":"👁️"}</div>
-<div style="flex:1"><div style="font-size:13px;font-weight:800">${u.full_name||u.username}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${u.username} · ${u.role==="admin"?"مشرف":"عضو"}</div></div>
-<button class="btn brd" style="padding:4px 9px;font-size:11px" onclick="delMember(${u.id},'${u.username}')">حذف</button>
-</div>`).join("");
+  const m=await req("GET","/api/members");
+  document.getElementById("mbr-grid").innerHTML=m.map(u=>`
+    <div class="uc2">
+      <div class="uav2" style="background:${u.role==="admin"?"rgba(61,214,140,.12)":"rgba(91,164,245,.12)"}">${u.role==="admin"?"🛠️":"👁️"}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:800">${u.full_name||u.username}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${u.username} · ${u.role==="admin"?"مشرف":"عضو"}</div></div>
+      <button class="btn brd" style="padding:4px 9px;font-size:11px" onclick="delMember(${u.id},'${u.username}')">حذف</button>
+    </div>`).join("");
 }
 
 function openAddMember(){ ["mbr-name","mbr-login","mbr-pass"].forEach(f=>document.getElementById(f).value=""); document.getElementById("mbr-role").value="member"; document.getElementById("mbr-err").classList.remove("on"); document.getElementById("mo-member").classList.add("on"); }
 
 async function saveMember(){
-document.getElementById("mbr-err").classList.remove("on");
-try{
-await req("POST","/api/members",{username:document.getElementById("mbr-login").value.trim(),password:document.getElementById("mbr-pass").value,full_name:document.getElementById("mbr-name").value.trim(),role:document.getElementById("mbr-role").value});
-document.getElementById("mo-member").classList.remove("on"); loadMembers();
-}catch(e){showErr("mbr-err","⚠️ "+e.message);}
+  document.getElementById("mbr-err").classList.remove("on");
+  try{
+    await req("POST","/api/members",{username:document.getElementById("mbr-login").value.trim(),password:document.getElementById("mbr-pass").value,full_name:document.getElementById("mbr-name").value.trim(),role:document.getElementById("mbr-role").value});
+    document.getElementById("mo-member").classList.remove("on"); loadMembers();
+  }catch(e){showErr("mbr-err","⚠️ "+e.message);}
 }
 
 async function delMember(id,n){ if(!confirm(`حذف العضو ${n}؟`)) return; await req("DELETE",`/api/members/${id}`); loadMembers(); }
 
 // ═══════════════════════════════════════════
-// SUPER ADMIN
+//  SUPER ADMIN
 // ═══════════════════════════════════════════
 async function loadFarmers(){
-const f=await req("GET","/api/super/farmers");
-document.getElementById("farms-list").innerHTML=f.map(x=>`
-<div class="farm-card">
-<div class="farm-icon">🌾</div>
-<div class="farm-info">
-<div class="farm-name">${x.farm_name}</div>
-<div class="farm-sub">${x.owner_name} · ${x.email} · ${x.animal_count} حيوان · سُجِّل ${x.created_at?.split("T")[0]||"—"}</div>
-</div>
-<span class="${x.status==="active"?"sbactive":x.status==="pending"?"sbpending":"sbsusp"}">${x.status==="active"?"نشط":x.status==="pending"?"في الانتظار":"موقوف"}</span>
-<div style="display:flex;gap:6px;flex-wrap:wrap">
-${x.status==="pending"?`<button class="btn bgr" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'active')">✅ قبول</button>`:""}
-${x.status==="active"?`<button class="btn bor" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'suspended')">⏸ وقف</button>`:""}
-${x.status==="suspended"?`<button class="btn bgr" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'active')">▶ تفعيل</button>`:""}
-<button class="btn brd" style="padding:5px 10px;font-size:12px" onclick="delFarmer(${x.id},'${x.farm_name}')">🗑️</button>
-</div>
-</div>`).join("");
+  const f=await req("GET","/api/super/farmers");
+  document.getElementById("farms-list").innerHTML=f.map(x=>`
+    <div class="farm-card">
+      <div class="farm-icon">🌾</div>
+      <div class="farm-info">
+        <div class="farm-name">${x.farm_name}</div>
+        <div class="farm-sub">${x.owner_name} · ${x.email} · ${x.animal_count} حيوان · سُجِّل ${x.created_at?.split("T")[0]||"—"}</div>
+      </div>
+      <span class="${x.status==="active"?"sbactive":x.status==="pending"?"sbpending":"sbsusp"}">${x.status==="active"?"نشط":x.status==="pending"?"في الانتظار":"موقوف"}</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${x.status==="pending"?`<button class="btn bgr" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'active')">✅ قبول</button>`:""}
+        ${x.status==="active"?`<button class="btn bor" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'suspended')">⏸ وقف</button>`:""}
+        ${x.status==="suspended"?`<button class="btn bgr" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'active')">▶ تفعيل</button>`:""}
+        <button class="btn brd" style="padding:5px 10px;font-size:12px" onclick="delFarmer(${x.id},'${x.farm_name}')">🗑️</button>
+      </div>
+    </div>`).join("");
 }
 
 async function setStatus(id,status){ await req("PATCH",`/api/super/farmers/${id}/status`,{status}); loadFarmers(); }
 async function delFarmer(id,n){ if(!confirm(`حذف مزرعة ${n} وكل بياناتها؟`)) return; await req("DELETE",`/api/super/farmers/${id}`); loadFarmers(); }
 
 async function loadSuperStats(){
-try{
-const s=await req("GET","/api/super/stats");
-document.getElementById("super-stats").innerHTML=[
-{i:"🌾",l:"إجمالي المزارع",v:s.farmers.total,c:"var(--gold)"},
-{i:"✅",l:"مزارع نشطة",v:s.farmers.active,c:"var(--green)"},
-{i:"⏳",l:"في الانتظار",v:s.farmers.pending,c:"var(--orange)"},
-{i:"🐑",l:"إجمالي الحيوانات",v:s.animals.total,c:"var(--blue)"},
-].map(x=>`<div class="sc"><div class="si2" style="background:rgba(201,169,110,.1)">${x.i}</div><div><div class="sn" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div></div>`).join("");
-}catch(e){}
+  try{
+    const s=await req("GET","/api/super/stats");
+    document.getElementById("super-stats").innerHTML=[
+      {i:"🌾",l:"إجمالي المزارع",v:s.farmers.total,c:"var(--gold)"},
+      {i:"✅",l:"مزارع نشطة",v:s.farmers.active,c:"var(--green)"},
+      {i:"⏳",l:"في الانتظار",v:s.farmers.pending,c:"var(--orange)"},
+      {i:"🐑",l:"إجمالي الحيوانات",v:s.animals.total,c:"var(--blue)"},
+    ].map(x=>`<div class="sc"><div class="si2" style="background:rgba(201,169,110,.1)">${x.i}</div><div><div class="sn" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div></div>`).join("");
+  }catch(e){}
 }
 
 // ═══════════════════════════════════════════
-// NAV
+//  NAV
 // ═══════════════════════════════════════════
 function goPage(id,btn){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("on"));
-document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
-document.getElementById("page-"+id).classList.add("on"); btn.classList.add("on");
-if(id==="rep") buildReport();
-if(id==="mbrs") loadMembers();
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
+  document.getElementById("page-"+id).classList.add("on"); btn.classList.add("on");
+  if(id==="rep") buildReport();
+  if(id==="mbrs") loadMembers();
 }
 function goSuperPage(id,btn){
-document.querySelectorAll("#sc-super-app .page").forEach(p=>p.classList.remove("on"));
-document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
-document.getElementById("sp-"+id).classList.add("on"); btn.classList.add("on");
-if(id==="stats") loadSuperStats();
+  document.querySelectorAll("#sc-super-app .page").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
+  document.getElementById("sp-"+id).classList.add("on"); btn.classList.add("on");
+  if(id==="stats") loadSuperStats();
 }
 
 // ═══════════════════════════════════════════
-// AUTO REFRESH + INIT
+//  AUTO REFRESH + INIT
 // ═══════════════════════════════════════════
 setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
 
 const saved=localStorage.getItem("herd_token");
 if(saved){
-try{
-const raw=saved.split(".")[1].replace(/-/g,"+").replace(/_/g,"/").padEnd(Math.ceil(saved.split(".")[1].length/4)*4,"="); const p=JSON.parse(atob(raw));
-if(Date.now()/1000<p.exp){
-token=saved;
-if(p.type==="superadmin"){ show("sc-super-app"); loadFarmers(); loadSuperStats(); }
-else{ userType=p.type; userRole=p.role; farmerId=p.farmer_id; farmName=p.farm_name; userName=p.owner_name||p.full_name||p.username; launchApp(); }
-} else { localStorage.removeItem("herd_token"); }
-}catch{ localStorage.removeItem("herd_token"); }
+  try{
+    const raw=saved.split(".")[1].replace(/-/g,"+").replace(/_/g,"/").padEnd(Math.ceil(saved.split(".")[1].length/4)*4,"="); const p=JSON.parse(atob(raw));
+    if(Date.now()/1000<p.exp){
+      token=saved;
+      if(p.type==="superadmin"){ show("sc-super-app"); loadFarmers(); loadSuperStats(); }
+      else{ userType=p.type; userRole=p.role; farmerId=p.farmer_id; farmName=p.farm_name; userName=p.owner_name||p.full_name||p.username; launchApp(); }
+    } else { localStorage.removeItem("herd_token"); }
+  }catch{ localStorage.removeItem("herd_token"); }
 }
 </script>
 </body>
