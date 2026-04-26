@@ -548,7 +548,7 @@ let allAnimals=[], pendId=null, editId=null, curFilt="all";
 // ═══════════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════════
-function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); document.getElementById(id).classList.add("on"); }
+function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on")); document.getElementById(id).classList.add("on"); window.scrollTo({top:0,behavior:"instant"}); }
 
 async function req(method,url,body){
 const r=await fetch(API+url,{method,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:body?JSON.stringify(body):undefined});
