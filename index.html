@@ -21,7 +21,7 @@
 html{scroll-behavior:smooth;}
 body{
   font-family:'Tajawal',sans-serif;
-  background:var(--bg);
+  background:linear-gradient(160deg,#f0f7f0 0%,#f7f3ed 50%,#f0ede4 100%);
   position:relative;
   background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   color:var(--text);min-height:100vh;direction:rtl;
@@ -277,7 +277,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
     <div class="auth-card">
       <h2>🔐 تسجيل الدخول</h2>
       <div class="af"><label>البريد الإلكتروني</label><input id="l-email" type="email" placeholder="example@email.com"></div>
-      <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <div class="auth-err" id="l-err"></div>
       <button class="btn bg btn-full" onclick="doLogin()">دخول →</button>
       <div class="auth-switch" onclick="show('sc-member-login')">دخول كـ <span>عضو في مزرعة</span></div>
@@ -293,7 +293,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       <h2>👁️ دخول عضو</h2>
       <div class="af"><label>رقم المزرعة</label><input id="m-farmid" type="number" placeholder="رقم المزرعة (اسأل المشرف)"></div>
       <div class="af"><label>اسم المستخدم</label><input id="m-user" placeholder="اسم المستخدم"></div>
-      <div class="af"><label>كلمة المرور</label><input id="m-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doMemberLogin()"></div>
+      <div class="af"><label>كلمة المرور</label><input id="m-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doMemberLogin()"></div>
       <div class="auth-err" id="m-err"></div>
       <button class="btn bg btn-full" onclick="doMemberLogin()">دخول →</button>
       <div class="auth-back" onclick="show('sc-login')">← رجوع</div>
@@ -323,8 +323,8 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>👑 الإدارة العليا</h2>
-      <div class="af"><label>اسم المستخدم</label><input id="sa-user" placeholder="superadmin"></div>
-      <div class="af"><label>كلمة المرور</label><input id="sa-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSuperLogin()"></div>
+      <div class="af"><label>اسم المستخدم</label><input id="sa-user" placeholder="اسم المستخدم"></div>
+      <div class="af"><label>كلمة المرور</label><input id="sa-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doSuperLogin()"></div>
       <div class="auth-err" id="sa-err"></div>
       <button class="btn bg btn-full" onclick="doSuperLogin()">دخول →</button>
       <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
@@ -530,7 +530,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
     <div class="fg">
       <div class="ff full"><label>الاسم الكامل</label><input id="mbr-name" placeholder="اسم العضو"></div>
       <div class="ff full"><label>اسم الدخول *</label><input id="mbr-login" placeholder="ahmed123"></div>
-      <div class="ff full"><label>كلمة المرور *</label><input type="password" id="mbr-pass" placeholder="••••••••"></div>
+      <div class="ff full"><label>كلمة المرور *</label><input type="password" id="mbr-pass" placeholder="كلمة المرور"></div>
       <div class="ff full"><label>الدور</label><select id="mbr-role"><option value="admin">مشرف</option><option value="member">عضو</option></select></div>
     </div>
     <div class="merr" id="mbr-err"></div>
@@ -922,6 +922,27 @@ if(saved){
       else{ userType=p.type; userRole=p.role; farmerId=p.farmer_id; farmName=p.farm_name; userName=p.owner_name||p.full_name||p.username; launchApp(); }
     } else { localStorage.removeItem("herd_token"); }
   }catch{ localStorage.removeItem("herd_token"); }
+}
+
+// Hidden admin access - click logo 5 times
+let logoClicks = 0, logoTimer;
+function logoClick(){
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(()=>{ logoClicks=0; }, 2000);
+  if(logoClicks >= 5){
+    logoClicks=0;
+    show('sc-super');
+  }
+}
+
+
+let logoClicks=0,logoTimer;
+function logoClick(){
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer=setTimeout(()=>{logoClicks=0;},2000);
+  if(logoClicks>=5){logoClicks=0;show('sc-super');}
 }
 </script>
 </body>
