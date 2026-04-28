@@ -935,15 +935,6 @@ function logoClick(){
     show('sc-super');
   }
 }
-
-
-let logoClicks=0,logoTimer;
-function logoClick(){
-  logoClicks++;
-  clearTimeout(logoTimer);
-  logoTimer=setTimeout(()=>{logoClicks=0;},2000);
-  if(logoClicks>=5){logoClicks=0;show('sc-super');}
-}
 </script>
 </body>
 </html>
