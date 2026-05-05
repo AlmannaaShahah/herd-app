@@ -605,7 +605,7 @@ async function doRegister(){
   const btn=document.getElementById("r-btn"); btn.disabled=true; btn.textContent="جاري التسجيل...";
   try{
     await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
-    const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح! في انتظار موافقة الإدارة."; ok.classList.add("on");
+    const ok=document.getElementById("r-ok"); ok.textContent=" !تم التسجيل بنجاح"; ok.classList.add("on");
     btn.textContent="تم ✓";
   }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
 }
