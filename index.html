@@ -267,7 +267,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       <button class="btn bbl" style="padding:13px 32px;font-size:15px" onclick="show('sc-register')">إنشاء حساب</button>
     </div>
     
-    <div class="land-super" onclick="show('sc-super')">دخول الإدارة العليا</div>
+    <div class="land-super" onclick="show('sc-super')"></div>
   </div>
 </div>
 
@@ -276,7 +276,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>🔐 تسجيل الدخول</h2>
-      <div class="af"><label>البريد الإلكتروني</label><input id="l-email" type="email" placeholder="example@email.com"></div>
+      <div class="af"><label>البريد الإلكتروني أو اسم المستخدم</label><input id="l-email" placeholder="البريد أو اسم المستخدم" autocomplete="username"></div>
       <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <div class="auth-err" id="l-err"></div>
       <button class="btn bg btn-full" onclick="doLogin()">دخول →</button>
@@ -319,7 +319,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 </div>
 
 <!-- ══ SUPER ADMIN LOGIN ══ -->
-<div class="screen" id="sc-super">
+<div class="screen" id="sc-super" style="display:none!important;">
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>👑 الإدارة العليا</h2>
@@ -451,7 +451,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 </div>
 
 <!-- ══ SUPER ADMIN APP ══ -->
-<div class="screen" id="sc-super-app">
+<div class="screen" id="sc-super-app" style="display:none!important;">
   <header class="hdr">
     <div class="hdr-ico">👑</div>
     <div><div class="hdr-name">الإدارة العليا</div><div class="hdr-farm">لوحة تحكم المنصة</div></div>
@@ -605,7 +605,7 @@ async function doRegister(){
   const btn=document.getElementById("r-btn"); btn.disabled=true; btn.textContent="جاري التسجيل...";
   try{
     await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
-    const ok=document.getElementById("r-ok"); ok.textContent=" !تم التسجيل بنجاح"; ok.classList.add("on");
+    const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح! في انتظار موافقة الإدارة."; ok.classList.add("on");
     btn.textContent="تم ✓";
   }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
 }
