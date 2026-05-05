@@ -150,7 +150,7 @@ app.post("/api/register", async (req, res) => {
     "INSERT INTO farmers (farm_name,owner_name,email,password_hash,status) VALUES (?,?,?,?,'pending')",
     [farm_name, owner_name, email, hash]
   );
-  res.json({ success: true, message: "تم التسجيل بنجاح — في انتظار موافقة الإدارة" });
+  res.json({ success: true, message: "تم التسجيل بنجاح!" });
 });
 
 app.post("/api/login/farmer", async (req, res) => {
