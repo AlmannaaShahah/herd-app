@@ -308,6 +308,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       <h2>🌾 إنشاء حساب مزرعة</h2>
       <div class="af"><label>اسم المزرعة / الحاشية</label><input id="r-farm" placeholder="مزرعة العمري"></div>
       <div class="af"><label>اسم صاحب المزرعة</label><input id="r-owner" placeholder="محمد العمري"></div>
+      <div class="af"><label>اسم المستخدم *</label><input id="r-username" placeholder="مثال: alomari123" autocomplete="username"></div>
       <div class="af"><label>البريد الإلكتروني</label><input id="r-email" type="email" placeholder="example@email.com"></div>
       <div class="af"><label>كلمة المرور</label><input id="r-pass" type="password" placeholder="6 أحرف على الأقل"></div>
       <div class="auth-err" id="r-err"></div>
@@ -581,7 +582,8 @@ const today=()=>new Date().toISOString().split("T")[0];
 async function doLogin(){
   hideErr("l-err");
   try{
-    const d=await req("POST","/api/login/farmer",{email:document.getElementById("l-email").value.trim(),password:document.getElementById("l-pass").value});
+    const loginVal=document.getElementById("l-email").value.trim();
+  const d=await req("POST","/api/login/farmer",{email:loginVal,username:loginVal,password:document.getElementById("l-pass").value});
     token=d.token; userRole="admin"; userType="farmer"; farmName=d.farm_name; userName=d.owner_name;
     try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
     localStorage.setItem("herd_token",token);
@@ -604,7 +606,7 @@ async function doRegister(){
   hideErr("r-err"); document.getElementById("r-ok").classList.remove("on");
   const btn=document.getElementById("r-btn"); btn.disabled=true; btn.textContent="جاري التسجيل...";
   try{
-    await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
+    await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),username:document.getElementById("r-username").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
     const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح! في انتظار موافقة الإدارة."; ok.classList.add("on");
     btn.textContent="تم ✓";
   }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
