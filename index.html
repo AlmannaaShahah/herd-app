@@ -459,6 +459,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
     <nav class="hdr-nav">
       <button class="nb on" onclick="goSuperPage('farmers',this)">🌾 المزارعون</button>
       <button class="nb" onclick="goSuperPage('stats',this)">📊 الإحصائيات</button>
+      <button class="nb" onclick="goSuperPage('password',this)">🔑 كلمة المرور</button>
     </nav>
     <div class="rbdg rb-super">👑 سوبر أدمن</div>
     <button class="btn-out" onclick="doLogout()">خروج</button>
@@ -913,6 +914,34 @@ function goSuperPage(id,btn){
 //  AUTO REFRESH + INIT
 // ═══════════════════════════════════════════
 setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
+
+async function changeAdminPass(){
+  const oldPass = document.getElementById("cp-old").value;
+  const newPass = document.getElementById("cp-new").value;
+  const confirm = document.getElementById("cp-confirm").value;
+  const errEl = document.getElementById("cp-err");
+  const okEl  = document.getElementById("cp-ok");
+  errEl.classList.remove("on"); okEl.classList.remove("on");
+
+  if(!oldPass || !newPass || !confirm){
+    errEl.textContent="⚠️ جميع الحقول مطلوبة"; errEl.classList.add("on"); return;
+  }
+  if(newPass.length < 6){
+    errEl.textContent="⚠️ كلمة المرور 6 أحرف على الأقل"; errEl.classList.add("on"); return;
+  }
+  if(newPass !== confirm){
+    errEl.textContent="⚠️ كلمة المرور غير متطابقة"; errEl.classList.add("on"); return;
+  }
+  try{
+    await req("POST","/api/super/change-password",{old_password:oldPass, new_password:newPass});
+    okEl.textContent="✅ تم تغيير كلمة المرور بنجاح!"; okEl.classList.add("on");
+    document.getElementById("cp-old").value="";
+    document.getElementById("cp-new").value="";
+    document.getElementById("cp-confirm").value="";
+  }catch(e){
+    errEl.textContent="⚠️ "+e.message; errEl.classList.add("on");
+  }
+}
 
 // فحص الرابط - إذا كان admin-login افتح شاشة الإدارة
 if(window.location.pathname.includes('admin-login')){
