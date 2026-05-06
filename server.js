@@ -12,14 +12,24 @@ const SECRET = process.env.JWT_SECRET || "herd_secret";
 
 app.use(cors());
 app.use(express.json());
+const fs = require("fs");
+app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, "public")));
+
 app.get("/", (req, res) => {
-  const p = path.join(__dirname, "public", "index.html");
-  const p2 = path.join(__dirname, "index.html");
-  const fs = require("fs");
+  const p = path.join(__dirname, "index.html");
+  const p2 = path.join(__dirname, "public", "index.html");
   if (fs.existsSync(p)) res.sendFile(p);
   else if (fs.existsSync(p2)) res.sendFile(p2);
-  else res.send("Server is running!");
+  else res.send("مواشيك - Server Running!");
+});
+
+app.get("/admin-login", (req, res) => {
+  const p = path.join(__dirname, "index.html");
+  const p2 = path.join(__dirname, "public", "index.html");
+  if (fs.existsSync(p)) res.sendFile(p);
+  else if (fs.existsSync(p2)) res.sendFile(p2);
+  else res.send("Not found");
 });
 
 // ── اتصال قاعدة البيانات ─────────────────────────────────
