@@ -259,7 +259,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 <!-- ══ LANDING ══ -->
 <div class="screen on" id="sc-land">
   <div id="land">
-    <div class="land-logo">🐑</div>
+    <div class="land-logo" onclick="logoClick()" style="cursor:pointer;">🐑</div>
     <div class="land-title">مواشيك</div>
     <div class="land-sub">سجّل حلالك، تابع مواشيك، وابقَ على اطلاع يومي على بياناتك</div>
     <div class="land-btns">
@@ -320,7 +320,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 </div>
 
 <!-- ══ SUPER ADMIN LOGIN ══ -->
-<div class="screen" id="sc-super" style="display:none!important;">
+<div class="screen" id="sc-super">
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>👑 الإدارة العليا</h2>
@@ -926,17 +926,7 @@ if(saved){
   }catch{ localStorage.removeItem("herd_token"); }
 }
 
-// Hidden admin access - click logo 5 times
-let logoClicks = 0, logoTimer;
-function logoClick(){
-  logoClicks++;
-  clearTimeout(logoTimer);
-  logoTimer = setTimeout(()=>{ logoClicks=0; }, 2000);
-  if(logoClicks >= 5){
-    logoClicks=0;
-    show('sc-super');
-  }
-}
+
 </script>
 </body>
 </html>
