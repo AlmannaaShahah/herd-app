@@ -395,31 +395,102 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
         <div class="sc"><div class="si2" style="background:rgba(240,106,106,.12)">🔪</div><div><div class="sn" id="s-slau" style="color:var(--red)">—</div><div class="sl">ذبائح</div></div></div>
       </div>
 
-      <div class="tsec">
-        <div class="th2">
-          <h3>📋 قائمة الحيوانات</h3>
+      <div class="tsec" style="margin-bottom:18px">
+      <div class="th2">
+        <h3>🐑 جدول الغنم</h3>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
           <div class="tabs">
-            <button class="tab on" onclick="filt('all',this)">الكل</button>
-            <button class="tab" onclick="filt('f',this)">إناث</button>
-            <button class="tab" onclick="filt('m',this)">ذكور</button>
-            <button class="tab" onclick="filt('mo',this)">أمهات</button>
-            <button class="tab" onclick="filt('d',this)">💀</button>
-            <button class="tab" onclick="filt('s',this)">🔪</button>
+            <button class="tab on" onclick="filt('all',this,'غنم')">الكل</button>
+            <button class="tab" onclick="filt('f',this,'غنم')">إناث</button>
+            <button class="tab" onclick="filt('m',this,'غنم')">ذكور</button>
+            <button class="tab" onclick="filt('mo',this,'غنم')">أمهات</button>
+            <button class="tab" onclick="filt('d',this,'غنم')">💀</button>
+            <button class="tab" onclick="filt('s',this,'غنم')">🔪</button>
+          </div>
+          <div style="position:relative;">
+            <button onclick="toggleFilter('filter-غنم')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;color:var(--green);font-weight:800;">⚙️ تصفية</button>
+            <div id="filter-غنم" style="display:none;position:absolute;top:36px;left:0;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;z-index:100;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);">
+              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب الصنف</div>
+              <div id="breed-filters-غنم" style="display:flex;flex-direction:column;gap:6px;"></div>
+              <button onclick="clearBreedFilter('غنم')" style="margin-top:10px;width:100%;background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:7px;padding:6px;font-family:Tajawal,sans-serif;font-size:12px;color:var(--red);cursor:pointer;font-weight:800;">إزالة التصفية</button>
+            </div>
           </div>
         </div>
-        <div class="tw">
-          <table>
-            <thead><tr>
-              <th>الرقم</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
-              <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
-              <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
-              <th>الحالة</th><th id="ac-th" style="display:none">إجراءات</th>
-            </tr></thead>
-            <tbody id="tbody"></tbody>
-          </table>
+      </div>
+      <div class="tw"><table>
+        <thead><tr>
+          <th>الرقم</th><th>الصنف</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
+          <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
+          <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
+          <th>الحالة</th><th id="ac-th" style="display:none">إجراءات</th>
+        </tr></thead>
+        <tbody id="tbody-غنم"></tbody>
+      </table></div>
+    </div>
+
+    <div class="tsec" style="margin-bottom:18px">
+      <div class="th2">
+        <h3>🐄 جدول البقر</h3>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tabs">
+            <button class="tab on" onclick="filt('all',this,'بقر')">الكل</button>
+            <button class="tab" onclick="filt('f',this,'بقر')">إناث</button>
+            <button class="tab" onclick="filt('m',this,'بقر')">ذكور</button>
+            <button class="tab" onclick="filt('d',this,'بقر')">💀</button>
+            <button class="tab" onclick="filt('s',this,'بقر')">🔪</button>
+          </div>
+          <div style="position:relative;">
+            <button onclick="toggleFilter('filter-بقر')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;color:var(--green);font-weight:800;">⚙️ تصفية</button>
+            <div id="filter-بقر" style="display:none;position:absolute;top:36px;left:0;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;z-index:100;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);">
+              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب الصنف</div>
+              <div id="breed-filters-بقر" style="display:flex;flex-direction:column;gap:6px;"></div>
+              <button onclick="clearBreedFilter('بقر')" style="margin-top:10px;width:100%;background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:7px;padding:6px;font-family:Tajawal,sans-serif;font-size:12px;color:var(--red);cursor:pointer;font-weight:800;">إزالة التصفية</button>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="tw"><table>
+        <thead><tr>
+          <th>الرقم</th><th>الصنف</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
+          <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
+          <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
+          <th>الحالة</th><th class="ac-th-extra" style="display:none">إجراءات</th>
+        </tr></thead>
+        <tbody id="tbody-بقر"></tbody>
+      </table></div>
     </div>
+
+    <div class="tsec">
+      <div class="th2">
+        <h3>🐪 جدول الإبل</h3>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div class="tabs">
+            <button class="tab on" onclick="filt('all',this,'إبل')">الكل</button>
+            <button class="tab" onclick="filt('f',this,'إبل')">إناث</button>
+            <button class="tab" onclick="filt('m',this,'إبل')">ذكور</button>
+            <button class="tab" onclick="filt('d',this,'إبل')">💀</button>
+            <button class="tab" onclick="filt('s',this,'إبل')">🔪</button>
+          </div>
+          <div style="position:relative;">
+            <button onclick="toggleFilter('filter-إبل')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;color:var(--green);font-weight:800;">⚙️ تصفية</button>
+            <div id="filter-إبل" style="display:none;position:absolute;top:36px;left:0;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;z-index:100;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);">
+              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب الصنف</div>
+              <div id="breed-filters-إبل" style="display:flex;flex-direction:column;gap:6px;"></div>
+              <button onclick="clearBreedFilter('إبل')" style="margin-top:10px;width:100%;background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:7px;padding:6px;font-family:Tajawal,sans-serif;font-size:12px;color:var(--red);cursor:pointer;font-weight:800;">إزالة التصفية</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tw"><table>
+        <thead><tr>
+          <th>الرقم</th><th>الصنف</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
+          <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
+          <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
+          <th>الحالة</th><th class="ac-th-extra" style="display:none">إجراءات</th>
+        </tr></thead>
+        <tbody id="tbody-إبل"></tbody>
+      </table></div>
+    </div></div>
 
     <!-- REPORT -->
     <div class="page" id="page-rep">
@@ -498,9 +569,9 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
     <div class="fg">
       <div class="ff"><label>الرقم *</label><input id="f-num" placeholder="601"></div>
       <div class="ff"><label>الصنف</label><select id="f-type"><option value="غنم">غنم</option><option value="بقر">بقر</option><option value="إبل">إبل</option></select></div>
-      <div class="ff full"><label>النوع / السلالة</label><select id="f-breed"><option>نجدي</option><option>عربي</option><option>نعيمي</option><option>هجين</option><option>حرّي</option><option>بربري</option></select></div>
+      <div class="ff full"><label>الصنف</label><select id="f-breed"><option>نجدي</option><option>نعيمي</option><option>معزة</option><option>حرّي</option><option>بربري</option></select></div>
       <div class="ff"><label>الجنس *</label><select id="f-gender"><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
-      <div class="ff full"><label>العمر</label><select id="f-age"><option value="رخلة">رخلة</option><option value="ثني">ثني</option><option value="سديس">سديس</option><option value="جامع">جامع</option></select></div>
+      <div class="ff full"><label>العمر</label><select id="f-age"><option value="رخلة">رخلة</option><option value="رباع">رباع</option><option value="ثني">ثني</option><option value="سديس">سديس</option><option value="جامع">جامع</option></select></div>
       <div class="ff"><label>لون الجسم</label><input id="f-body" placeholder="أبيض / بني..."></div>
       <div class="ff"><label>لون الإشارة</label><input id="f-ear" placeholder="بني / أسود..."></div>
       <div class="ff"><label>تاريخ الميلاد</label><input type="date" id="f-born" style="direction:ltr;text-align:right;"></div>
@@ -587,7 +658,21 @@ async function req(method,url,body){
 function showErr(id,msg){ const e=document.getElementById(id); e.textContent=msg; e.classList.add("on"); }
 function hideErr(id){ document.getElementById(id).classList.remove("on"); }
 
-const cdot=c=>({أبيض:"#f0f0f0",بني:"#8B4513",أسود:"#111",رمادي:"#888",بيج:"#d4b896"}[c]||"#555");
+const colorMap={
+  أبيض:"#e8e8e8",بيضاء:"#e8e8e8",
+  أسود:"#222",سوداء:"#222",
+  بني:"#8B4513",بنية:"#8B4513",
+  رمادي:"#888",رمادية:"#888",
+  بيج:"#d4a96a",
+  أحمر:"#e74c3c",حمراء:"#e74c3c",
+  أصفر:"#f1c40f",صفراء:"#f1c40f",
+  أخضر:"#27ae60",خضراء:"#27ae60",
+  أزرق:"#2980b9",زرقاء:"#2980b9",
+  برتقالي:"#e67e22",برتقالية:"#e67e22",
+  وردي:"#e91e8c",وردية:"#e91e8c",
+};
+const cdot=c=>colorMap[c]||"#999";
+const ctext=c=>colorMap[c]||"inherit";
 const albl=a=>({رخلة:"رخلة",ثني:"ثني ✅",سديس:"سديس ✅",جامع:"جامع ✅"}[a]||a||"—");
 const today=()=>new Date().toISOString().split("T")[0];
 
@@ -681,49 +766,64 @@ function renderStats(){
   document.getElementById("s-slau").textContent   = allAnimals.filter(x=>x.status==="slaughtered").length;
 }
 
-function filt(f,el){ curFilt=f; document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on")); el.classList.add("on"); renderTable(); }
+let curFilts = {غنم:'all', بقر:'all', إبل:'all'};
+function filt(f,el,type){
+  curFilts[type]=f;
+  // only reset tabs in same table
+  el.closest('.th2').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderTable();
+}
 
 function renderTable(){
   const canEdit = userType==="farmer"||userRole==="admin";
-  let d=[...allAnimals];
-  if(curFilt==="f")  d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
-  if(curFilt==="m")  d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
-  if(curFilt==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&allAnimals.some(c=>c.mother_id===x.id));
-  if(curFilt==="d")  d=d.filter(x=>x.status==="dead");
-  if(curFilt==="s")  d=d.filter(x=>x.status==="slaughtered");
-  const kc=id=>allAnimals.filter(c=>c.mother_id===id&&c.status==="alive").length;
-
-  document.getElementById("tbody").innerHTML=d.map(x=>{
-    const k=kc(x.id);
-    const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
-    const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
-    const nt=x.notes?x.notes.substring(0,18)+(x.notes.length>18?"...":""):"—";
-    const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
-    let ac="";
-    if(canEdit){
-      let b=`<button class="ab ae" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
-      if(x.status==="alive"){b+=`<button class="ab ak2" onclick="event.stopPropagation();openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab as2" onclick="event.stopPropagation();openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
-      b+=`<button class="ab adk" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
-      ac=`<td><div class="ac">${b}</div></td>`;
-    }
-    const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":"";
-    return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
-      <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
-      <td>${x.animal_type||"غنم"}</td>
-      <td><span style="color:${x.gender==="أنثى"?"var(--purple)":"var(--blue)"};font-weight:800">${x.gender}</span></td>
-      <td>${albl(x.age_label)}</td>
-      <td><span class="dot" style="background:${cdot(x.body_color)}"></span>${x.body_color||"—"}</td>
-      <td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
-      <td>${x.ear_color||"—"}</td><td>${mT}</td><td>${kT}</td>
-      <td style="color:var(--muted);font-size:12px">${nt}</td>
-      <td>${st}</td>${ac}
-    </tr>`;
-  }).join("");
+  if(canEdit){
+    document.getElementById("ac-th").style.display="table-cell";
+    document.querySelectorAll(".ac-th-extra").forEach(th=>th.style.display="table-cell");
+  }
+  ["غنم","بقر","إبل"].forEach(type=>{
+    const f=curFilts[type]||"all";
+    let d=allAnimals.filter(x=>x.animal_type===type);
+    if(f==="f")  d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
+    else if(f==="m") d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
+    else if(f==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&allAnimals.some(c=>c.mother_id===x.id));
+    else if(f==="d") d=d.filter(x=>x.status==="dead");
+    else if(f==="s") d=d.filter(x=>x.status==="slaughtered");
+    const kc=id=>allAnimals.filter(c=>c.mother_id===id&&c.status==="alive").length;
+    if(breedFilters[type]) d=d.filter(x=>x.breed===breedFilters[type]);
+    const rows=d.map(x=>{
+      const k=kc(x.id);
+      const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
+      const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
+      const nt=x.notes?x.notes.substring(0,18)+(x.notes.length>18?"...":""):"—";
+      const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
+      let ac="";
+      if(canEdit){
+        let b=`<button class="ab ae" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
+        if(x.status==="alive"){b+=`<button class="ab ak2" onclick="event.stopPropagation();openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab as2" onclick="event.stopPropagation();openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
+        b+=`<button class="ab adk" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
+        ac=`<td><div class="ac">${b}</div></td>`;
+      }
+      const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":"";
+      return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
+        <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
+        <td>${x.animal_type||"غنم"}</td>
+        <td style="color:var(--muted)">${x.breed||"—"}</td>
+        <td><span style="color:${x.gender==="أنثى"?"var(--purple)":"var(--blue)"};font-weight:800">${x.gender}</span></td>
+        <td>${albl(x.age_label)}</td>
+        <td>${colorText(x.body_color||"—")}</td>
+        <td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
+        <td>${colorText(x.ear_color||"—")}</td>
+        <td>${mT}</td><td>${kT}</td>
+        <td style="color:var(--muted);font-size:12px">${nt}</td>
+        <td>${st}</td>${ac}
+      </tr>`;
+    }).join("");
+    const tbody=document.getElementById("tbody-"+type);
+    if(tbody) tbody.innerHTML=rows;
+  });
 }
 
-// ═══════════════════════════════════════════
-//  SEARCH
-// ═══════════════════════════════════════════
 function goNum(n){ document.getElementById("s-inp").value=n; doSearch(); window.scrollTo({top:0,behavior:"smooth"}); }
 function clearSearch(){ document.getElementById("s-inp").value=""; document.getElementById("rcard").classList.remove("on"); document.getElementById("nfound").classList.remove("on"); }
 
@@ -750,7 +850,7 @@ async function doSearch(){
     } else ra.innerHTML="";
     document.getElementById("r-dets").innerHTML=[
       {l:"الصنف",v:x.animal_type||"غنم"},{l:"الجنس",v:x.gender},{l:"العمر",v:albl(x.age_label)},
-      {l:"لون الجسم",v:`<span class='dot' style='background:${cdot(x.body_color)}'></span>${x.body_color||"—"}`},
+      {l:"لون الجسم",v:`<span style='color:${cdot(x.body_color)};font-weight:700'>${x.body_color||"—"}</span>`},
       {l:"لون الإشارة",v:x.ear_color||"—"},{l:"الميلاد",v:x.birth_date?.split("T")[0]||"—"},
       {l:"الأم",v:x.mother_number?`<span style='color:var(--gold);cursor:pointer;font-weight:800' onclick="goNum('${x.mother_number}')">${x.mother_number}</span>`:"أم أصلية"},
       {l:"الأبناء",v:ch.length>0?`<span style='color:var(--green)'>${ch.length}</span>`:"لا يوجد"},
@@ -927,6 +1027,58 @@ function goSuperPage(id,btn){
 // ═══════════════════════════════════════════
 //  AUTO REFRESH + INIT
 // ═══════════════════════════════════════════
+
+// ─── BREED FILTER ───────────────────────────────────────────
+let breedFilters = {غنم:null, بقر:null, إبل:null};
+
+function toggleFilter(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const type = id.replace('filter-','');
+  // Build breed list dynamically
+  const breeds = [...new Set(allAnimals.filter(x=>x.animal_type===type).map(x=>x.breed).filter(Boolean))];
+  const container = document.getElementById('breed-filters-'+type);
+  if(container){
+    container.innerHTML = breeds.map(b=>`
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700;">
+        <input type="radio" name="breed-${type}" value="${b}" ${breedFilters[type]===b?'checked':''} onchange="applyBreedFilter('${type}','${b}')">
+        ${b}
+      </label>
+    `).join('') || '<div style="color:var(--muted);font-size:12px">لا توجد أصناف</div>';
+  }
+  el.style.display = el.style.display==='none' ? 'block' : 'none';
+  // Close other filters
+  ['غنم','بقر','إبل'].forEach(t=>{
+    if(t!==type){
+      const other = document.getElementById('filter-'+t);
+      if(other) other.style.display='none';
+    }
+  });
+}
+
+function applyBreedFilter(type, breed){
+  breedFilters[type] = breed;
+  renderTable();
+  document.getElementById('filter-'+type).style.display='none';
+}
+
+function clearBreedFilter(type){
+  breedFilters[type] = null;
+  document.querySelectorAll(`input[name="breed-${type}"]`).forEach(r=>r.checked=false);
+  renderTable();
+  document.getElementById('filter-'+type).style.display='none';
+}
+
+// Close filters when clicking outside
+document.addEventListener('click', e=>{
+  if(!e.target.closest('[id^="filter-"]') && !e.target.closest('button[onclick^="toggleFilter"]')){
+    ['غنم','بقر','إبل'].forEach(t=>{
+      const el = document.getElementById('filter-'+t);
+      if(el) el.style.display='none';
+    });
+  }
+});
+
 setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
 
 async function changeAdminPass(){
