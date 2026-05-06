@@ -181,7 +181,7 @@ body{
 .tabs{display:flex;gap:5px;flex-wrap:wrap;}
 .tab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);background:var(--s1);font-family:'Tajawal',sans-serif;transition:.2s;}
 .tab.on,.tab:hover{border-color:var(--green);color:var(--green);background:var(--green3);}
-.tw{overflow-x:auto;}
+.tw{overflow-x:auto;width:100%;} table{width:100%;min-width:900px;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 thead th{background:var(--s3);padding:11px 13px;text-align:right;color:var(--muted);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
 tbody tr{border-bottom:1px solid var(--border);transition:.15s;cursor:pointer;}
@@ -428,7 +428,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       </table></div>
     </div>
 
-    <div class="tsec" style="margin-bottom:18px">
+    <div class="tsec" id="table-بقر" style="margin-bottom:18px;display:none">
       <div class="th2">
         <h3>🐄 جدول البقر</h3>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -460,7 +460,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       </table></div>
     </div>
 
-    <div class="tsec">
+    <div class="tsec" id="table-إبل" style="display:none">
       <div class="th2">
         <h3>🐪 جدول الإبل</h3>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -709,6 +709,18 @@ async function doRegister(){
     await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),username:document.getElementById("r-username").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
     const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح!"; ok.classList.add("on");
     btn.textContent="تم ✓";
+    // Auto login after register
+    setTimeout(async ()=>{
+      try{
+        const loginVal=document.getElementById("r-email").value.trim();
+        const pass=document.getElementById("r-pass").value;
+        const d2=await req("POST","/api/login/farmer",{email:loginVal,username:loginVal,password:pass});
+        token=d2.token; userRole="admin"; userType="farmer"; farmName=d2.farm_name; userName=d2.owner_name;
+        try{const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");farmerId=JSON.parse(atob(b64)).farmer_id;}catch(e){farmerId=null;}
+        localStorage.setItem("herd_token",token);
+        launchApp();
+      }catch(e){}
+    },1000);
   }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
 }
 
@@ -728,8 +740,8 @@ function doLogout(){ token=""; localStorage.removeItem("herd_token"); location.r
 // ═══════════════════════════════════════════
 function launchApp(){
   show("sc-app");
-  document.getElementById("hdr-farm").textContent=farmName;
-  document.getElementById("hdr-user").textContent=userName;
+  document.getElementById("hdr-farm").textContent=farmName||"مزرعتي";
+  document.getElementById("hdr-user").textContent=userName||"";
   const b=document.getElementById("rbdg");
   if(userType==="farmer"){b.textContent="🌾 صاحب المزرعة";b.className="rbdg rb-owner";}
   else if(userRole==="admin"){b.textContent="🛠️ مشرف";b.className="rbdg rb-admin";}
@@ -781,6 +793,12 @@ function renderTable(){
     document.getElementById("ac-th").style.display="table-cell";
     document.querySelectorAll(".ac-th-extra").forEach(th=>th.style.display="table-cell");
   }
+  // Show/hide tables based on content
+  ["غنم","بقر","إبل"].forEach(type=>{
+    const hasAnimals = allAnimals.some(x=>x.animal_type===type);
+    const tableEl = document.getElementById("table-"+type);
+    if(tableEl) tableEl.style.display = hasAnimals ? "block" : "none";
+  });
   ["غنم","بقر","إبل"].forEach(type=>{
     const f=curFilts[type]||"all";
     let d=allAnimals.filter(x=>x.animal_type===type);
