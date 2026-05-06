@@ -181,7 +181,7 @@ body{
 .tabs{display:flex;gap:5px;flex-wrap:wrap;}
 .tab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);background:var(--s1);font-family:'Tajawal',sans-serif;transition:.2s;}
 .tab.on,.tab:hover{border-color:var(--green);color:var(--green);background:var(--green3);}
-.tw{overflow-x:auto;width:100%;} table{width:100%;min-width:900px;}
+.tw{overflow-x:auto;} table{width:100%;min-width:800px;border-collapse:collapse;font-size:13px;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
 thead th{background:var(--s3);padding:11px 13px;text-align:right;color:var(--muted);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
 tbody tr{border-bottom:1px solid var(--border);transition:.15s;cursor:pointer;}
@@ -712,15 +712,17 @@ async function doRegister(){
     // Auto login after register
     setTimeout(async ()=>{
       try{
-        const loginVal=document.getElementById("r-email").value.trim();
-        const pass=document.getElementById("r-pass").value;
-        const d2=await req("POST","/api/login/farmer",{email:loginVal,username:loginVal,password:pass});
-        token=d2.token; userRole="admin"; userType="farmer"; farmName=d2.farm_name; userName=d2.owner_name;
-        try{const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");farmerId=JSON.parse(atob(b64)).farmer_id;}catch(e){farmerId=null;}
+        const emailVal=document.getElementById("r-email").value.trim();
+        const passVal=document.getElementById("r-pass").value;
+        const d2=await req("POST","/api/login/farmer",{email:emailVal,username:emailVal,password:passVal});
+        token=d2.token; userRole="admin"; userType="farmer"; 
+        farmName=d2.farm_name||"مزرعتي"; 
+        userName=d2.owner_name||d2.username||"";
+        try{const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");const pp=JSON.parse(atob(b64));farmerId=pp.farmer_id;}catch(e){farmerId=null;}
         localStorage.setItem("herd_token",token);
         launchApp();
-      }catch(e){}
-    },1000);
+      }catch(e){ console.error("auto login failed:",e); }
+    },800);
   }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
 }
 
@@ -793,7 +795,7 @@ function renderTable(){
     document.getElementById("ac-th").style.display="table-cell";
     document.querySelectorAll(".ac-th-extra").forEach(th=>th.style.display="table-cell");
   }
-  // Show/hide tables based on content
+  // Show tables that have animals
   ["غنم","بقر","إبل"].forEach(type=>{
     const hasAnimals = allAnimals.some(x=>x.animal_type===type);
     const tableEl = document.getElementById("table-"+type);
