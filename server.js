@@ -384,12 +384,21 @@ app.get("/api/super/stats", authSuper, async (req, res) => {
 });
 
 // ── تشغيل السيرفر ─────────────────────────────────────────
-// مسار مؤقت لتغيير كلمة مرور السوبر أدمن - احذفيه بعد الاستخدام
-app.get("/reset-admin-temp-2026", async (req, res) => {
+// تغيير كلمة مرور السوبر أدمن
+app.post("/api/super/change-password", authSuper, async (req, res) => {
+  const { old_password, new_password } = req.body;
+  if(!old_password || !new_password)
+    return res.status(400).json({ error: "جميع الحقول مطلوبة" });
+  if(new_password.length < 6)
+    return res.status(400).json({ error: "كلمة المرور 6 أحرف على الأقل" });
   const pool = await getDB();
-  const hash = await bcrypt.hash("Mawashik2026!", 10);
+  const [rows] = await pool.query("SELECT * FROM admins WHERE username='superadmin'");
+  if(!rows.length) return res.status(404).json({ error: "المستخدم غير موجود" });
+  const ok = await bcrypt.compare(old_password, rows[0].password_hash);
+  if(!ok) return res.status(401).json({ error: "كلمة المرور الحالية غير صحيحة" });
+  const hash = await bcrypt.hash(new_password, 10);
   await pool.query("UPDATE admins SET password_hash=? WHERE username='superadmin'", [hash]);
-  res.json({ success: true, message: "تم تغيير كلمة المرور إلى: Mawashik2026!" });
+  res.json({ success: true });
 });
 
 app.listen(PORT, async () => {
