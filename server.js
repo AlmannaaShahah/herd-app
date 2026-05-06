@@ -384,6 +384,14 @@ app.get("/api/super/stats", authSuper, async (req, res) => {
 });
 
 // ── تشغيل السيرفر ─────────────────────────────────────────
+// مسار مؤقت لتغيير كلمة مرور السوبر أدمن - احذفيه بعد الاستخدام
+app.get("/reset-admin-temp-2026", async (req, res) => {
+  const pool = await getDB();
+  const hash = await bcrypt.hash("Mawashik2026!", 10);
+  await pool.query("UPDATE admins SET password_hash=? WHERE username='superadmin'", [hash]);
+  res.json({ success: true, message: "تم تغيير كلمة المرور إلى: Mawashik2026!" });
+});
+
 app.listen(PORT, async () => {
   console.log(`✅ السيرفر يعمل على المنفذ ${PORT}`);
   await initDB();
