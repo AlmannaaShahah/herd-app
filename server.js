@@ -393,6 +393,21 @@ app.get("/api/super/stats", authSuper, async (req, res) => {
 });
 
 // ── تشغيل السيرفر ─────────────────────────────────────────
+// تغيير كلمة مرور المزارع
+app.post("/api/farmer/change-password", authFarmer, async (req, res) => {
+  const { old_password, new_password } = req.body;
+  if(!old_password||!new_password) return res.status(400).json({error:"جميع الحقول مطلوبة"});
+  if(new_password.length<6) return res.status(400).json({error:"كلمة المرور 6 أحرف على الأقل"});
+  const pool = await getDB();
+  const [rows] = await pool.query("SELECT * FROM farmers WHERE id=?", [req.farmer_id]);
+  if(!rows.length) return res.status(404).json({error:"المزرعة غير موجودة"});
+  const ok = await bcrypt.compare(old_password, rows[0].password_hash);
+  if(!ok) return res.status(401).json({error:"كلمة المرور الحالية غير صحيحة"});
+  const hash = await bcrypt.hash(new_password, 10);
+  await pool.query("UPDATE farmers SET password_hash=? WHERE id=?", [hash, req.farmer_id]);
+  res.json({success:true});
+});
+
 // تغيير كلمة مرور السوبر أدمن
 app.post("/api/super/change-password", authSuper, async (req, res) => {
   const { old_password, new_password } = req.body;
