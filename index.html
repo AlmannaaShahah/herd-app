@@ -428,7 +428,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       </table></div>
     </div>
 
-    <div class="tsec" id="table-بقر" style="margin-bottom:18px;display:none">
+    <div class="tsec" id="table-بقر" style="margin-bottom:18px;">
       <div class="th2">
         <h3>🐄 جدول البقر</h3>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -460,7 +460,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       </table></div>
     </div>
 
-    <div class="tsec" id="table-إبل" style="display:none">
+    <div class="tsec" id="table-إبل">
       <div class="th2">
         <h3>🐪 جدول الإبل</h3>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
@@ -766,11 +766,14 @@ function launchApp(){
 // ═══════════════════════════════════════════
 async function loadAnimals(){
   allAnimals=await req("GET","/api/animals");
+  console.log("Animals loaded:", allAnimals.length, allAnimals.map(x=>x.animal_type));
   renderStats(); renderTable();
 }
 
 function renderStats(){
   const a=allAnimals.filter(x=>x.status==="alive");
+  // Normalize animal_type
+  allAnimals.forEach(x=>{ if(!x.animal_type) x.animal_type="غنم"; });
   document.getElementById("s-alive").textContent  = a.length;
   document.getElementById("s-males").textContent  = a.filter(x=>x.gender==="ذكر").length;
   document.getElementById("s-females").textContent= a.filter(x=>x.gender==="أنثى").length;
@@ -795,15 +798,10 @@ function renderTable(){
     document.getElementById("ac-th").style.display="table-cell";
     document.querySelectorAll(".ac-th-extra").forEach(th=>th.style.display="table-cell");
   }
-  // Show tables that have animals
-  ["غنم","بقر","إبل"].forEach(type=>{
-    const hasAnimals = allAnimals.some(x=>x.animal_type===type);
-    const tableEl = document.getElementById("table-"+type);
-    if(tableEl) tableEl.style.display = hasAnimals ? "block" : "none";
-  });
+
   ["غنم","بقر","إبل"].forEach(type=>{
     const f=curFilts[type]||"all";
-    let d=allAnimals.filter(x=>x.animal_type===type);
+    let d=allAnimals.filter(x=>(x.animal_type||"غنم")===type);
     if(f==="f")  d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
     else if(f==="m") d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
     else if(f==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&allAnimals.some(c=>c.mother_id===x.id));
