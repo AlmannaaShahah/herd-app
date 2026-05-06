@@ -914,6 +914,15 @@ function goSuperPage(id,btn){
 // ═══════════════════════════════════════════
 setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
 
+// فحص الرابط - إذا كان admin-login افتح شاشة الإدارة
+if(window.location.pathname.includes('admin-login')){
+  document.querySelectorAll(".screen").forEach(s=>{ s.classList.remove("on"); s.style.display="none"; });
+  const adminScreen = document.getElementById('sc-super');
+  adminScreen.classList.add("on");
+  adminScreen.style.display="block";
+  window.scrollTo(0,0);
+}
+
 const saved=localStorage.getItem("herd_token");
 if(saved){
   try{
