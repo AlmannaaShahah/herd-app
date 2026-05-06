@@ -452,7 +452,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 </div>
 
 <!-- ══ SUPER ADMIN APP ══ -->
-<div class="screen" id="sc-super-app" style="display:none!important;">
+<div class="screen" id="sc-super-app">
   <header class="hdr">
     <div class="hdr-ico">👑</div>
     <div><div class="hdr-name">الإدارة العليا</div><div class="hdr-farm">لوحة تحكم المنصة</div></div>
@@ -475,6 +475,18 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
     <div class="page" id="sp-stats">
       <div style="font-size:18px;font-weight:900;color:var(--gold2);margin-bottom:16px">📊 إحصائيات المنصة</div>
       <div class="sgrid" id="super-stats"></div>
+    </div>
+
+    <div class="page" id="sp-password">
+      <div style="font-size:18px;font-weight:900;color:var(--green);margin-bottom:20px">🔑 تغيير كلمة المرور</div>
+      <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:24px;max-width:400px;">
+        <div class="af"><label>كلمة المرور الحالية</label><input type="password" id="cp-old"></div>
+        <div class="af"><label>كلمة المرور الجديدة</label><input type="password" id="cp-new"></div>
+        <div class="af"><label>تأكيد كلمة المرور الجديدة</label><input type="password" id="cp-confirm"></div>
+        <div class="merr" id="cp-err"></div>
+        <div class="auth-ok" id="cp-ok"></div>
+        <button class="btn bg" style="width:100%;margin-top:14px" onclick="changeAdminPass()">💾 حفظ كلمة المرور</button>
+      </div>
     </div>
   </div>
 </div>
@@ -555,10 +567,12 @@ function show(id){
   document.querySelectorAll(".screen").forEach(s=>{ 
     s.classList.remove("on"); 
     s.style.display="none"; 
+    s.style.removeProperty("display");
+    s.style.display="none";
   }); 
   const el = document.getElementById(id);
   el.classList.add("on"); 
-  el.style.display="block";
+  el.style.cssText="display:block!important;";
   document.documentElement.scrollTop=0;
   document.body.scrollTop=0;
 }
@@ -618,7 +632,7 @@ async function doSuperLogin(){
   try{
     const d=await req("POST","/api/login/super",{username:document.getElementById("sa-user").value.trim(),password:document.getElementById("sa-pass").value});
     token=d.token; localStorage.setItem("herd_token",token);
-    show("sc-super-app"); loadFarmers(); loadSuperStats();
+    show("sc-super-app"); setTimeout(()=>{loadFarmers(); loadSuperStats();},100);
   }catch(e){showErr("sa-err",e.message);}
 }
 
@@ -958,7 +972,7 @@ if(saved){
     const raw=saved.split(".")[1].replace(/-/g,"+").replace(/_/g,"/").padEnd(Math.ceil(saved.split(".")[1].length/4)*4,"="); const p=JSON.parse(atob(raw));
     if(Date.now()/1000<p.exp){
       token=saved;
-      if(p.type==="superadmin"){ show("sc-super-app"); loadFarmers(); loadSuperStats(); }
+      if(p.type==="superadmin"){ show("sc-super-app"); setTimeout(()=>{loadFarmers(); loadSuperStats();},100); }
       else{ userType=p.type; userRole=p.role; farmerId=p.farmer_id; farmName=p.farm_name; userName=p.owner_name||p.full_name||p.username; launchApp(); }
     } else { localStorage.removeItem("herd_token"); }
   }catch{ localStorage.removeItem("herd_token"); }
