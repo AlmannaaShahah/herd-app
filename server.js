@@ -156,18 +156,27 @@ app.post("/api/register", async (req, res) => {
   const [ex] = await pool.query("SELECT id FROM farmers WHERE email=?", [email]);
   if (ex.length) return res.status(400).json({ error: "البريد الإلكتروني مسجل مسبقاً" });
   const hash = await bcrypt.hash(password, 10);
+  // Add username column if not exists
+  try { await pool.query("ALTER TABLE farmers ADD COLUMN username VARCHAR(80) UNIQUE AFTER owner_name"); } catch(e) {}
+  const uname = (req.body.username||"").trim() || email;
   await pool.query(
-    "INSERT INTO farmers (farm_name,owner_name,email,password_hash,status) VALUES (?,?,?,?,'active')",
-    [farm_name, owner_name, email, hash]
+    "INSERT INTO farmers (farm_name,owner_name,username,email,password_hash,status) VALUES (?,?,?,?,?,'active')",
+    [farm_name, owner_name, uname, email, hash]
   );
   res.json({ success: true, message: "تم التسجيل بنجاح! يمكنك الدخول الآن" });
 });
 
 app.post("/api/login/farmer", async (req, res) => {
   const { email, username, password } = req.body;
-  const loginVal = email || username;
+  const loginVal = (email || username || "").trim();
   const pool = await getDB();
-  const [rows] = await pool.query("SELECT * FROM farmers WHERE email=? OR username=?", [loginVal, loginVal]);
+  // Try email first, then username column if exists
+  let rows;
+  try {
+    [rows] = await pool.query("SELECT * FROM farmers WHERE email=? OR username=?", [loginVal, loginVal]);
+  } catch(e) {
+    [rows] = await pool.query("SELECT * FROM farmers WHERE email=?", [loginVal]);
+  }
   if (!rows.length) return res.status(401).json({ error: "البريد غير موجود" });
   const f = rows[0];
   if (f.status === "pending")   return res.status(403).json({ error: "حسابك في انتظار موافقة الإدارة" });
