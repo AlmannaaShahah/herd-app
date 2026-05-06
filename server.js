@@ -401,19 +401,6 @@ app.post("/api/super/change-password", authSuper, async (req, res) => {
   res.json({ success: true });
 });
 
-// Route مؤقت لإعداد السوبر أدمن
-app.get("/setup-admin-now", async (req, res) => {
-  try {
-    const pool = await getDB();
-    const hash = await bcrypt.hash("Admin2026", 10);
-    await pool.query("DELETE FROM admins");
-    await pool.query("INSERT INTO admins (username, password_hash) VALUES (?, ?)", ["superadmin", hash]);
-    res.json({ success: true, message: "تم! ادخلي بكلمة: Admin2026" });
-  } catch(e) {
-    res.json({ error: e.message });
-  }
-});
-
 app.listen(PORT, async () => {
   console.log(`✅ السيرفر يعمل على المنفذ ${PORT}`);
   await initDB();
