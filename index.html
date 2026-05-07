@@ -1184,11 +1184,7 @@ async function changeAdminPass(){
 
 // فحص الرابط - إذا كان admin-login افتح شاشة الإدارة
 if(window.location.pathname.includes('admin-login')){
-  document.querySelectorAll(".screen").forEach(s=>{ s.classList.remove("on"); s.style.display="none"; });
-  const adminScreen = document.getElementById('sc-super');
-  adminScreen.classList.add("on");
-  adminScreen.style.display="block";
-  window.scrollTo(0,0);
+  show('sc-super');
 }
 
 const saved=localStorage.getItem("herd_token");
