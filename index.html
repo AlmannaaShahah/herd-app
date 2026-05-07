@@ -22,7 +22,6 @@ html{scroll-behavior:smooth;}
 body{
   font-family:'Tajawal',sans-serif;
   background:linear-gradient(160deg,#f0f7f0 0%,#f7f3ed 50%,#f0ede4 100%);
-  position:relative;
   background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   color:var(--text);min-height:100vh;direction:rtl;
 }
@@ -33,9 +32,7 @@ body{
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(45,122,58,.1)}50%{box-shadow:0 0 40px rgba(45,122,58,.25)}}
 
 /* ─── SCREENS ─── */
-.screen{display:none;min-height:100vh;}
-.screen.on{display:block;}
-#sc-land.on{display:flex;}
+.screen{display:none!important;}.screen.on{display:block!important;}#sc-land.on{display:flex!important;flex-direction:column;align-items:center;justify-content:center;}
 
 /* ─── LANDING ─── */
 #sc-land{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;}
@@ -628,9 +625,12 @@ let allAnimals=[], pendId=null, editId=null, curFilt="all";
 //  HELPERS
 // ═══════════════════════════════════════════
 function show(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
-  document.getElementById(id).classList.add("on");
-  window.scrollTo(0,0);
+  var screens = document.querySelectorAll(".screen");
+  for(var i=0;i<screens.length;i++){screens[i].classList.remove("on");}
+  var el = document.getElementById(id);
+  if(el){ el.classList.add("on"); }
+  document.body.scrollTop=0;
+  document.documentElement.scrollTop=0;
 }
 
 
