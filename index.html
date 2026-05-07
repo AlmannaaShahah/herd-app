@@ -411,7 +411,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
           <div style="position:relative;">
             <button onclick="toggleFilter('filter-غنم')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;color:var(--green);font-weight:800;">⚙️ تصفية</button>
             <div id="filter-غنم" style="display:none;position:absolute;top:36px;left:0;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;z-index:100;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);">
-              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب الصنف</div>
+              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب النوع</div>
               <div id="breed-filters-غنم" style="display:flex;flex-direction:column;gap:6px;"></div>
               <button onclick="clearBreedFilter('غنم')" style="margin-top:10px;width:100%;background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:7px;padding:6px;font-family:Tajawal,sans-serif;font-size:12px;color:var(--red);cursor:pointer;font-weight:800;">إزالة التصفية</button>
             </div>
@@ -429,37 +429,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       </table></div>
     </div>
 
-    <div class="tsec" id="table-إبل">
-      <div class="th2">
-        <h3>🐪 جدول الإبل</h3>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <div class="tabs">
-            <button class="tab on" onclick="filt('all',this,'إبل')">الكل</button>
-            <button class="tab" onclick="filt('f',this,'إبل')">إناث</button>
-            <button class="tab" onclick="filt('m',this,'إبل')">ذكور</button>
-            <button class="tab" onclick="filt('d',this,'إبل')">💀</button>
-            <button class="tab" onclick="filt('s',this,'إبل')">🔪</button>
-          </div>
-          <div style="position:relative;">
-            <button onclick="toggleFilter('filter-إبل')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;color:var(--green);font-weight:800;">⚙️ تصفية</button>
-            <div id="filter-إبل" style="display:none;position:absolute;top:36px;left:0;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;z-index:100;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);">
-              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب الصنف</div>
-              <div id="breed-filters-إبل" style="display:flex;flex-direction:column;gap:6px;"></div>
-              <button onclick="clearBreedFilter('إبل')" style="margin-top:10px;width:100%;background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:7px;padding:6px;font-family:Tajawal,sans-serif;font-size:12px;color:var(--red);cursor:pointer;font-weight:800;">إزالة التصفية</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tw"><table>
-        <thead><tr>
-          <th>الرقم</th><th>الصنف</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
-          <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
-          <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
-          <th>الحالة</th><th class="ac-th-extra" style="display:none">إجراءات</th>
-        </tr></thead>
-        <tbody id="tbody-إبل"></tbody>
-      </table></div>
-    </div></div>
+    
 
     <!-- REPORT -->
     <div class="page" id="page-rep">
@@ -826,7 +796,7 @@ function renderTable(){
     document.querySelectorAll(".ac-th-extra").forEach(th=>th.style.display="table-cell");
   }
 
-  ["غنم","بقر","إبل"].forEach(type=>{
+  ["غنم"].forEach(type=>{
     const f=curFilts[type]||"all";
     let d=allAnimals.filter(x=>(x.animal_type||"غنم")===type);
     if(f==="f")  d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
@@ -1081,23 +1051,22 @@ function goSuperPage(id,btn){
 // ─── BREED FILTER ───────────────────────────────────────────
 let breedFilters = {غنم:null, بقر:null, إبل:null};
 
+const allBreeds = ['نجدي','نعيمي','معزة','حرّي','بربري'];
+
 function toggleFilter(id){
   const el = document.getElementById(id);
   if(!el) return;
   const type = id.replace('filter-','');
-  // Build breed list dynamically
-  const breeds = [...new Set(allAnimals.filter(x=>x.animal_type===type).map(x=>x.breed).filter(Boolean))];
   const container = document.getElementById('breed-filters-'+type);
   if(container){
-    container.innerHTML = breeds.map(b=>`
-      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700;">
+    container.innerHTML = allBreeds.map(b=>`
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700;padding:4px 0;">
         <input type="radio" name="breed-${type}" value="${b}" ${breedFilters[type]===b?'checked':''} onchange="applyBreedFilter('${type}','${b}')">
         ${b}
       </label>
-    `).join('') || '<div style="color:var(--muted);font-size:12px">لا توجد أصناف</div>';
+    `).join('');
   }
   el.style.display = el.style.display==='none' ? 'block' : 'none';
-  // Close other filters
   ['غنم','بقر','إبل'].forEach(t=>{
     if(t!==type){
       const other = document.getElementById('filter-'+t);
