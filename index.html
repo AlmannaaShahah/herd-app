@@ -359,7 +359,7 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
             <thead><tr>
               <th>الرقم</th><th>الصنف</th><th>النوع</th><th>الجنس</th><th>العمر</th>
               <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
-              <th>الأم</th><th>الأبناء</th><th>الحالة</th>
+              <th>الأم</th><th>الأبناء</th><th>ملاحظات</th><th>الحالة</th>
               <th id="ac-th" style="display:none">إجراءات</th>
             </tr></thead>
             <tbody id="tbody"></tbody>
@@ -718,6 +718,7 @@ function renderTable(){
       <td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
       <td>${ctext(x.ear_color)}</td>
       <td>${mT}</td><td>${kT}</td>
+      <td style="color:var(--muted);font-size:12px">${x.notes?x.notes.substring(0,20)+(x.notes.length>20?"...":""):"—"}</td>
       <td>${st}</td>${ac}
     </tr>`;
   }).join("");
