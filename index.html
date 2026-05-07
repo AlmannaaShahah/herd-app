@@ -627,19 +627,12 @@ let allAnimals=[], pendId=null, editId=null, curFilt="all";
 // ═══════════════════════════════════════════
 //  HELPERS
 // ═══════════════════════════════════════════
-function show(id){ 
-  document.querySelectorAll(".screen").forEach(s=>{ 
-    s.classList.remove("on"); 
-    s.style.display="none"; 
-    s.style.removeProperty("display");
-    s.style.display="none";
-  }); 
-  const el = document.getElementById(id);
-  el.classList.add("on"); 
-  el.style.cssText="display:block!important;";
-  document.documentElement.scrollTop=0;
-  document.body.scrollTop=0;
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  window.scrollTo(0,0);
 }
+
 
 async function req(method,url,body){
   const r=await fetch(API+url,{method,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:body?JSON.stringify(body):undefined});
