@@ -88,6 +88,7 @@ async function initDB() {
     mother_id INT DEFAULT NULL,
     notes TEXT,
     status VARCHAR(20) DEFAULT 'alive',
+    pregnant VARCHAR(5) DEFAULT 'no',
     death_reason VARCHAR(255),
     death_date DATE,
     slaughter_reason VARCHAR(255),
@@ -110,6 +111,7 @@ async function initDB() {
     const hash = await bcrypt.hash("superadmin123", 10);
     await pool.query("INSERT INTO admins (username, password_hash) VALUES (?, ?)", ["superadmin", hash]);
   }
+  try { await pool.query("ALTER TABLE animals ADD COLUMN pregnant VARCHAR(5) DEFAULT 'no'"); } catch(e) {}
   console.log("✅ قاعدة البيانات جاهزة");
 }
 
@@ -263,8 +265,8 @@ app.post("/api/animals", authFarmer, adminOnly, async (req, res) => {
     mother_id = m[0].id;
   }
   await pool.query(
-    "INSERT INTO animals (farmer_id,animal_number,animal_type,breed,age_label,gender,body_color,birth_date,ear_color,mother_id,notes) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-    [req.farmer_id,animal_number,animal_type||"غنم",breed||null,age_label||"رخلة",gender,body_color||null,birth_date||null,ear_color||null,mother_id,notes||null]
+    "INSERT INTO animals (farmer_id,animal_number,animal_type,breed,age_label,gender,body_color,birth_date,ear_color,mother_id,notes,pregnant) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+    [req.farmer_id,animal_number,animal_type||"غنم",breed||null,age_label||"رخلة",gender,body_color||null,birth_date||null,ear_color||null,mother_id,notes||null,req.body.pregnant||"no"]
   );
   res.json({ success: true });
 });
@@ -279,8 +281,8 @@ app.put("/api/animals/:id", authFarmer, adminOnly, async (req, res) => {
     mother_id = m[0].id;
   }
   await pool.query(
-    "UPDATE animals SET animal_number=?,animal_type=?,breed=?,age_label=?,gender=?,body_color=?,birth_date=?,ear_color=?,mother_id=?,notes=? WHERE id=? AND farmer_id=?",
-    [animal_number,animal_type,breed,age_label,gender,body_color,birth_date||null,ear_color,mother_id,notes,req.params.id,req.farmer_id]
+    "UPDATE animals SET animal_number=?,animal_type=?,breed=?,age_label=?,gender=?,body_color=?,birth_date=?,ear_color=?,mother_id=?,notes=?,pregnant=? WHERE id=? AND farmer_id=?",
+    [animal_number,animal_type,breed,age_label,gender,body_color,birth_date||null,ear_color,mother_id,notes,req.body.pregnant||"no",req.params.id,req.farmer_id]
   );
   res.json({ success: true });
 });
