@@ -137,6 +137,8 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
 .row-slau td{opacity:.55;}
 .row-pregnant{background:rgba(192,57,43,.04)!important;}
 .row-pregnant td:first-child{border-right:3px solid var(--red);}
+.row-fahl{background:rgba(26,82,118,.04)!important;}
+.row-fahl td:first-child{border-right:3px solid var(--blue);}
 .sbdead{background:var(--s3);color:var(--muted);border:1px solid var(--border);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;}
 .sbslau{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;}
 .sbpreg{background:var(--red3);color:var(--red);border:1px solid rgba(192,57,43,.2);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;}
@@ -481,10 +483,10 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
       <div class="ff"><label>لون الإشارة *</label><input id="f-ear" required></div>
       <div class="ff"><label>تاريخ الميلاد *</label><input type="date" id="f-born" style="direction:ltr;text-align:right;" required></div>
       <div class="ff full" id="f-preg-wrap" style="display:none">
-        <label>حامل؟</label>
+        <label id="f-preg-label">حامل؟</label>
         <div style="display:flex;gap:14px;margin-top:6px;">
           <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:14px;font-weight:700;"><input type="radio" name="f-preg" value="no" checked> لا</label>
-          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:14px;font-weight:700;"><input type="radio" name="f-preg" value="yes"> نعم 🤰</label>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:14px;font-weight:700;"><input type="radio" name="f-preg" value="yes" id="f-preg-yes-label"> نعم</label>
         </div>
       </div>
       <div class="ff full"><label>رقم الأم</label><input id="f-mom" placeholder="فارغ = أم أصلية"></div>
@@ -699,7 +701,8 @@ function renderTable(){
     const k=kc(x.id);
     const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
     const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
-    const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:x.pregnant==="yes"?`<span class="sbpreg">🤰 حامل</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
+    const pregLabel = x.pregnant==="yes" ? (x.gender==="أنثى" ? "🤰 حامل" : "🐏 فحل") : null;
+    const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:pregLabel?`<span class="sbpreg">${pregLabel}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
     let ac="";
     if(canEdit){
       let b=`<button class="ab ab-edit" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
@@ -707,7 +710,7 @@ function renderTable(){
       b+=`<button class="ab ab-del" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
       ac=`<td><div class="ac">${b}</div></td>`;
     }
-    const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":x.pregnant==="yes"?"row-pregnant":"";
+    const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":(x.pregnant==="yes"&&x.gender==="أنثى")?"row-pregnant":(x.pregnant==="yes"&&x.gender==="ذكر")?"row-fahl":"";
     return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
       <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
       <td>${x.animal_type||"غنم"}</td>
