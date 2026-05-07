@@ -1145,6 +1145,10 @@ async function changeFarmPass(){
   }catch(e){errEl.textContent="⚠️ "+e.message;errEl.classList.add("on");}
 }
 
+// دخول الإدارة السري - 5 ضغطات على الشعار
+let _lc=0,_lt;
+function logoClick(){_lc++;clearTimeout(_lt);_lt=setTimeout(()=>_lc=0,2000);if(_lc>=5){_lc=0;show('sc-super');}}
+
 setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
 
 async function changeAdminPass(){
