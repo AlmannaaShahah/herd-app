@@ -32,10 +32,10 @@ body{
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(45,122,58,.1)}50%{box-shadow:0 0 40px rgba(45,122,58,.25)}}
 
 /* ─── SCREENS ─── */
-.screen{display:none!important;}.screen.on{display:block!important;}#sc-land.on{display:flex!important;flex-direction:column;align-items:center;justify-content:center;}
+
 
 /* ─── LANDING ─── */
-#sc-land{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;}
+#sc-land{flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;}
 #land{text-align:center;max-width:560px;}
 .land-logo{
   width:90px;height:90px;margin:0 auto 20px;
@@ -249,6 +249,11 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 ::-webkit-scrollbar-track{background:var(--s2);}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 ::-webkit-scrollbar-thumb:hover{background:var(--muted2);}
+
+/* ─── SCREENS ─── */
+.screen{ display:none; }
+.screen.on{ display:block; }
+#sc-land.on{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; }
 </style>
 </head>
 <body>
