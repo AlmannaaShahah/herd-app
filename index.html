@@ -397,25 +397,27 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       </div>
 
       <div class="tsec" style="margin-bottom:18px">
+      <!-- شريط التصفية البارز -->
+      <div style="background:var(--green3);border-bottom:1px solid rgba(45,122,58,.15);padding:14px 20px;">
+        <div style="font-size:11px;color:var(--green);font-weight:900;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;">⚙️ تصفية حسب النوع</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <button onclick="applyBreedFilter('غنم',null)" id="breed-all-غنم" style="padding:6px 14px;border-radius:20px;border:2px solid var(--green);background:var(--green);color:#fff;font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">الكل</button>
+          <button onclick="applyBreedFilter('غنم','نجدي')" id="breed-نجدي-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">نجدي</button>
+          <button onclick="applyBreedFilter('غنم','نعيمي')" id="breed-نعيمي-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">نعيمي</button>
+          <button onclick="applyBreedFilter('غنم','معزة')" id="breed-معزة-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">معزة</button>
+          <button onclick="applyBreedFilter('غنم','حرّي')" id="breed-حرّي-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">حرّي</button>
+          <button onclick="applyBreedFilter('غنم','بربري')" id="breed-بربري-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">بربري</button>
+        </div>
+      </div>
       <div class="th2">
         <h3>🐑 جدول الغنم</h3>
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <div class="tabs">
-            <button class="tab on" onclick="filt('all',this,'غنم')">الكل</button>
-            <button class="tab" onclick="filt('f',this,'غنم')">إناث</button>
-            <button class="tab" onclick="filt('m',this,'غنم')">ذكور</button>
-            <button class="tab" onclick="filt('mo',this,'غنم')">أمهات</button>
-            <button class="tab" onclick="filt('d',this,'غنم')">💀</button>
-            <button class="tab" onclick="filt('s',this,'غنم')">🔪</button>
-          </div>
-          <div style="position:relative;">
-            <button onclick="toggleFilter('filter-غنم')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;cursor:pointer;font-family:Tajawal,sans-serif;font-size:13px;color:var(--green);font-weight:800;">⚙️ تصفية</button>
-            <div id="filter-غنم" style="display:none;position:absolute;top:36px;left:0;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:14px;z-index:100;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);">
-              <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:8px;">تصفية حسب النوع</div>
-              <div id="breed-filters-غنم" style="display:flex;flex-direction:column;gap:6px;"></div>
-              <button onclick="clearBreedFilter('غنم')" style="margin-top:10px;width:100%;background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:7px;padding:6px;font-family:Tajawal,sans-serif;font-size:12px;color:var(--red);cursor:pointer;font-weight:800;">إزالة التصفية</button>
-            </div>
-          </div>
+        <div class="tabs">
+          <button class="tab on" onclick="filt('all',this,'غنم')">الكل</button>
+          <button class="tab" onclick="filt('f',this,'غنم')">إناث</button>
+          <button class="tab" onclick="filt('m',this,'غنم')">ذكور</button>
+          <button class="tab" onclick="filt('mo',this,'غنم')">أمهات</button>
+          <button class="tab" onclick="filt('d',this,'غنم')">💀</button>
+          <button class="tab" onclick="filt('s',this,'غنم')">🔪</button>
         </div>
       </div>
       <div class="tw"><table>
@@ -1078,14 +1080,22 @@ function toggleFilter(id){
 function applyBreedFilter(type, breed){
   breedFilters[type] = breed;
   renderTable();
-  document.getElementById('filter-'+type).style.display='none';
+  // Close dropdown if exists
+  const dd = document.getElementById('filter-'+type);
+  if(dd) dd.style.display='none';
+  // Update button styles
+  const allBreedBtns = document.querySelectorAll('[id^="breed-"][id$="-'+type+'"]');
+  allBreedBtns.forEach(btn=>{
+    const isActive = (breed===null && btn.id==='breed-all-'+type) || 
+                     (breed && btn.id==='breed-'+breed+'-'+type);
+    btn.style.background = isActive ? 'var(--green)' : 'transparent';
+    btn.style.color = isActive ? '#fff' : 'var(--green)';
+    btn.style.border = isActive ? '2px solid var(--green)' : '1.5px solid rgba(45,122,58,.3)';
+  });
 }
 
 function clearBreedFilter(type){
-  breedFilters[type] = null;
-  document.querySelectorAll(`input[name="breed-${type}"]`).forEach(r=>r.checked=false);
-  renderTable();
-  document.getElementById('filter-'+type).style.display='none';
+  applyBreedFilter(type, null);
 }
 
 // Close filters when clicking outside
