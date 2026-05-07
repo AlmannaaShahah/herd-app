@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مواشيك</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -123,8 +124,8 @@ body{
 
 /* ─── WRAP ─── */
 .wrap{max-width:1440px;margin:0 auto;padding:22px 24px;}
-.page{display:none;animation:fadeUp .3s ease;}
-.page.on{display:block;}
+.page{display:none;}
+.page.on{display:block !important;}
 
 /* ─── NOTICE ─── */
 .notice{background:var(--blue3);border:1px solid rgba(26,82,118,.15);border-radius:10px;padding:11px 16px;margin-bottom:18px;font-size:13px;color:var(--blue);display:none;align-items:center;gap:8px;}
@@ -197,6 +198,8 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 .as2{background:var(--gold3);color:var(--gold);}
 .as2:hover{background:#fff0c0;}
 .row-dead td{opacity:.45;text-decoration:line-through;}
+.row-pregnant td{background:rgba(192,57,43,.06);}
+.row-pregnant td:first-child{border-right:3px solid var(--red);}
 .row-slau td{opacity:.6;}
 .sbdead{background:var(--s3);color:var(--muted);border:1px solid var(--border2);padding:2px 9px;border-radius:12px;font-size:11px;font-weight:800;}
 .sbslau{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:2px 9px;border-radius:12px;font-size:11px;font-weight:800;}
@@ -355,7 +358,7 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
 
   <div class="wrap">
     <!-- DASHBOARD -->
-    <div class="page on" id="page-dash">
+    <div class="page on" id="page-dash" style="display:block">
       <div class="notice" id="mem-notice">👁️ وضع العرض فقط — ليس لديك صلاحية التعديل</div>
       <div class="sbox">
         <div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase">🔍 بحث سريع</div>
@@ -565,12 +568,23 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
       <div class="ff"><label>الرقم *</label><input id="f-num" placeholder="001" required></div>
       <div class="ff"><label>الصنف *</label><select id="f-type" required><option value="غنم">غنم</option><option value="بقر">بقر</option><option value="إبل">إبل</option></select></div>
       <div class="ff full"><label>النوع *</label><select id="f-breed" required><option value="">— اختر النوع —</option><option>نجدي</option><option>نعيمي</option><option>معزة</option><option>حرّي</option><option>بربري</option></select></div>
-      <div class="ff"><label>الجنس *</label><select id="f-gender" required><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
+      <div class="ff"><label>الجنس *</label><select id="f-gender" required onchange="togglePregnant()" ><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
       <div class="ff full"><label>العمر *</label><select id="f-age" required><option value="رخلة">رخلة</option><option value="رباع">رباع</option><option value="ثني">ثني</option><option value="سديس">سديس</option><option value="جامع">جامع</option></select></div>
       <div class="ff"><label>لون الجسم *</label><input id="f-body" placeholder="أبيض / بني..." required></div>
       <div class="ff"><label>لون الإشارة *</label><input id="f-ear" placeholder="بني / أسود..." required></div>
       <div class="ff"><label>تاريخ الميلاد *</label><input type="date" id="f-born" style="direction:ltr;text-align:right;" required></div>
       <div class="ff full"><label>رقم الأم (اتركه فارغاً إن كانت أم أصلية)</label><input id="f-mom" placeholder="001"></div>
+      <div class="ff full" id="f-pregnant-wrap" style="display:none">
+        <label>حامل؟</label>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;font-weight:700;">
+            <input type="radio" name="f-pregnant" id="f-preg-no" value="no" checked> لا
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;font-weight:700;">
+            <input type="radio" name="f-pregnant" id="f-preg-yes" value="yes"> نعم
+          </label>
+        </div>
+      </div>
       <div class="ff full"><label>ملاحظات</label><textarea id="f-notes" rows="2" style="resize:vertical"></textarea></div>
     </div>
     <div class="merr" id="mo-err"></div>
@@ -669,7 +683,7 @@ const colorText=c=>{
   if(!col||c==="—") return c||"—";
   return '<span style="color:'+col+';font-weight:800">'+c+'</span>';
 };
-const albl=a=>({رخلة:"رخلة",ثني:"ثني ✅",سديس:"سديس ✅",جامع:"جامع ✅"}[a]||a||"—");
+const albl=a=>a||"—";
 const today=()=>new Date().toISOString().split("T")[0];
 
 // ═══════════════════════════════════════════
@@ -763,6 +777,11 @@ function launchApp(){
 // ═══════════════════════════════════════════
 async function loadAnimals(){
   allAnimals=await req("GET","/api/animals");
+  allAnimals.sort((a,b)=>{
+    const na=parseInt(a.animal_number)||0, nb=parseInt(b.animal_number)||0;
+    if(na!==nb) return na-nb;
+    return a.animal_number.localeCompare(b.animal_number);
+  });
   console.log("Animals loaded:", allAnimals.length, allAnimals.map(x=>x.animal_type));
   renderStats(); renderTable();
 }
@@ -819,7 +838,7 @@ function renderTable(){
         b+=`<button class="ab adk" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
         ac=`<td><div class="ac">${b}</div></td>`;
       }
-      const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":"";
+      const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":x.pregnant==="yes"?"row-pregnant":"";
       return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
         <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
         <td>${x.animal_type||"غنم"}</td>
@@ -887,6 +906,8 @@ function openAdd(){
   ["f-num","f-body","f-ear","f-notes","f-mom"].forEach(f=>document.getElementById(f).value="");
   document.getElementById("f-born").value=""; document.getElementById("f-type").value="غنم";
   document.getElementById("f-gender").value="أنثى"; document.getElementById("f-age").value="رخلة";
+  document.getElementById("f-preg-no").checked=true;
+  togglePregnant();
   document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
 }
 function openEdit(id){
@@ -904,7 +925,8 @@ function closeMo(){ document.getElementById("mo-animal").classList.remove("on");
 
 async function saveAnimal(){
   document.getElementById("mo-err").classList.remove("on");
-  const body={animal_number:document.getElementById("f-num").value.trim(),animal_type:document.getElementById("f-type").value,breed:document.getElementById("f-breed").value,age_label:document.getElementById("f-age").value,gender:document.getElementById("f-gender").value,body_color:document.getElementById("f-body").value,birth_date:document.getElementById("f-born").value||null,ear_color:document.getElementById("f-ear").value,mother_number:document.getElementById("f-mom").value.trim()||null,notes:document.getElementById("f-notes").value};
+  const pregEl = document.querySelector('input[name="f-pregnant"]:checked');
+  const body={animal_number:document.getElementById("f-num").value.trim(),animal_type:document.getElementById("f-type").value,breed:document.getElementById("f-breed").value,age_label:document.getElementById("f-age").value,gender:document.getElementById("f-gender").value,body_color:document.getElementById("f-body").value,birth_date:document.getElementById("f-born").value||null,ear_color:document.getElementById("f-ear").value,mother_number:document.getElementById("f-mom").value.trim()||null,notes:document.getElementById("f-notes").value,pregnant:pregEl?pregEl.value:"no"};
   if(!body.animal_number){showErr("mo-err","⚠️ الرقم مطلوب");return;}
   if(!body.breed){showErr("mo-err","⚠️ النوع مطلوب");return;}
   if(!body.body_color){showErr("mo-err","⚠️ لون الجسم مطلوب");return;}
@@ -1030,9 +1052,14 @@ async function loadSuperStats(){
 //  NAV
 // ═══════════════════════════════════════════
 function goPage(id,btn){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll("#sc-app .page").forEach(p=>{
+    p.classList.remove("on");
+    p.style.display="none";
+  });
   document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
-  document.getElementById("page-"+id).classList.add("on"); btn.classList.add("on");
+  const pg = document.getElementById("page-"+id);
+  if(pg){ pg.classList.add("on"); pg.style.display="block"; }
+  if(btn) btn.classList.add("on");
   if(id==="rep") buildReport();
   if(id==="mbrs") loadMembers();
   if(id==="settings") loadSettings();
@@ -1153,6 +1180,13 @@ async function changeFarmPass(){
 // دخول الإدارة السري - 5 ضغطات على الشعار
 let _lc=0,_lt;
 function logoClick(){_lc++;clearTimeout(_lt);_lt=setTimeout(()=>_lc=0,2000);if(_lc>=5){_lc=0;show('sc-super');}}
+
+
+function togglePregnant(){
+  const gender = document.getElementById("f-gender").value;
+  const wrap = document.getElementById("f-pregnant-wrap");
+  if(wrap) wrap.style.display = gender==="أنثى" ? "block" : "none";
+}
 
 setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
 
