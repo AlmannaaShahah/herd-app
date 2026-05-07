@@ -5,556 +5,463 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مواشيك</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f3ed;--s1:#ffffff;--s2:#faf7f2;--s3:#f0ebe2;
-  --border:#e2d9cc;--border2:#d4c8b8;
-  --green:#2d7a3a;--green2:#3a9648;--green3:#e8f5ea;
-  --gold:#b8860b;--gold2:#d4a017;--gold3:#fff8e7;
-  --brown:#6b4c2a;--brown2:#8b6340;--brown3:#f5ede0;
-  --red:#c0392b;--red2:#e74c3c;--red3:#fdecea;
-  --blue:#1a5276;--blue2:#2980b9;--blue3:#eaf4fb;
-  --text:#2c1810;--muted:#7a6555;--muted2:#b8a898;
-  --r:12px;
+  --bg:#f5f0e8;--s1:#ffffff;--s2:#faf7f2;--s3:#f0ebe2;
+  --border:#e2d9cc;--green:#2d7a3a;--green2:#3a9648;--green3:#e8f5ea;
+  --gold:#b8860b;--gold3:#fff8e7;--brown:#6b4c2a;--brown3:#f5ede0;
+  --red:#c0392b;--red3:#fdecea;--blue:#1a5276;--blue3:#eaf4fb;
+  --text:#2c1810;--muted:#7a6555;--muted2:#b8a898;--r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Tajawal',sans-serif;
-  background:linear-gradient(160deg,#f0f7f0 0%,#f7f3ed 50%,#f0ede4 100%);
-  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b89a' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  color:var(--text);min-height:100vh;direction:rtl;
-}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);direction:rtl;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(45,122,58,.1)}50%{box-shadow:0 0 40px rgba(45,122,58,.25)}}
+/* === SCREENS === */
+.screen{display:none;}
+.screen.on{display:block;}
+#sc-land.on{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;}
 
-/* ─── SCREENS ─── */
+/* === LANDING === */
+#sc-land{background:linear-gradient(160deg,#f0f7f0,#f7f3ed,#f0ede4);padding:24px;}
+.land-box{text-align:center;max-width:400px;width:100%;}
+.land-logo{width:80px;height:80px;margin:0 auto 20px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:36px;box-shadow:0 8px 32px rgba(45,122,58,.25);}
+.land-title{font-size:32px;font-weight:900;color:var(--green);margin-bottom:8px;}
+.land-sub{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.8;}
+.land-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
 
+/* === AUTH === */
+#sc-login,#sc-register,#sc-member-login,#sc-super{background:var(--bg);}
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+.auth-card{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:32px;width:400px;max-width:100%;box-shadow:0 8px 40px rgba(107,76,42,.1);}
+.auth-card h2{font-size:18px;font-weight:900;color:var(--green);margin-bottom:20px;}
+.af{display:flex;flex-direction:column;gap:4px;margin-bottom:14px;}
+.af label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.5px;}
+.af input,.af select{background:var(--s2);border:1.5px solid var(--border);border-radius:9px;padding:11px 13px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:14px;outline:none;transition:.2s;}
+.af input:focus,.af select:focus{border-color:var(--green);}
+.err-box{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:8px;padding:10px 13px;color:var(--red);font-size:13px;font-weight:700;margin-bottom:12px;display:none;}
+.err-box.on{display:block;}
+.ok-box{background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:10px 13px;color:var(--green);font-size:13px;font-weight:700;margin-bottom:12px;display:none;}
+.ok-box.on{display:block;}
+.back-link{font-size:12px;color:var(--muted);cursor:pointer;text-align:center;margin-top:14px;}
+.back-link:hover{color:var(--green);}
+.switch-link{font-size:13px;color:var(--muted);text-align:center;margin-top:10px;cursor:pointer;}
+.switch-link span{color:var(--green);font-weight:800;}
 
-/* ─── LANDING ─── */
-#sc-land{flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px;}
-#land{text-align:center;max-width:560px;}
-.land-logo{
-  width:90px;height:90px;margin:0 auto 20px;
-  background:linear-gradient(135deg,var(--green),var(--green2));
-  border-radius:24px;display:flex;align-items:center;justify-content:center;
-  font-size:40px;box-shadow:0 8px 32px rgba(45,122,58,.25);
-  animation:glow 3s ease-in-out infinite;
-}
-.land-title{font-size:30px;font-weight:900;color:var(--green);margin-bottom:10px;}
-.land-sub{font-size:15px;color:var(--muted);margin-bottom:36px;line-height:1.8;}
-.land-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:16px;}
-.land-super{font-size:12px;color:var(--muted2);cursor:pointer;margin-top:8px;}
-.land-super:hover{color:var(--muted);}
+/* === BUTTONS === */
+.btn{border:none;border-radius:10px;padding:11px 18px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap;width:100%;}
+.btn-green{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;}
+.btn-green:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(45,122,58,.3);}
+.btn-outline{background:var(--s2);border:1.5px solid var(--border);color:var(--muted);}
+.btn-outline:hover{color:var(--text);}
+.btn-sm{width:auto;padding:7px 14px;font-size:12px;}
+.btn-red-sm{background:var(--red3);border:1px solid rgba(192,57,43,.2);color:var(--red);width:auto;padding:5px 10px;font-size:11px;border-radius:7px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;}
+.btn-blue-sm{background:var(--blue3);border:1px solid rgba(26,82,118,.15);color:var(--blue);width:auto;padding:5px 10px;font-size:11px;border-radius:7px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;}
+.btn-gold-sm{background:var(--gold3);border:1px solid rgba(184,134,11,.2);color:var(--gold);width:auto;padding:5px 10px;font-size:11px;border-radius:7px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;}
+.btn-gray-sm{background:var(--s3);border:1px solid var(--border);color:var(--muted);width:auto;padding:5px 10px;font-size:11px;border-radius:7px;cursor:pointer;font-family:'Tajawal',sans-serif;font-weight:800;}
 
-/* ─── FEATURE CARDS ─── */
-.features{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-bottom:32px;width:100%;}
-.feat{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center;}
-.feat-icon{font-size:24px;margin-bottom:8px;}
-.feat-title{font-size:13px;font-weight:800;color:var(--green);}
-.feat-sub{font-size:11px;color:var(--muted);margin-top:3px;}
-
-/* ─── AUTH ─── */
-.auth-card{
-  background:var(--s1);border:1px solid var(--border);border-radius:20px;
-  padding:36px 32px;width:420px;max-width:100%;
-  box-shadow:0 8px 40px rgba(107,76,42,.1);animation:fadeUp .4s ease;
-}
-.auth-card h2{font-size:20px;font-weight:900;color:var(--green);margin-bottom:22px;display:flex;align-items:center;gap:8px;}
-.af{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
-.af label{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.5px;}
-.af input,.af select{
-  background:var(--s2);border:1.5px solid var(--border);border-radius:9px;
-  padding:11px 14px;color:var(--text);font-family:'Tajawal',sans-serif;
-  font-size:14px;outline:none;transition:.2s;
-}
-.af input:focus,.af select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(45,122,58,.08);}
-.af select option{background:var(--s1);}
-.auth-err{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:9px;padding:10px 14px;color:var(--red);font-size:13px;font-weight:700;margin-bottom:12px;display:none;}
-.auth-err.on{display:block;}
-.auth-ok{background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:9px;padding:10px 14px;color:var(--green);font-size:13px;font-weight:700;margin-bottom:12px;display:none;}
-.auth-ok.on{display:block;}
-.auth-back{font-size:12px;color:var(--muted);cursor:pointer;text-align:center;margin-top:14px;}
-.auth-back:hover{color:var(--green);}
-.auth-switch{font-size:13px;color:var(--muted);text-align:center;margin-top:10px;cursor:pointer;}
-.auth-switch span{color:var(--green);font-weight:800;}
-
-/* ─── BUTTONS ─── */
-.btn{border:none;border-radius:10px;padding:10px 18px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap;}
-.bg{background:linear-gradient(135deg,#1a6b28,#2d7a3a);color:#fff;font-size:15px;letter-spacing:.3px;}
-.bg:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(45,122,58,.3);}
-.bg:disabled{opacity:.6;pointer-events:none;}
-.bgh{background:var(--s2);border:1.5px solid var(--border);color:var(--muted);}
-.bgh:hover{color:var(--text);border-color:var(--muted);}
-.bgr{background:var(--green3);border:1px solid rgba(45,122,58,.2);color:var(--green);}
-.bgr:hover{background:#d4edda;}
-.bbl{background:var(--blue3);border:1px solid rgba(26,82,118,.15);color:var(--blue);}
-.bbl:hover{background:#d0e8f5;}
-.brd{background:var(--red3);border:1px solid rgba(192,57,43,.2);color:var(--red);}
-.brd:hover{background:#fad7d3;}
-.bor{background:var(--gold3);border:1px solid rgba(184,134,11,.2);color:var(--gold);}
-.bor:hover{background:#fff0c0;}
-.btn-full{width:100%;padding:13px;font-size:15px;margin-top:4px;}
-
-/* ─── HEADER ─── */
-.hdr{
-  background:var(--s1);border-bottom:2px solid var(--border);
-  padding:0 24px;height:62px;
-  display:flex;align-items:center;gap:12px;
-  position:sticky;top:0;z-index:50;
-  box-shadow:0 2px 12px rgba(107,76,42,.08);
-}
-.hdr-ico{width:38px;height:38px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;}
-.hdr-name{font-size:15px;font-weight:900;color:var(--green);}
+/* === APP HEADER === */
+#sc-app{min-height:100vh;background:var(--bg);}
+.hdr{background:var(--s1);border-bottom:2px solid var(--border);padding:0 20px;height:58px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(107,76,42,.08);}
+.hdr-logo{width:34px;height:34px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.hdr-name{font-size:14px;font-weight:900;color:var(--green);}
 .hdr-farm{font-size:11px;color:var(--muted);}
-.hdr-nav{flex:1;display:flex;gap:4px;margin:0 14px;overflow-x:auto;}
-.nb{background:transparent;border:none;padding:7px 14px;border-radius:8px;color:var(--muted);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap;}
-.nb:hover,.nb.on{background:var(--green3);color:var(--green);}
-.rbdg{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;flex-shrink:0;}
+.hdr-nav{flex:1;display:flex;gap:3px;margin:0 12px;overflow-x:auto;}
+.nav-btn{background:transparent;border:none;padding:6px 12px;border-radius:8px;color:var(--muted);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap;}
+.nav-btn:hover,.nav-btn.on{background:var(--green3);color:var(--green);}
+.role-badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;flex-shrink:0;}
 .rb-owner{background:var(--green3);color:var(--green);border:1px solid rgba(45,122,58,.2);}
-.rb-admin{background:var(--blue3);color:var(--blue);border:1px solid rgba(26,82,118,.15);}
 .rb-member{background:var(--brown3);color:var(--brown);border:1px solid rgba(107,76,42,.15);}
 .rb-super{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);}
-.btn-out{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:8px;padding:6px 12px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap;}
-.btn-out:hover{background:#fad7d3;}
+.logout-btn{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:8px;padding:5px 10px;color:var(--red);font-family:'Tajawal',sans-serif;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;}
 
-/* ─── WRAP ─── */
-.wrap{max-width:1440px;margin:0 auto;padding:22px 24px;}
+/* === WRAP === */
+.wrap{max-width:1400px;margin:0 auto;padding:20px;}
 .page{display:none;}
-.page.on{display:block !important;}
+.page.on{display:block;}
 
-/* ─── NOTICE ─── */
-.notice{background:var(--blue3);border:1px solid rgba(26,82,118,.15);border-radius:10px;padding:11px 16px;margin-bottom:18px;font-size:13px;color:var(--blue);display:none;align-items:center;gap:8px;}
-.notice.on{display:flex;}
+/* === NOTICE === */
+.notice{background:var(--blue3);border:1px solid rgba(26,82,118,.15);border-radius:10px;padding:11px 16px;margin-bottom:16px;font-size:13px;color:var(--blue);display:none;}
+.notice.on{display:block;}
 
-/* ─── SEARCH ─── */
-.sbox{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(107,76,42,.05);}
+/* === SEARCH BOX === */
+.sbox{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:16px;box-shadow:0 2px 8px rgba(107,76,42,.05);}
 .srow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-.si{flex:1;min-width:150px;background:var(--s2);border:1.5px solid var(--border);border-radius:10px;padding:10px 15px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:14px;outline:none;transition:.2s;}
-.si:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(45,122,58,.08);}
-.si::placeholder{color:var(--muted2);font-size:13px;}
+.sinput{flex:1;min-width:140px;background:var(--s2);border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:14px;outline:none;transition:.2s;}
+.sinput:focus{border-color:var(--green);}
+.add-btn{background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:9px;padding:10px 16px;color:var(--green);font-family:'Tajawal',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:none;white-space:nowrap;}
 
-/* ─── RESULT ─── */
-.rcard{background:var(--s1);border:2px solid var(--green);border-radius:var(--r);padding:20px;margin-bottom:18px;display:none;animation:fadeUp .3s ease;box-shadow:0 4px 20px rgba(45,122,58,.1);}
+/* === RESULT CARD === */
+.rcard{background:var(--s1);border:2px solid var(--green);border-radius:var(--r);padding:18px;margin-bottom:16px;display:none;box-shadow:0 4px 20px rgba(45,122,58,.1);}
 .rcard.on{display:block;}
-.rh{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);}
-.rava{width:50px;height:50px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.rt2 h2{font-size:17px;font-weight:900;color:var(--green);}
-.rt2 p{font-size:11px;color:var(--muted);margin-top:2px;}
-.gbdg{margin-right:auto;padding:4px 11px;border-radius:20px;font-size:11px;font-weight:800;}
-.gf{background:var(--brown3);color:var(--brown);border:1px solid rgba(107,76,42,.2);}
-.gm{background:var(--blue3);color:var(--blue);border:1px solid rgba(26,82,118,.15);}
-.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:9px;margin-bottom:12px;}
-.di{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:11px 13px;transition:.2s;}
-.di:hover{border-color:var(--green);background:var(--green3);}
-.dl{font-size:10px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
-.dv{font-size:13px;font-weight:800;color:var(--text);}
-.nbox{background:var(--gold3);border:1px solid rgba(184,134,11,.15);border-radius:10px;padding:12px;margin-bottom:10px;}
-.csec{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
-.stl{font-size:11px;font-weight:800;color:var(--muted);margin-bottom:9px;text-transform:uppercase;letter-spacing:.5px;}
-.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:7px;}
-.ccard{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px;}
-.ccard:hover{border-color:var(--green);background:var(--green3);transform:translateY(-2px);}
-.cn{font-size:13px;font-weight:900;color:var(--green);}
-.ci{font-size:11px;color:var(--muted);}
-.nfound{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:var(--r);padding:20px;margin-bottom:18px;text-align:center;display:none;}
+.rh{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.rava{width:46px;height:46px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:10px;}
+.di{background:var(--s2);border:1px solid var(--border);border-radius:9px;padding:10px 12px;}
+.dl{font-size:10px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px;}
+.dv{font-size:13px;font-weight:800;}
+.nfound{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:var(--r);padding:16px;margin-bottom:16px;text-align:center;display:none;}
 .nfound.on{display:block;}
 
-/* ─── STATS ─── */
-.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:18px;}
-.sc{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:16px;display:flex;align-items:center;gap:11px;transition:.2s;box-shadow:0 2px 8px rgba(107,76,42,.05);}
-.sc:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(107,76,42,.1);border-color:var(--green);}
-.si2{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.sn{font-size:22px;font-weight:900;line-height:1;}
-.sl{font-size:11px;color:var(--muted);margin-top:3px;}
+/* === STATS === */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:16px;}
+.sc{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(107,76,42,.04);}
+.sc:hover{border-color:var(--green);}
+.si2{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.sn{font-size:20px;font-weight:900;line-height:1;}
+.sl{font-size:11px;color:var(--muted);margin-top:2px;}
 
-/* ─── TABLE ─── */
-.tsec{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:0 2px 8px rgba(107,76,42,.05);}
-.th2{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;background:var(--s2);}
+/* === TABLE === */
+.tsec{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:0 2px 8px rgba(107,76,42,.04);}
+.th2{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--s2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
 .th2 h3{font-size:14px;font-weight:800;color:var(--green);}
-.tabs{display:flex;gap:5px;flex-wrap:wrap;}
-.tab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);background:var(--s1);font-family:'Tajawal',sans-serif;transition:.2s;}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;}
+.tab{padding:4px 10px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);background:transparent;font-family:'Tajawal',sans-serif;transition:.2s;}
 .tab.on,.tab:hover{border-color:var(--green);color:var(--green);background:var(--green3);}
-.tw{overflow-x:auto;} table{width:100%;min-width:800px;border-collapse:collapse;font-size:13px;}
-table{width:100%;border-collapse:collapse;font-size:13px;}
-thead th{background:var(--s3);padding:11px 13px;text-align:right;color:var(--muted);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
+
+/* Filter bar */
+.filter-bar{background:var(--green3);border-bottom:1px solid rgba(45,122,58,.15);padding:12px 16px;}
+.filter-bar-title{font-size:11px;color:var(--green);font-weight:900;margin-bottom:8px;letter-spacing:.5px;}
+.filter-btns{display:flex;gap:7px;flex-wrap:wrap;}
+.fbtn{padding:5px 13px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:'Tajawal',sans-serif;font-size:12px;font-weight:800;cursor:pointer;transition:.2s;}
+.fbtn.on{background:var(--green);color:#fff;border-color:var(--green);}
+
+.tw{overflow-x:auto;}
+table{width:100%;min-width:800px;border-collapse:collapse;font-size:13px;}
+thead th{background:var(--s3);padding:10px 12px;text-align:right;color:var(--muted);font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--border);}
 tbody tr{border-bottom:1px solid var(--border);transition:.15s;cursor:pointer;}
 tbody tr:hover{background:var(--green3);}
-tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
+tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
 .nc{font-weight:900;color:var(--green);}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-left:5px;vertical-align:middle;border:1.5px solid rgba(0,0,0,.1);}
-.ac{display:flex;gap:5px;}
-.ab{border:none;border-radius:6px;padding:5px 9px;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:.2s;}
-.ae{background:var(--blue3);color:var(--blue);}
-.ae:hover{background:#d0e8f5;}
-.adk{background:var(--red3);color:var(--red);}
-.adk:hover{background:#fad7d3;}
-.ak2{background:var(--s3);color:var(--muted);}
-.ak2:hover{background:var(--border);}
-.as2{background:var(--gold3);color:var(--gold);}
-.as2:hover{background:#fff0c0;}
 .row-dead td{opacity:.45;text-decoration:line-through;}
-.row-pregnant td{background:rgba(192,57,43,.06);}
+.row-slau td{opacity:.55;}
+.row-pregnant{background:rgba(192,57,43,.04)!important;}
 .row-pregnant td:first-child{border-right:3px solid var(--red);}
-.row-slau td{opacity:.6;}
-.sbdead{background:var(--s3);color:var(--muted);border:1px solid var(--border2);padding:2px 9px;border-radius:12px;font-size:11px;font-weight:800;}
-.sbslau{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:2px 9px;border-radius:12px;font-size:11px;font-weight:800;}
+.sbdead{background:var(--s3);color:var(--muted);border:1px solid var(--border);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;}
+.sbslau{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;}
+.sbpreg{background:var(--red3);color:var(--red);border:1px solid rgba(192,57,43,.2);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:800;}
+.ac{display:flex;gap:4px;}
+.ab{border:none;border-radius:6px;padding:4px 8px;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:.2s;}
+.ab-edit{background:var(--blue3);color:var(--blue);}
+.ab-dead{background:var(--s3);color:var(--muted);}
+.ab-slau{background:var(--gold3);color:var(--gold);}
+.ab-del{background:var(--red3);color:var(--red);}
 
-/* ─── MODAL ─── */
-.mo{position:fixed;inset:0;background:rgba(44,24,16,.4);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+/* === MODAL === */
+.mo{position:fixed;inset:0;background:rgba(44,24,16,.45);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
 .mo.on{display:flex;}
-.mb{background:var(--s1);border:1px solid var(--border);border-radius:18px;padding:26px;width:520px;max-width:95vw;max-height:92vh;overflow-y:auto;animation:fadeUp .3s ease;box-shadow:0 16px 60px rgba(107,76,42,.2);}
-.mb h2{font-size:17px;font-weight:900;margin-bottom:18px;color:var(--green);display:flex;align-items:center;gap:8px;}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.ff{display:flex;flex-direction:column;gap:5px;}
+.mb{background:var(--s1);border:1px solid var(--border);border-radius:18px;padding:24px;width:500px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:0 16px 60px rgba(107,76,42,.2);}
+.mb h2{font-size:16px;font-weight:900;margin-bottom:16px;color:var(--green);}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ff{display:flex;flex-direction:column;gap:4px;}
 .ff.full{grid-column:1/-1;}
-.ff label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
-.ff input,.ff select,.ff textarea{background:var(--s2);border:1.5px solid var(--border);border-radius:9px;padding:10px 13px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;outline:none;transition:.2s;}
-.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--green);box-shadow:0 0 0 2px rgba(45,122,58,.08);}
-.ff select option{background:var(--s1);}
-.merr{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:8px;padding:10px 14px;color:var(--red);font-size:13px;font-weight:700;margin-top:10px;display:none;}
+.ff label{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+.ff input,.ff select,.ff textarea{background:var(--s2);border:1.5px solid var(--border);border-radius:9px;padding:9px 12px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;outline:none;transition:.2s;}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--green);}
+.merr{background:var(--red3);border:1px solid rgba(192,57,43,.2);border-radius:8px;padding:9px 12px;color:var(--red);font-size:13px;font-weight:700;margin-top:10px;display:none;}
 .merr.on{display:block;}
-.mact{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;}
+.mact{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;}
+.mact .btn{width:auto;padding:9px 18px;}
 
-/* ─── REPORT ─── */
-.rsec{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:14px;box-shadow:0 2px 8px rgba(107,76,42,.05);}
+/* === REPORT === */
+.rsec{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(107,76,42,.04);}
 .rst{font-size:14px;font-weight:900;margin-bottom:12px;color:var(--green);}
-.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px;}
-.ri{background:var(--s2);border:1px solid var(--border);border-radius:11px;padding:14px;}
-.ril{font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:700;}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;}
+.ri{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:13px;}
+.ril{font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:700;}
 .riv{font-size:22px;font-weight:900;}
-.ris{font-size:11px;color:var(--muted);margin-top:2px;}
 .rt3{width:100%;border-collapse:collapse;font-size:13px;}
-.rt3 th{background:var(--s3);padding:10px 13px;text-align:right;color:var(--muted);font-size:11px;font-weight:800;border-bottom:2px solid var(--border);}
-.rt3 td{padding:10px 13px;border-bottom:1px solid var(--border);color:var(--text);}
-.ldot{width:7px;height:7px;background:var(--green);border-radius:50%;display:inline-block;animation:pulse 1.5s infinite;}
+.rt3 th{background:var(--s3);padding:9px 12px;text-align:right;color:var(--muted);font-size:11px;font-weight:800;border-bottom:2px solid var(--border);}
+.rt3 td{padding:9px 12px;border-bottom:1px solid var(--border);}
+.ldot{width:7px;height:7px;background:var(--green);border-radius:50%;display:inline-block;}
 
-/* ─── SUPER ─── */
-.farm-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;align-items:center;gap:14px;transition:.2s;box-shadow:0 2px 8px rgba(107,76,42,.05);}
-.farm-card:hover{border-color:var(--green);box-shadow:0 4px 16px rgba(45,122,58,.1);}
-.farm-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.farm-info{flex:1;}
-.farm-name{font-size:15px;font-weight:800;color:var(--green);}
-.farm-sub{font-size:12px;color:var(--muted);margin-top:3px;}
-.farms-grid{display:flex;flex-direction:column;gap:10px;margin-top:16px;}
-.sbpending{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;}
-.sbactive{background:var(--green3);color:var(--green);border:1px solid rgba(45,122,58,.2);padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;}
-.sbsusp{background:var(--red3);color:var(--red);border:1px solid rgba(192,57,43,.2);padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;}
-.ugrid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:14px;}
-.uc2{background:var(--s2);border:1px solid var(--border);border-radius:11px;padding:14px;display:flex;align-items:center;gap:12px;}
-.uav2{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+/* === SETTINGS === */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.set-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(107,76,42,.04);}
+.set-card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.set-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+
+/* === MEMBERS === */
+.mbr-card{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:13px;display:flex;align-items:center;gap:10px;}
+.mbr-av{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.mbr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:14px;}
+
+/* === SUPER ADMIN === */
+#sc-super-app{min-height:100vh;background:var(--bg);}
+.farm-card{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;transition:.2s;}
+.farm-card:hover{border-color:var(--green);}
+.farm-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--green),var(--green2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.farms-list{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+.sbactive{background:var(--green3);color:var(--green);border:1px solid rgba(45,122,58,.2);padding:3px 9px;border-radius:12px;font-size:11px;font-weight:800;}
+.sbpend{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:3px 9px;border-radius:12px;font-size:11px;font-weight:800;}
+.sbsusp{background:var(--red3);color:var(--red);border:1px solid rgba(192,57,43,.2);padding:3px 9px;border-radius:12px;font-size:11px;font-weight:800;}
 
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:var(--s2);}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
-::-webkit-scrollbar-thumb:hover{background:var(--muted2);}
-
-/* ─── SCREENS ─── */
-.screen{ display:none; }
-.screen.on{ display:block; }
-#sc-land.on{ display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; }
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 </style>
 </head>
 <body>
 
-<!-- ══ LANDING ══ -->
+<!-- LANDING -->
 <div class="screen on" id="sc-land">
-  <div id="land">
-    <div class="land-logo" onclick="logoClick()" style="cursor:pointer;">🐑</div>
+  <div class="land-box">
+    <div class="land-logo">🐑</div>
     <div class="land-title">مواشيك</div>
     <div class="land-sub">سجّل حلالك، تابع مواشيك، وابقَ على اطلاع يومي على بياناتك</div>
     <div class="land-btns">
-      <button class="btn bg" style="padding:13px 32px;font-size:15px" onclick="show('sc-login')">تسجيل الدخول</button>
-      <button class="btn bbl" style="padding:13px 32px;font-size:15px" onclick="show('sc-register')">إنشاء حساب</button>
+      <button class="btn btn-green" onclick="goTo('sc-login')">تسجيل الدخول</button>
+      <button class="btn btn-outline" onclick="goTo('sc-register')">إنشاء حساب</button>
     </div>
-    
-    <div class="land-super" onclick="show('sc-super')"></div>
+    <div style="font-size:11px;color:var(--muted2);text-align:center;cursor:pointer;" onclick="goTo('sc-super')">.</div>
   </div>
 </div>
 
-<!-- ══ LOGIN ══ -->
+<!-- LOGIN -->
 <div class="screen" id="sc-login">
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>🔐 تسجيل الدخول</h2>
-      <div class="af"><label>البريد الإلكتروني أو اسم المستخدم</label><input id="l-email" placeholder="البريد أو اسم المستخدم" autocomplete="username"></div>
-      <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()"></div>
-      <div class="auth-err" id="l-err"></div>
-      <button class="btn bg btn-full" onclick="doLogin()">دخول →</button>
-      <div class="auth-switch" onclick="show('sc-member-login')">دخول كـ <span>عضو في مزرعة</span></div>
-      <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
+      <div class="af"><label>البريد أو اسم المستخدم</label><input id="l-val" autocomplete="username"></div>
+      <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div class="err-box" id="l-err"></div>
+      <button class="btn btn-green" onclick="doLogin()">دخول →</button>
+      <div class="switch-link" onclick="goTo('sc-member-login')">دخول كـ <span>عضو في مزرعة</span></div>
+      <div class="back-link" onclick="goTo('sc-land')">← رجوع</div>
     </div>
   </div>
 </div>
 
-<!-- ══ MEMBER LOGIN ══ -->
+<!-- MEMBER LOGIN -->
 <div class="screen" id="sc-member-login">
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>👁️ دخول عضو</h2>
-      <div class="af"><label>رقم المزرعة</label><input id="m-farmid" type="number" placeholder="رقم المزرعة (اسأل المشرف)"></div>
-      <div class="af"><label>اسم المستخدم</label><input id="m-user" placeholder="اسم المستخدم"></div>
-      <div class="af"><label>كلمة المرور</label><input id="m-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doMemberLogin()"></div>
-      <div class="auth-err" id="m-err"></div>
-      <button class="btn bg btn-full" onclick="doMemberLogin()">دخول →</button>
-      <div class="auth-back" onclick="show('sc-login')">← رجوع</div>
+      <div class="af"><label>رقم المزرعة</label><input id="ml-fid" type="number" placeholder="اسأل المشرف عن الرقم"></div>
+      <div class="af"><label>اسم المستخدم</label><input id="ml-user"></div>
+      <div class="af"><label>كلمة المرور</label><input id="ml-pass" type="password" onkeydown="if(event.key==='Enter')doMemberLogin()"></div>
+      <div class="err-box" id="ml-err"></div>
+      <button class="btn btn-green" onclick="doMemberLogin()">دخول →</button>
+      <div class="back-link" onclick="goTo('sc-login')">← رجوع</div>
     </div>
   </div>
 </div>
 
-<!-- ══ REGISTER ══ -->
+<!-- REGISTER -->
 <div class="screen" id="sc-register">
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>🌾 إنشاء حساب مزرعة</h2>
-      <div class="af"><label>اسم المزرعة / الحاشية</label><input id="r-farm" placeholder=""></div>
-      <div class="af"><label>اسم صاحب المزرعة</label><input id="r-owner" placeholder=""></div>
-      <div class="af"><label>اسم المستخدم *</label><input id="r-username" placeholder="" autocomplete="username"></div>
-      <div class="af"><label>البريد الإلكتروني</label><input id="r-email" type="email" placeholder=""></div>
-      <div class="af"><label>كلمة المرور</label><input id="r-pass" type="password" placeholder=""></div>
-      <div class="auth-err" id="r-err"></div>
-      <div class="auth-ok" id="r-ok"></div>
-      <button class="btn bg btn-full" id="r-btn" onclick="doRegister()">إنشاء الحساب</button>
-      <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
+      <div class="af"><label>اسم المزرعة</label><input id="r-farm"></div>
+      <div class="af"><label>اسم صاحب المزرعة</label><input id="r-owner"></div>
+      <div class="af"><label>اسم المستخدم *</label><input id="r-username" autocomplete="username"></div>
+      <div class="af"><label>البريد الإلكتروني</label><input id="r-email" type="email"></div>
+      <div class="af"><label>كلمة المرور</label><input id="r-pass" type="password"></div>
+      <div class="err-box" id="r-err"></div>
+      <div class="ok-box" id="r-ok"></div>
+      <button class="btn btn-green" id="r-btn" onclick="doRegister()">إنشاء الحساب</button>
+      <div class="back-link" onclick="goTo('sc-land')">← رجوع</div>
     </div>
   </div>
 </div>
 
-<!-- ══ SUPER ADMIN LOGIN ══ -->
+<!-- SUPER LOGIN -->
 <div class="screen" id="sc-super">
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>👑 الإدارة العليا</h2>
-      <div class="af"><label>اسم المستخدم</label><input id="sa-user" placeholder="اسم المستخدم"></div>
-      <div class="af"><label>كلمة المرور</label><input id="sa-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doSuperLogin()"></div>
-      <div class="auth-err" id="sa-err"></div>
-      <button class="btn bg btn-full" onclick="doSuperLogin()">دخول →</button>
-      <div class="auth-back" onclick="show('sc-land')">← رجوع</div>
+      <div class="af"><label>اسم المستخدم</label><input id="sa-user"></div>
+      <div class="af"><label>كلمة المرور</label><input id="sa-pass" type="password" onkeydown="if(event.key==='Enter')doSuperLogin()"></div>
+      <div class="err-box" id="sa-err"></div>
+      <button class="btn btn-green" onclick="doSuperLogin()">دخول →</button>
+      <div class="back-link" onclick="goTo('sc-land')">← رجوع</div>
     </div>
   </div>
 </div>
 
-<!-- ══ MAIN APP ══ -->
+<!-- MAIN APP -->
 <div class="screen" id="sc-app">
   <header class="hdr">
-    <div class="hdr-ico">🐑</div>
-    <div>
-      <div class="hdr-name" id="hdr-farm">—</div>
-      <div class="hdr-farm" id="hdr-user">—</div>
-    </div>
+    <div class="hdr-logo">🐑</div>
+    <div><div class="hdr-name" id="hdr-farm">—</div><div class="hdr-farm" id="hdr-user">—</div></div>
     <nav class="hdr-nav">
-      <button class="nb on" onclick="goPage('dash',this)">📊 الرئيسية</button>
-      <button class="nb" onclick="goPage('rep',this)">📋 التقارير</button>
-      <button class="nb" id="nb-members" onclick="goPage('mbrs',this)" style="display:none">👥 الأعضاء</button>
-      <button class="nb" id="nb-settings" onclick="goPage('settings',this)" style="display:none">⚙️ الإعدادات</button>
+      <button class="nav-btn on" onclick="goPage('dash',this)">📊 الرئيسية</button>
+      <button class="nav-btn" onclick="goPage('rep',this)">📋 التقارير</button>
+      <button class="nav-btn" id="nb-mbrs" onclick="goPage('mbrs',this)" style="display:none">👥 الأعضاء</button>
+      <button class="nav-btn" id="nb-set" onclick="goPage('set',this)" style="display:none">⚙️ الإعدادات</button>
     </nav>
-    <div class="rbdg" id="rbdg">—</div>
-    <button class="btn-out" onclick="doLogout()">خروج</button>
+    <div class="role-badge" id="rbdg">—</div>
+    <button class="logout-btn" onclick="doLogout()">خروج</button>
   </header>
-
   <div class="wrap">
+
     <!-- DASHBOARD -->
-    <div class="page on" id="page-dash" style="display:block">
-      <div class="notice" id="mem-notice">👁️ وضع العرض فقط — ليس لديك صلاحية التعديل</div>
+    <div class="page on" id="page-dash">
+      <div class="notice" id="view-notice">👁️ وضع العرض فقط</div>
       <div class="sbox">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:800;letter-spacing:.5px;text-transform:uppercase">🔍 بحث سريع</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-weight:800;">🔍 بحث سريع</div>
         <div class="srow">
-          <input class="si" id="s-inp" placeholder="رقم الحيوان... مثلاً: 001" onkeydown="if(event.key==='Enter')doSearch()">
-          <button class="btn bg" onclick="doSearch()">بحث</button>
-          <button class="btn bgh" onclick="clearSearch()">مسح</button>
-          <button class="btn bgr" id="add-btn" onclick="openAdd()" style="display:none">＋ إضافة</button>
+          <input class="sinput" id="s-inp" placeholder="رقم الحيوان..." onkeydown="if(event.key==='Enter')doSearch()">
+          <button class="btn-sm btn-green" style="width:auto;padding:10px 16px;" onclick="doSearch()">بحث</button>
+          <button class="btn-sm btn-outline" style="width:auto;padding:10px 14px;" onclick="clearSearch()">مسح</button>
+          <button class="add-btn" id="add-btn" onclick="openAdd()">＋ إضافة</button>
         </div>
       </div>
-
-      <div class="nfound" id="nfound"><p style="color:var(--red);font-size:14px;font-weight:800;">❌ لا يوجد حيوان بهذا الرقم</p></div>
-
+      <div class="nfound" id="nfound"><p style="color:var(--red);font-weight:800;">❌ لا يوجد حيوان بهذا الرقم</p></div>
       <div class="rcard" id="rcard">
         <div class="rh">
           <div class="rava" id="r-ava">🐑</div>
-          <div class="rt2"><h2 id="r-num">—</h2><p id="r-type">—</p></div>
-          <div class="gbdg" id="r-gbdg">—</div>
-          <div id="r-sbdg" style="margin-right:8px"></div>
-          <div id="r-acts" style="display:flex;gap:6px;margin-right:8px"></div>
+          <div style="flex:1"><div style="font-size:16px;font-weight:900;color:var(--green)" id="r-num">—</div><div style="font-size:11px;color:var(--muted)" id="r-type">—</div></div>
+          <div id="r-gbdg" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;">—</div>
+          <div id="r-acts" style="display:flex;gap:6px;margin-right:6px;"></div>
         </div>
         <div class="dgrid" id="r-dets"></div>
-        <div class="nbox" id="r-nbox" style="display:none">
-          <div class="dl">ملاحظات</div>
-          <p id="r-ntxt" style="font-size:13px;line-height:1.8;margin-top:4px"></p>
-        </div>
-        <div class="csec" id="r-csec" style="display:none">
-          <div class="stl">الأبناء</div>
-          <div class="cgrid" id="r-clist"></div>
+        <div id="r-notes" style="background:var(--gold3);border:1px solid rgba(184,134,11,.15);border-radius:9px;padding:11px;margin-bottom:10px;display:none;"><div class="dl">ملاحظات</div><p id="r-ntxt" style="font-size:13px;margin-top:3px;"></p></div>
+        <div id="r-kids" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+          <div style="font-size:11px;font-weight:800;color:var(--muted);margin-bottom:8px;">الأبناء</div>
+          <div id="r-kids-list" style="display:flex;flex-wrap:wrap;gap:7px;"></div>
         </div>
       </div>
-
       <div class="sgrid">
-        <div class="sc"><div class="si2" style="background:rgba(201,169,110,.12)">🐑</div><div><div class="sn" id="s-alive" style="color:var(--gold)">—</div><div class="sl">الأحياء</div></div></div>
-        <div class="sc"><div class="si2" style="background:rgba(185,138,255,.12)">🐏</div><div><div class="sn" id="s-moms" style="color:var(--purple)">—</div><div class="sl">الأمهات</div></div></div>
-        <div class="sc"><div class="si2" style="background:rgba(91,164,245,.12)">♂</div><div><div class="sn" id="s-males" style="color:var(--blue)">—</div><div class="sl">ذكور</div></div></div>
-        <div class="sc"><div class="si2" style="background:rgba(61,214,140,.12)">♀</div><div><div class="sn" id="s-females" style="color:var(--green)">—</div><div class="sl">إناث</div></div></div>
-        <div class="sc"><div class="si2" style="background:rgba(245,149,74,.12)">🍼</div><div><div class="sn" id="s-kids" style="color:var(--orange)">—</div><div class="sl">مواليد</div></div></div>
-        <div class="sc"><div class="si2" style="background:rgba(100,116,139,.12)">💀</div><div><div class="sn" id="s-dead" style="color:#94a3b8">—</div><div class="sl">أموات</div></div></div>
-        <div class="sc"><div class="si2" style="background:rgba(240,106,106,.12)">🔪</div><div><div class="sn" id="s-slau" style="color:var(--red)">—</div><div class="sl">ذبائح</div></div></div>
+        <div class="sc"><div class="si2" style="background:var(--green3);">🐑</div><div><div class="sn" id="s-alive" style="color:var(--green)">—</div><div class="sl">الأحياء</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(185,138,255,.12);">🐏</div><div><div class="sn" id="s-moms" style="color:#8b5cf6">—</div><div class="sl">الأمهات</div></div></div>
+        <div class="sc"><div class="si2" style="background:var(--blue3);">♂</div><div><div class="sn" id="s-males" style="color:var(--blue)">—</div><div class="sl">ذكور</div></div></div>
+        <div class="sc"><div class="si2" style="background:var(--green3);">♀</div><div><div class="sn" id="s-females" style="color:var(--green)">—</div><div class="sl">إناث</div></div></div>
+        <div class="sc"><div class="si2" style="background:rgba(245,149,74,.12);">🍼</div><div><div class="sn" id="s-kids" style="color:#f59332">—</div><div class="sl">مواليد</div></div></div>
+        <div class="sc"><div class="si2" style="background:var(--s3);">💀</div><div><div class="sn" id="s-dead" style="color:var(--muted)">—</div><div class="sl">أموات</div></div></div>
+        <div class="sc"><div class="si2" style="background:var(--red3);">🔪</div><div><div class="sn" id="s-slau" style="color:var(--red)">—</div><div class="sl">ذبائح</div></div></div>
       </div>
-
-      <div class="tsec" style="margin-bottom:18px">
-      <!-- شريط التصفية البارز -->
-      <div style="background:var(--green3);border-bottom:1px solid rgba(45,122,58,.15);padding:14px 20px;">
-        <div style="font-size:11px;color:var(--green);font-weight:900;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;">⚙️ تصفية حسب النوع</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
-          <button onclick="applyBreedFilter('غنم',null)" id="breed-all-غنم" style="padding:6px 14px;border-radius:20px;border:2px solid var(--green);background:var(--green);color:#fff;font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">الكل</button>
-          <button onclick="applyBreedFilter('غنم','نجدي')" id="breed-نجدي-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">نجدي</button>
-          <button onclick="applyBreedFilter('غنم','نعيمي')" id="breed-نعيمي-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">نعيمي</button>
-          <button onclick="applyBreedFilter('غنم','معزة')" id="breed-معزة-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">معزة</button>
-          <button onclick="applyBreedFilter('غنم','حرّي')" id="breed-حرّي-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">حرّي</button>
-          <button onclick="applyBreedFilter('غنم','بربري')" id="breed-بربري-غنم" style="padding:6px 14px;border-radius:20px;border:1.5px solid rgba(45,122,58,.3);background:transparent;color:var(--green);font-family:Tajawal,sans-serif;font-size:12px;font-weight:800;cursor:pointer;">بربري</button>
+      <div class="tsec">
+        <div class="filter-bar">
+          <div class="filter-bar-title">⚙️ تصفية حسب النوع</div>
+          <div class="filter-btns">
+            <button class="fbtn on" onclick="setBreed(null,this)">الكل</button>
+            <button class="fbtn" onclick="setBreed('نجدي',this)">نجدي</button>
+            <button class="fbtn" onclick="setBreed('نعيمي',this)">نعيمي</button>
+            <button class="fbtn" onclick="setBreed('معزة',this)">معزة</button>
+            <button class="fbtn" onclick="setBreed('حرّي',this)">حرّي</button>
+            <button class="fbtn" onclick="setBreed('بربري',this)">بربري</button>
+          </div>
+        </div>
+        <div class="th2">
+          <h3>🐑 جدول الغنم</h3>
+          <div class="tabs">
+            <button class="tab on" onclick="setFilt('all',this)">الكل</button>
+            <button class="tab" onclick="setFilt('f',this)">إناث</button>
+            <button class="tab" onclick="setFilt('m',this)">ذكور</button>
+            <button class="tab" onclick="setFilt('mo',this)">أمهات</button>
+            <button class="tab" onclick="setFilt('d',this)">💀</button>
+            <button class="tab" onclick="setFilt('s',this)">🔪</button>
+          </div>
+        </div>
+        <div class="tw">
+          <table>
+            <thead><tr>
+              <th>الرقم</th><th>الصنف</th><th>النوع</th><th>الجنس</th><th>العمر</th>
+              <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
+              <th>الأم</th><th>الأبناء</th><th>الحالة</th>
+              <th id="ac-th" style="display:none">إجراءات</th>
+            </tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="th2">
-        <h3>🐑 جدول الغنم</h3>
-        <div class="tabs">
-          <button class="tab on" onclick="filt('all',this,'غنم')">الكل</button>
-          <button class="tab" onclick="filt('f',this,'غنم')">إناث</button>
-          <button class="tab" onclick="filt('m',this,'غنم')">ذكور</button>
-          <button class="tab" onclick="filt('mo',this,'غنم')">أمهات</button>
-          <button class="tab" onclick="filt('d',this,'غنم')">💀</button>
-          <button class="tab" onclick="filt('s',this,'غنم')">🔪</button>
-        </div>
-      </div>
-      <div class="tw"><table>
-        <thead><tr>
-          <th>الرقم</th><th>الصنف</th><th>الصنف</th><th>الجنس</th><th>العمر</th>
-          <th>لون الجسم</th><th>الميلاد</th><th>لون الإشارة</th>
-          <th>الأم</th><th>الأبناء</th><th>ملاحظات</th>
-          <th>الحالة</th><th id="ac-th" style="display:none">إجراءات</th>
-        </tr></thead>
-        <tbody id="tbody-غنم"></tbody>
-      </table></div>
     </div>
-
-    
 
     <!-- REPORT -->
     <div class="page" id="page-rep">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-        <div>
-          <div style="font-size:18px;font-weight:900;color:var(--gold2)">📋 التقارير</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:4px;display:flex;align-items:center;gap:6px"><span class="ldot"></span> يتحدث تلقائياً &nbsp;|&nbsp; <span id="rep-date"></span></div>
-        </div>
-        <button class="btn bg" onclick="window.print()">🖨️ طباعة</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+        <div><div style="font-size:18px;font-weight:900;color:var(--green)">📋 التقارير</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px;display:flex;align-items:center;gap:5px"><span class="ldot"></span> <span id="rep-date"></span></div></div>
+        <button class="btn-sm btn-green" style="width:auto;padding:9px 16px;" onclick="window.print()">🖨️ طباعة</button>
       </div>
       <div class="rsec"><div class="rst">📊 ملخص الحاشية</div><div class="rgrid" id="rg1"></div></div>
-      <div class="rsec"><div class="rst">🍼 الإنتاج والمواليد</div><div class="rgrid" id="rg2"></div></div>
-      <div class="rsec"><div class="rst">💀 الأموات</div><div id="d-count" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>الجنس</th><th>العمر</th><th>سبب الوفاة</th><th>التاريخ</th></tr></thead><tbody id="d-tbody"></tbody></table></div>
-      <div class="rsec"><div class="rst">🔪 الذبائح</div><div id="s-count" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>سبب الذبح</th><th>التاريخ</th></tr></thead><tbody id="s-tbody"></tbody></table></div>
+      <div class="rsec"><div class="rst">🍼 المواليد</div><div class="rgrid" id="rg2"></div></div>
+      <div class="rsec"><div class="rst">💀 الأموات</div><div id="d-cnt" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>الجنس</th><th>العمر</th><th>سبب الوفاة</th><th>التاريخ</th></tr></thead><tbody id="d-tbody"></tbody></table></div>
+      <div class="rsec"><div class="rst">🔪 الذبائح</div><div id="s-cnt" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>سبب الذبح</th><th>التاريخ</th></tr></thead><tbody id="s-tbody"></tbody></table></div>
       <div class="rsec"><div class="rst">🐑 توزيع الأنواع</div><table class="rt3"><thead><tr><th>النوع</th><th>الجنس</th><th>العدد</th><th>النسبة</th></tr></thead><tbody id="br-tbody"></tbody></table></div>
-      <div class="rsec"><div class="rst">🏆 الأكثر إنتاجاً</div><table class="rt3"><thead><tr><th>الرقم</th><th>النوع</th><th>الأبناء</th><th>آخر مولود</th></tr></thead><tbody id="mt-tbody"></tbody></table></div>
       <div class="rsec"><div class="rst">✅ الجاهزات للإنجاب</div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>النوع</th><th>الميلاد</th></tr></thead><tbody id="rf-tbody"></tbody></table></div>
     </div>
 
     <!-- MEMBERS -->
     <div class="page" id="page-mbrs">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-        <div style="font-size:18px;font-weight:900;color:var(--gold2)">👥 الأعضاء</div>
-        <button class="btn bgr" onclick="openAddMember()">＋ إضافة عضو</button>
+        <div style="font-size:18px;font-weight:900;color:var(--green)">👥 الأعضاء</div>
+        <button class="btn-sm btn-green" style="width:auto;padding:9px 16px;" onclick="openAddMbr()">＋ إضافة عضو</button>
       </div>
-      <div id="farm-id-notice" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--muted)"></div>
-      <div class="ugrid2" id="mbr-grid"></div>
+      <div id="farm-id-note" style="background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:11px 14px;margin-bottom:14px;font-size:13px;color:var(--muted)"></div>
+      <div class="mbr-grid" id="mbr-grid"></div>
     </div>
 
     <!-- SETTINGS -->
-    <div class="page" id="page-settings">
-      <div style="font-size:20px;font-weight:900;color:var(--green);margin-bottom:24px;">⚙️ إعدادات المزرعة</div>
-      
-      <!-- بطاقات الإعدادات -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;">
-        
-        <!-- معلومات المزرعة -->
-        <div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(107,76,42,.05);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="width:40px;height:40px;background:var(--green3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🌾</div>
-            <div style="font-size:15px;font-weight:900;color:var(--green);">معلومات المزرعة</div>
+    <div class="page" id="page-set">
+      <div style="font-size:18px;font-weight:900;color:var(--green);margin-bottom:18px">⚙️ الإعدادات</div>
+      <div class="set-grid">
+        <div class="set-card">
+          <div class="set-card-header">
+            <div class="set-icon" style="background:var(--green3)">🌾</div>
+            <div style="font-size:14px;font-weight:900;color:var(--green)">معلومات المزرعة</div>
           </div>
-          <div id="farm-info-display" style="font-size:13px;color:var(--muted);line-height:2;"></div>
+          <div id="set-info" style="font-size:13px;color:var(--muted);line-height:2.2;"></div>
         </div>
-
-        <!-- تغيير كلمة المرور -->
-        <div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(107,76,42,.05);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="width:40px;height:40px;background:var(--blue3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">🔑</div>
-            <div style="font-size:15px;font-weight:900;color:var(--green);">تغيير كلمة المرور</div>
+        <div class="set-card">
+          <div class="set-card-header">
+            <div class="set-icon" style="background:var(--blue3)">🔑</div>
+            <div style="font-size:14px;font-weight:900;color:var(--green)">تغيير كلمة المرور</div>
           </div>
-          <div class="af"><label>كلمة المرور الحالية</label><input type="password" id="farm-old-pass"></div>
-          <div class="af"><label>كلمة المرور الجديدة</label><input type="password" id="farm-new-pass"></div>
-          <div class="af"><label>تأكيد كلمة المرور</label><input type="password" id="farm-confirm-pass"></div>
-          <div class="auth-err" id="pass-err"></div>
-          <div class="auth-ok" id="pass-ok"></div>
-          <button class="btn bg" style="width:100%;margin-top:8px" onclick="changeFarmPass()">تغيير كلمة المرور</button>
+          <div class="af"><label>الحالية</label><input type="password" id="cp-old"></div>
+          <div class="af"><label>الجديدة</label><input type="password" id="cp-new"></div>
+          <div class="af"><label>تأكيد الجديدة</label><input type="password" id="cp-conf"></div>
+          <div class="err-box" id="cp-err"></div>
+          <div class="ok-box" id="cp-ok"></div>
+          <button class="btn btn-green" style="margin-top:8px" onclick="changeFarmPass()">تغيير</button>
         </div>
-
-        <!-- إدارة الأعضاء -->
-        <div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(107,76,42,.05);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="width:40px;height:40px;background:rgba(185,138,255,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">👥</div>
-            <div style="font-size:15px;font-weight:900;color:var(--green);">إدارة الأعضاء</div>
+        <div class="set-card">
+          <div class="set-card-header">
+            <div class="set-icon" style="background:var(--gold3)">📊</div>
+            <div style="font-size:14px;font-weight:900;color:var(--green)">ملخص سريع</div>
           </div>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.7;">أضف أعضاء لمزرعتك عشان يقدرون يشوفون البيانات</p>
-          <button class="btn bgr" style="width:100%" onclick="goPage('mbrs',document.getElementById('nb-members'))">إدارة الأعضاء ←</button>
+          <div id="set-stats" style="font-size:13px;color:var(--muted);line-height:2.4;"></div>
         </div>
-
-        <!-- إحصائيات سريعة -->
-        <div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 2px 8px rgba(107,76,42,.05);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-            <div style="width:40px;height:40px;background:var(--gold3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;">📊</div>
-            <div style="font-size:15px;font-weight:900;color:var(--green);">ملخص سريع</div>
-          </div>
-          <div id="settings-stats" style="font-size:13px;color:var(--muted);line-height:2.2;"></div>
-        </div>
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ SUPER ADMIN APP ══ -->
+<!-- SUPER ADMIN APP -->
 <div class="screen" id="sc-super-app">
   <header class="hdr">
-    <div class="hdr-ico">👑</div>
-    <div><div class="hdr-name">الإدارة العليا</div><div class="hdr-farm">لوحة تحكم المنصة</div></div>
+    <div class="hdr-logo">👑</div>
+    <div><div class="hdr-name">الإدارة العليا</div><div class="hdr-farm">مواشيك</div></div>
     <nav class="hdr-nav">
-      <button class="nb on" onclick="goSuperPage('farmers',this)">🌾 المزارعون</button>
-      <button class="nb" onclick="goSuperPage('stats',this)">📊 الإحصائيات</button>
-      <button class="nb" onclick="goSuperPage('password',this)">🔑 كلمة المرور</button>
+      <button class="nav-btn on" onclick="goSuperPage('farmers',this)">🌾 المزارعون</button>
+      <button class="nav-btn" onclick="goSuperPage('stats',this)">📊 الإحصائيات</button>
+      <button class="nav-btn" onclick="goSuperPage('spass',this)">🔑 كلمة المرور</button>
     </nav>
-    <div class="rbdg rb-super">👑 سوبر أدمن</div>
-    <button class="btn-out" onclick="doLogout()">خروج</button>
+    <div class="role-badge rb-super">👑 سوبر أدمن</div>
+    <button class="logout-btn" onclick="doLogout()">خروج</button>
   </header>
   <div class="wrap">
     <div class="page on" id="sp-farmers">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <div style="font-size:18px;font-weight:900;color:var(--gold2)">🌾 المزارعون المسجلون</div>
-        <button class="btn bg" onclick="loadFarmers()">🔄 تحديث</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="font-size:18px;font-weight:900;color:var(--green)">🌾 المزارعون</div>
+        <button class="btn-sm btn-green" style="width:auto;padding:9px 16px;" onclick="loadFarmers()">🔄 تحديث</button>
       </div>
-      <div class="farms-grid" id="farms-list"></div>
+      <div class="farms-list" id="farms-list"></div>
     </div>
     <div class="page" id="sp-stats">
-      <div style="font-size:18px;font-weight:900;color:var(--gold2);margin-bottom:16px">📊 إحصائيات المنصة</div>
+      <div style="font-size:18px;font-weight:900;color:var(--green);margin-bottom:14px">📊 إحصائيات</div>
       <div class="sgrid" id="super-stats"></div>
     </div>
-
-    <div class="page" id="sp-password">
-      <div style="font-size:18px;font-weight:900;color:var(--green);margin-bottom:20px">🔑 تغيير كلمة المرور</div>
-      <div style="background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:24px;max-width:400px;">
-        <div class="af"><label>كلمة المرور الحالية</label><input type="password" id="cp-old"></div>
-        <div class="af"><label>كلمة المرور الجديدة</label><input type="password" id="cp-new"></div>
-        <div class="af"><label>تأكيد كلمة المرور الجديدة</label><input type="password" id="cp-confirm"></div>
-        <div class="merr" id="cp-err"></div>
-        <div class="auth-ok" id="cp-ok"></div>
-        <button class="btn bg" style="width:100%;margin-top:14px" onclick="changeAdminPass()">💾 حفظ كلمة المرور</button>
+    <div class="page" id="sp-spass">
+      <div style="font-size:18px;font-weight:900;color:var(--green);margin-bottom:18px">🔑 تغيير كلمة المرور</div>
+      <div style="background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:20px;max-width:360px;">
+        <div class="af"><label>الحالية</label><input type="password" id="scp-old"></div>
+        <div class="af"><label>الجديدة</label><input type="password" id="scp-new"></div>
+        <div class="af"><label>تأكيد</label><input type="password" id="scp-conf"></div>
+        <div class="err-box" id="scp-err"></div>
+        <div class="ok-box" id="scp-ok"></div>
+        <button class="btn btn-green" style="margin-top:8px" onclick="changeSuperPass()">تغيير</button>
       </div>
     </div>
   </div>
@@ -565,173 +472,149 @@ tbody td{padding:11px 13px;white-space:nowrap;color:var(--text);}
   <div class="mb">
     <h2 id="mo-title">إضافة حيوان</h2>
     <div class="fg">
-      <div class="ff"><label>الرقم *</label><input id="f-num" placeholder="001" required></div>
+      <div class="ff"><label>الرقم *</label><input id="f-num" required></div>
       <div class="ff"><label>الصنف *</label><select id="f-type" required><option value="غنم">غنم</option><option value="بقر">بقر</option><option value="إبل">إبل</option></select></div>
-      <div class="ff full"><label>النوع *</label><select id="f-breed" required><option value="">— اختر النوع —</option><option>نجدي</option><option>نعيمي</option><option>معزة</option><option>حرّي</option><option>بربري</option></select></div>
-      <div class="ff"><label>الجنس *</label><select id="f-gender" required onchange="togglePregnant()" ><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
+      <div class="ff full"><label>النوع *</label><select id="f-breed" required><option value="">— اختر —</option><option>نجدي</option><option>نعيمي</option><option>معزة</option><option>حرّي</option><option>بربري</option></select></div>
+      <div class="ff"><label>الجنس *</label><select id="f-gender" required onchange="togglePreg()"><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select></div>
       <div class="ff full"><label>العمر *</label><select id="f-age" required><option value="رخلة">رخلة</option><option value="رباع">رباع</option><option value="ثني">ثني</option><option value="سديس">سديس</option><option value="جامع">جامع</option></select></div>
-      <div class="ff"><label>لون الجسم *</label><input id="f-body" placeholder="أبيض / بني..." required></div>
-      <div class="ff"><label>لون الإشارة *</label><input id="f-ear" placeholder="بني / أسود..." required></div>
+      <div class="ff"><label>لون الجسم *</label><input id="f-body" required></div>
+      <div class="ff"><label>لون الإشارة *</label><input id="f-ear" required></div>
       <div class="ff"><label>تاريخ الميلاد *</label><input type="date" id="f-born" style="direction:ltr;text-align:right;" required></div>
-      <div class="ff full"><label>رقم الأم (اتركه فارغاً إن كانت أم أصلية)</label><input id="f-mom" placeholder="001"></div>
-      <div class="ff full" id="f-pregnant-wrap" style="display:none">
+      <div class="ff full" id="f-preg-wrap" style="display:none">
         <label>حامل؟</label>
-        <div style="display:flex;align-items:center;gap:12px;margin-top:6px;">
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;font-weight:700;">
-            <input type="radio" name="f-pregnant" id="f-preg-no" value="no" checked> لا
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;font-weight:700;">
-            <input type="radio" name="f-pregnant" id="f-preg-yes" value="yes"> نعم
-          </label>
+        <div style="display:flex;gap:14px;margin-top:6px;">
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:14px;font-weight:700;"><input type="radio" name="f-preg" value="no" checked> لا</label>
+          <label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:14px;font-weight:700;"><input type="radio" name="f-preg" value="yes"> نعم 🤰</label>
         </div>
       </div>
+      <div class="ff full"><label>رقم الأم</label><input id="f-mom" placeholder="فارغ = أم أصلية"></div>
       <div class="ff full"><label>ملاحظات</label><textarea id="f-notes" rows="2" style="resize:vertical"></textarea></div>
     </div>
     <div class="merr" id="mo-err"></div>
-    <div class="mact"><button class="btn bgh" onclick="closeMo()">إلغاء</button><button class="btn bg" onclick="saveAnimal()">💾 حفظ</button></div>
+    <div class="mact"><button class="btn btn-outline" onclick="closeMo('mo-animal')">إلغاء</button><button class="btn btn-green" onclick="saveAnimal()">💾 حفظ</button></div>
   </div>
 </div>
 
 <!-- MODAL: DEATH -->
 <div class="mo" id="mo-death">
-  <div class="mb" style="max-width:380px">
+  <div class="mb" style="max-width:360px">
     <h2 id="dt-title">💀 تسجيل وفاة</h2>
-    <div class="fg">
-      <div class="ff full"><label>سبب الوفاة *</label><input id="dt-reason" placeholder="مرض / حادث..."></div>
-      <div class="ff full"><label>التاريخ</label><input type="date" id="dt-date"></div>
-    </div>
+    <div class="ff full" style="margin-bottom:12px"><label>سبب الوفاة *</label><input id="dt-reason" placeholder="مرض / حادث..."></div>
+    <div class="ff full" style="margin-bottom:0"><label>التاريخ</label><input type="date" id="dt-date"></div>
     <div class="merr" id="dt-err"></div>
-    <div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-death').classList.remove('on')">إلغاء</button><button class="btn brd" onclick="confDeath()">تأكيد</button></div>
+    <div class="mact"><button class="btn btn-outline" onclick="closeMo('mo-death')">إلغاء</button><button class="btn btn-green" style="background:var(--red);background-image:none;" onclick="confDeath()">تأكيد</button></div>
   </div>
 </div>
 
 <!-- MODAL: SLAUGHTER -->
 <div class="mo" id="mo-slau">
-  <div class="mb" style="max-width:380px">
+  <div class="mb" style="max-width:360px">
     <h2 id="sl-title">🔪 تسجيل ذبح</h2>
-    <div class="fg">
-      <div class="ff full"><label>سبب الذبح</label><select id="sl-reason"><option>ذبح للأكل</option><option>أضحية</option><option>وليمة</option><option>بيع</option></select></div>
-      <div class="ff full"><label>التاريخ</label><input type="date" id="sl-date"></div>
-    </div>
-    <div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-slau').classList.remove('on')">إلغاء</button><button class="btn bor" onclick="confSlau()">تأكيد</button></div>
+    <div class="ff full" style="margin-bottom:12px"><label>سبب الذبح</label><select id="sl-reason"><option>ذبح للأكل</option><option>أضحية</option><option>وليمة</option><option>بيع</option></select></div>
+    <div class="ff full" style="margin-bottom:0"><label>التاريخ</label><input type="date" id="sl-date"></div>
+    <div class="mact"><button class="btn btn-outline" onclick="closeMo('mo-slau')">إلغاء</button><button class="btn btn-green" onclick="confSlau()">تأكيد</button></div>
   </div>
 </div>
 
 <!-- MODAL: MEMBER -->
-<div class="mo" id="mo-member">
-  <div class="mb" style="max-width:380px">
-    <h2>👤 إضافة عضو جديد</h2>
-    <div class="fg">
-      <div class="ff full"><label>الاسم الكامل</label><input id="mbr-name" placeholder="اسم العضو"></div>
-      <div class="ff full"><label>اسم الدخول *</label><input id="mbr-login" placeholder="ahmed123"></div>
-      <div class="ff full"><label>كلمة المرور *</label><input type="password" id="mbr-pass" placeholder="كلمة المرور"></div>
-      <div class="ff full"><label>الدور</label><select id="mbr-role"><option value="admin">مشرف</option><option value="member">عضو</option></select></div>
-    </div>
-    <div class="merr" id="mbr-err"></div>
-    <div class="mact"><button class="btn bgh" onclick="document.getElementById('mo-member').classList.remove('on')">إلغاء</button><button class="btn bg" onclick="saveMember()">إضافة</button></div>
+<div class="mo" id="mo-mbr">
+  <div class="mb" style="max-width:360px">
+    <h2>👤 إضافة عضو</h2>
+    <div class="ff full" style="margin-bottom:10px"><label>الاسم الكامل</label><input id="mb-name"></div>
+    <div class="ff full" style="margin-bottom:10px"><label>اسم الدخول *</label><input id="mb-user"></div>
+    <div class="ff full" style="margin-bottom:10px"><label>كلمة المرور *</label><input type="password" id="mb-pass"></div>
+    <div class="ff full" style="margin-bottom:0"><label>الدور</label><select id="mb-role"><option value="admin">مشرف</option><option value="member">عضو</option></select></div>
+    <div class="merr" id="mb-err"></div>
+    <div class="mact"><button class="btn btn-outline" onclick="closeMo('mo-mbr')">إلغاء</button><button class="btn btn-green" onclick="saveMbr()">إضافة</button></div>
   </div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════
-//  CONFIG & STATE
-// ═══════════════════════════════════════════
+// ═══ CONFIG ═══
 const API = window.location.origin;
 let token="", userRole="", farmerId=null, farmName="", userName="", userType="";
-let allAnimals=[], pendId=null, editId=null, curFilt="all";
+let animals=[], pendId=null, editId=null, curFilt="all", curBreed=null;
 
-// ═══════════════════════════════════════════
-//  HELPERS
-// ═══════════════════════════════════════════
-function show(id){
-  var screens = document.querySelectorAll(".screen");
-  for(var i=0;i<screens.length;i++){screens[i].classList.remove("on");}
-  var el = document.getElementById(id);
-  if(el){ el.classList.add("on"); }
-  document.body.scrollTop=0;
-  document.documentElement.scrollTop=0;
+// ═══ NAVIGATION ═══
+function goTo(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  window.scrollTo(0,0);
 }
 
+function goPage(id,btn){
+  document.querySelectorAll("#sc-app .page").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("on"));
+  document.getElementById("page-"+id).classList.add("on");
+  if(btn) btn.classList.add("on");
+  if(id==="rep") buildReport();
+  if(id==="mbrs") loadMbrs();
+  if(id==="set") loadSettings();
+}
 
-async function req(method,url,body){
-  const r=await fetch(API+url,{method,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:body?JSON.stringify(body):undefined});
+function goSuperPage(id,btn){
+  document.querySelectorAll("#sc-super-app .page").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("on"));
+  document.getElementById("sp-"+id).classList.add("on");
+  if(btn) btn.classList.add("on");
+  if(id==="stats") loadSuperStats();
+}
+
+// ═══ HTTP ═══
+async function req(m,u,b){
+  const r=await fetch(API+u,{method:m,headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},body:b?JSON.stringify(b):undefined});
   const d=await r.json();
   if(!r.ok) throw new Error(d.error||"خطأ");
   return d;
 }
 
-function showErr(id,msg){ const e=document.getElementById(id); e.textContent=msg; e.classList.add("on"); }
-function hideErr(id){ document.getElementById(id).classList.remove("on"); }
+function showErr(id,msg){const e=document.getElementById(id);e.textContent=msg;e.classList.add("on");}
+function hideErr(id){document.getElementById(id).classList.remove("on");}
 
-const colorMap={
-  أبيض:"#e8e8e8",بيضاء:"#e8e8e8",
-  أسود:"#222",سوداء:"#222",
-  بني:"#8B4513",بنية:"#8B4513",
-  رمادي:"#888",رمادية:"#888",
-  بيج:"#d4a96a",
-  أحمر:"#e74c3c",حمراء:"#e74c3c",
-  أصفر:"#f1c40f",صفراء:"#f1c40f",
-  أخضر:"#27ae60",خضراء:"#27ae60",
-  أزرق:"#2980b9",زرقاء:"#2980b9",
-  برتقالي:"#e67e22",برتقالية:"#e67e22",
-  وردي:"#e91e8c",وردية:"#e91e8c",
-};
-const cdot=c=>colorMap[c]||"#999";
-const ctext=c=>colorMap[c]||"inherit";
-const colorText=c=>{
-  const col=colorMap[c];
-  if(!col||c==="—") return c||"—";
-  return '<span style="color:'+col+';font-weight:800">'+c+'</span>';
-};
-const albl=a=>a||"—";
-const today=()=>new Date().toISOString().split("T")[0];
-
-// ═══════════════════════════════════════════
-//  AUTH
-// ═══════════════════════════════════════════
+// ═══ AUTH ═══
 async function doLogin(){
   hideErr("l-err");
   try{
-    const loginVal=document.getElementById("l-email").value.trim();
-  const d=await req("POST","/api/login/farmer",{email:loginVal,username:loginVal,password:document.getElementById("l-pass").value});
-    token=d.token; userRole="admin"; userType="farmer"; farmName=d.farm_name; userName=d.owner_name;
-    try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
-    localStorage.setItem("herd_token",token);
+    const v=document.getElementById("l-val").value.trim();
+    const d=await req("POST","/api/login/farmer",{email:v,username:v,password:document.getElementById("l-pass").value});
+    setSession(d,"farmer");
     launchApp();
   }catch(e){showErr("l-err",e.message);}
 }
 
 async function doMemberLogin(){
-  hideErr("m-err");
+  hideErr("ml-err");
   try{
-    const d=await req("POST","/api/login/member",{farm_id:parseInt(document.getElementById("m-farmid").value),username:document.getElementById("m-user").value.trim(),password:document.getElementById("m-pass").value});
-    token=d.token; userRole=d.role; userType="member"; farmName=d.farm_name; userName=d.full_name;
-    try { const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/"); const p=JSON.parse(atob(b64)); farmerId=p.farmer_id; } catch(e) { farmerId=null; }
-    localStorage.setItem("herd_token",token);
+    const d=await req("POST","/api/login/member",{farm_id:parseInt(document.getElementById("ml-fid").value),username:document.getElementById("ml-user").value.trim(),password:document.getElementById("ml-pass").value});
+    setSession(d,"member");
     launchApp();
-  }catch(e){showErr("m-err",e.message);}
+  }catch(e){showErr("ml-err",e.message);}
 }
 
 async function doRegister(){
-  hideErr("r-err"); document.getElementById("r-ok").classList.remove("on");
-  const btn=document.getElementById("r-btn"); btn.disabled=true; btn.textContent="جاري التسجيل...";
+  hideErr("r-err");
+  hideErr("r-ok");
+  const btn=document.getElementById("r-btn");
+  btn.disabled=true;btn.textContent="جاري التسجيل...";
   try{
-    await req("POST","/api/register",{farm_name:document.getElementById("r-farm").value.trim(),owner_name:document.getElementById("r-owner").value.trim(),username:document.getElementById("r-username").value.trim(),email:document.getElementById("r-email").value.trim(),password:document.getElementById("r-pass").value});
-    const ok=document.getElementById("r-ok"); ok.textContent="✅ تم التسجيل بنجاح!"; ok.classList.add("on");
+    const email=document.getElementById("r-email").value.trim();
+    const pass=document.getElementById("r-pass").value;
+    await req("POST","/api/register",{
+      farm_name:document.getElementById("r-farm").value.trim(),
+      owner_name:document.getElementById("r-owner").value.trim(),
+      username:document.getElementById("r-username").value.trim(),
+      email:email,password:pass
+    });
+    document.getElementById("r-ok").textContent="✅ تم التسجيل بنجاح!";
+    document.getElementById("r-ok").classList.add("on");
     btn.textContent="تم ✓";
-    // Auto login after register
-    setTimeout(async ()=>{
+    // Auto login
+    setTimeout(async()=>{
       try{
-        const emailVal=document.getElementById("r-email").value.trim();
-        const passVal=document.getElementById("r-pass").value;
-        const d2=await req("POST","/api/login/farmer",{email:emailVal,username:emailVal,password:passVal});
-        token=d2.token; userRole="admin"; userType="farmer"; 
-        farmName=d2.farm_name||"مزرعتي"; 
-        userName=d2.owner_name||d2.username||"";
-        try{const b64=token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");const pp=JSON.parse(atob(b64));farmerId=pp.farmer_id;}catch(e){farmerId=null;}
-        localStorage.setItem("herd_token",token);
+        const d=await req("POST","/api/login/farmer",{email:email,username:email,password:pass});
+        setSession(d,"farmer");
         launchApp();
-      }catch(e){ console.error("auto login failed:",e); }
+      }catch(e){}
     },800);
   }catch(e){showErr("r-err",e.message);btn.disabled=false;btn.textContent="إنشاء الحساب";}
 }
@@ -740,126 +623,109 @@ async function doSuperLogin(){
   hideErr("sa-err");
   try{
     const d=await req("POST","/api/login/super",{username:document.getElementById("sa-user").value.trim(),password:document.getElementById("sa-pass").value});
-    token=d.token; localStorage.setItem("herd_token",token);
-    show("sc-super-app"); setTimeout(()=>{loadFarmers(); loadSuperStats();},100);
+    token=d.token;
+    localStorage.setItem("mw_token",token);
+    goTo("sc-super-app");
+    loadFarmers();loadSuperStats();
   }catch(e){showErr("sa-err",e.message);}
 }
 
-function doLogout(){ token=""; localStorage.removeItem("herd_token"); location.reload(); }
+function setSession(d,type){
+  token=d.token;userType=type;farmName=d.farm_name||"مزرعتي";
+  userName=d.owner_name||d.full_name||d.username||"";
+  userRole=d.role||"admin";
+  try{const p=JSON.parse(atob(token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));farmerId=p.farmer_id;}catch(e){farmerId=null;}
+  localStorage.setItem("mw_token",token);
+}
 
-// ═══════════════════════════════════════════
-//  LAUNCH APP
-// ═══════════════════════════════════════════
+function doLogout(){token="";localStorage.removeItem("mw_token");location.reload();}
+
+// ═══ LAUNCH APP ═══
 function launchApp(){
-  show("sc-app");
-  document.getElementById("hdr-farm").textContent=farmName||"مزرعتي";
-  document.getElementById("hdr-user").textContent=userName||"";
+  goTo("sc-app");
+  document.getElementById("hdr-farm").textContent=farmName;
+  document.getElementById("hdr-user").textContent=userName;
   const b=document.getElementById("rbdg");
-  if(userType==="farmer"){b.textContent="🌾 صاحب المزرعة";b.className="rbdg rb-owner";}
-  else if(userRole==="admin"){b.textContent="🛠️ مشرف";b.className="rbdg rb-admin";}
-  else{b.textContent="👁️ عضو";b.className="rbdg rb-member";}
-
-  const canEdit = userType==="farmer" || userRole==="admin";
+  if(userType==="farmer"){b.textContent="🌾 صاحب المزرعة";b.className="role-badge rb-owner";}
+  else{b.textContent="👁️ عضو";b.className="role-badge rb-member";}
+  const canEdit=userType==="farmer"||userRole==="admin";
   if(canEdit){
     document.getElementById("add-btn").style.display="inline-flex";
     document.getElementById("ac-th").style.display="table-cell";
-    document.getElementById("nb-members").style.display="block";
-    document.getElementById("nb-settings").style.display="block";
-    document.getElementById("farm-id-notice").innerHTML=`رقم مزرعتك: <strong style="color:var(--gold)">${farmerId}</strong> — أعطه للأعضاء عند تسجيل دخولهم`;
-  } else {
-    document.getElementById("mem-notice").classList.add("on");
+    document.getElementById("nb-mbrs").style.display="block";
+    document.getElementById("nb-set").style.display="block";
+    document.getElementById("farm-id-note").innerHTML=`رقم مزرعتك: <strong style="color:var(--gold)">${farmerId}</strong> — أعطه للأعضاء`;
+  }else{
+    document.getElementById("view-notice").classList.add("on");
   }
   loadAnimals();
 }
 
-// ═══════════════════════════════════════════
-//  ANIMALS
-// ═══════════════════════════════════════════
+// ═══ ANIMALS ═══
 async function loadAnimals(){
-  allAnimals=await req("GET","/api/animals");
-  allAnimals.sort((a,b)=>{
-    const na=parseInt(a.animal_number)||0, nb=parseInt(b.animal_number)||0;
-    if(na!==nb) return na-nb;
-    return a.animal_number.localeCompare(b.animal_number);
-  });
-  console.log("Animals loaded:", allAnimals.length, allAnimals.map(x=>x.animal_type));
-  renderStats(); renderTable();
+  animals=await req("GET","/api/animals");
+  animals.sort((a,b)=>{const na=parseInt(a.animal_number)||0,nb=parseInt(b.animal_number)||0;return na!==nb?na-nb:a.animal_number.localeCompare(b.animal_number);});
+  renderStats();renderTable();
 }
 
 function renderStats(){
-  const a=allAnimals.filter(x=>x.status==="alive");
-  // Normalize animal_type
-  allAnimals.forEach(x=>{ if(!x.animal_type) x.animal_type="غنم"; });
-  document.getElementById("s-alive").textContent  = a.length;
-  document.getElementById("s-males").textContent  = a.filter(x=>x.gender==="ذكر").length;
-  document.getElementById("s-females").textContent= a.filter(x=>x.gender==="أنثى").length;
-  document.getElementById("s-moms").textContent   = a.filter(x=>!x.mother_id&&x.gender==="أنثى"&&allAnimals.some(c=>c.mother_id===x.id)).length;
-  document.getElementById("s-kids").textContent   = a.filter(x=>x.mother_id).length;
-  document.getElementById("s-dead").textContent   = allAnimals.filter(x=>x.status==="dead").length;
-  document.getElementById("s-slau").textContent   = allAnimals.filter(x=>x.status==="slaughtered").length;
+  const a=animals.filter(x=>x.status==="alive");
+  document.getElementById("s-alive").textContent=a.length;
+  document.getElementById("s-males").textContent=a.filter(x=>x.gender==="ذكر").length;
+  document.getElementById("s-females").textContent=a.filter(x=>x.gender==="أنثى").length;
+  document.getElementById("s-moms").textContent=a.filter(x=>!x.mother_id&&x.gender==="أنثى"&&animals.some(c=>c.mother_id===x.id)).length;
+  document.getElementById("s-kids").textContent=a.filter(x=>x.mother_id).length;
+  document.getElementById("s-dead").textContent=animals.filter(x=>x.status==="dead").length;
+  document.getElementById("s-slau").textContent=animals.filter(x=>x.status==="slaughtered").length;
 }
 
-let curFilts = {غنم:'all', بقر:'all', إبل:'all'};
-function filt(f,el,type){
-  curFilts[type]=f;
-  // only reset tabs in same table
-  el.closest('.th2').querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
-  el.classList.add('on');
-  renderTable();
-}
+function setFilt(f,el){curFilt=f;document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on"));el.classList.add("on");renderTable();}
+function setBreed(b,el){curBreed=b;document.querySelectorAll(".fbtn").forEach(x=>x.classList.remove("on"));el.classList.add("on");renderTable();}
+
+const colorMap={أبيض:"#999",بيضاء:"#999",أسود:"#111",سوداء:"#111",بني:"#8B4513",بنية:"#8B4513",رمادي:"#777",أحمر:"#e74c3c",أصفر:"#d4a017",أخضر:"#27ae60",أزرق:"#2980b9",برتقالي:"#e67e22",وردي:"#d63384"};
+const ctext=c=>{const col=colorMap[c];return col?`<span style="color:${col};font-weight:800">${c}</span>`:c||"—";};
 
 function renderTable(){
-  const canEdit = userType==="farmer"||userRole==="admin";
-  if(canEdit){
-    document.getElementById("ac-th").style.display="table-cell";
-    document.querySelectorAll(".ac-th-extra").forEach(th=>th.style.display="table-cell");
-  }
-
-  ["غنم"].forEach(type=>{
-    const f=curFilts[type]||"all";
-    let d=allAnimals.filter(x=>(x.animal_type||"غنم")===type);
-    if(f==="f")  d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
-    else if(f==="m") d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
-    else if(f==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&allAnimals.some(c=>c.mother_id===x.id));
-    else if(f==="d") d=d.filter(x=>x.status==="dead");
-    else if(f==="s") d=d.filter(x=>x.status==="slaughtered");
-    const kc=id=>allAnimals.filter(c=>c.mother_id===id&&c.status==="alive").length;
-    if(breedFilters[type]) d=d.filter(x=>x.breed===breedFilters[type]);
-    const rows=d.map(x=>{
-      const k=kc(x.id);
-      const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
-      const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
-      const nt=x.notes?x.notes.substring(0,18)+(x.notes.length>18?"...":""):"—";
-      const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
-      let ac="";
-      if(canEdit){
-        let b=`<button class="ab ae" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
-        if(x.status==="alive"){b+=`<button class="ab ak2" onclick="event.stopPropagation();openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab as2" onclick="event.stopPropagation();openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
-        b+=`<button class="ab adk" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
-        ac=`<td><div class="ac">${b}</div></td>`;
-      }
-      const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":x.pregnant==="yes"?"row-pregnant":"";
-      return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
-        <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
-        <td>${x.animal_type||"غنم"}</td>
-        <td style="color:var(--muted)">${x.breed||"—"}</td>
-        <td><span style="color:${x.gender==="أنثى"?"var(--purple)":"var(--blue)"};font-weight:800">${x.gender}</span></td>
-        <td>${albl(x.age_label)}</td>
-        <td>${colorText(x.body_color||"—")}</td>
-        <td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
-        <td>${colorText(x.ear_color||"—")}</td>
-        <td>${mT}</td><td>${kT}</td>
-        <td style="color:var(--muted);font-size:12px">${nt}</td>
-        <td>${st}</td>${ac}
-      </tr>`;
-    }).join("");
-    const tbody=document.getElementById("tbody-"+type);
-    if(tbody) tbody.innerHTML=rows;
-  });
+  const canEdit=userType==="farmer"||userRole==="admin";
+  let d=[...animals];
+  if(curBreed) d=d.filter(x=>x.breed===curBreed);
+  if(curFilt==="f") d=d.filter(x=>x.gender==="أنثى"&&x.status==="alive");
+  else if(curFilt==="m") d=d.filter(x=>x.gender==="ذكر"&&x.status==="alive");
+  else if(curFilt==="mo") d=d.filter(x=>!x.mother_id&&x.gender==="أنثى"&&x.status==="alive"&&animals.some(c=>c.mother_id===x.id));
+  else if(curFilt==="d") d=d.filter(x=>x.status==="dead");
+  else if(curFilt==="s") d=d.filter(x=>x.status==="slaughtered");
+  const kc=id=>animals.filter(c=>c.mother_id===id&&c.status==="alive").length;
+  document.getElementById("tbody").innerHTML=d.map(x=>{
+    const k=kc(x.id);
+    const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
+    const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
+    const st=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason||"ذبح"}</span>`:x.pregnant==="yes"?`<span class="sbpreg">🤰 حامل</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
+    let ac="";
+    if(canEdit){
+      let b=`<button class="ab ab-edit" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
+      if(x.status==="alive"){b+=`<button class="ab ab-dead" onclick="event.stopPropagation();openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab ab-slau" onclick="event.stopPropagation();openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
+      b+=`<button class="ab ab-del" onclick="event.stopPropagation();delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
+      ac=`<td><div class="ac">${b}</div></td>`;
+    }
+    const rc=x.status==="dead"?"row-dead":x.status==="slaughtered"?"row-slau":x.pregnant==="yes"?"row-pregnant":"";
+    return `<tr class="${rc}" onclick="goNum('${x.animal_number}')">
+      <td class="nc">${x.gender==="أنثى"?"🐑":"🐏"} ${x.animal_number}</td>
+      <td>${x.animal_type||"غنم"}</td>
+      <td>${x.breed||"—"}</td>
+      <td><span style="color:${x.gender==="أنثى"?"#8b5cf6":"var(--blue)"};font-weight:800">${x.gender}</span></td>
+      <td>${x.age_label||"—"}</td>
+      <td>${ctext(x.body_color)}</td>
+      <td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td>
+      <td>${ctext(x.ear_color)}</td>
+      <td>${mT}</td><td>${kT}</td>
+      <td>${st}</td>${ac}
+    </tr>`;
+  }).join("");
 }
 
-function goNum(n){ document.getElementById("s-inp").value=n; doSearch(); window.scrollTo({top:0,behavior:"smooth"}); }
-function clearSearch(){ document.getElementById("s-inp").value=""; document.getElementById("rcard").classList.remove("on"); document.getElementById("nfound").classList.remove("on"); }
+// ═══ SEARCH ═══
+function goNum(n){document.getElementById("s-inp").value=n;doSearch();window.scrollTo(0,0);}
+function clearSearch(){document.getElementById("s-inp").value="";document.getElementById("rcard").classList.remove("on");document.getElementById("nfound").classList.remove("on");}
 
 async function doSearch(){
   const q=document.getElementById("s-inp").value.trim();
@@ -868,65 +734,76 @@ async function doSearch(){
   if(!q) return;
   try{
     const x=await req("GET",`/api/animals/${q}`);
-    const ch=x.children||[], canEdit=userType==="farmer"||userRole==="admin";
+    const ch=x.children||[];
+    const canEdit=userType==="farmer"||userRole==="admin";
     document.getElementById("r-ava").textContent=x.gender==="أنثى"?"🐑":"🐏";
     document.getElementById("r-num").textContent=`رقم ${x.animal_number}`;
     document.getElementById("r-type").textContent=`${x.animal_type||"غنم"} — ${x.breed||"—"}`;
-    const bg=document.getElementById("r-gbdg"); bg.textContent=x.gender; bg.className="gbdg "+(x.gender==="أنثى"?"gf":"gm");
-    const sb=document.getElementById("r-sbdg");
-    sb.innerHTML=x.status==="dead"?`<span class="sbdead">💀 ${x.death_reason}</span>`:x.status==="slaughtered"?`<span class="sbslau">🔪 ${x.slaughter_reason}</span>`:"";
+    const bg=document.getElementById("r-gbdg");
+    bg.textContent=x.gender;
+    bg.style.cssText=`padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;background:${x.gender==="أنثى"?"var(--brown3)":"var(--blue3)"};color:${x.gender==="أنثى"?"var(--brown)":"var(--blue)"};border:1px solid ${x.gender==="أنثى"?"rgba(107,76,42,.2)":"rgba(26,82,118,.15)"}`;
     const ra=document.getElementById("r-acts");
     if(canEdit){
-      let h=`<button class="btn bbl" style="padding:5px 10px;font-size:12px" onclick="openEdit(${x.id})">✏️</button>`;
-      if(x.status==="alive"){h+=`<button class="btn" style="padding:5px 10px;font-size:12px;background:rgba(100,116,139,.12);color:#94a3b8;border:1px solid #2d3748" onclick="openDeath(${x.id},'${x.animal_number}')">💀</button><button class="btn bor" style="padding:5px 10px;font-size:12px" onclick="openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
-      h+=`<button class="btn brd" style="padding:5px 10px;font-size:12px" onclick="delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
+      let h=`<button class="ab ab-edit" onclick="openEdit(${x.id})">✏️</button>`;
+      if(x.status==="alive"){h+=`<button class="ab ab-dead" onclick="openDeath(${x.id},'${x.animal_number}')">💀</button><button class="ab ab-slau" onclick="openSlau(${x.id},'${x.animal_number}')">🔪</button>`;}
+      h+=`<button class="ab ab-del" onclick="delAnimal(${x.id},'${x.animal_number}')">🗑️</button>`;
       ra.innerHTML=h;
-    } else ra.innerHTML="";
+    }else ra.innerHTML="";
     document.getElementById("r-dets").innerHTML=[
-      {l:"الصنف",v:x.animal_type||"غنم"},{l:"الجنس",v:x.gender},{l:"العمر",v:albl(x.age_label)},
-      {l:"لون الجسم",v:`<span style='color:${cdot(x.body_color)};font-weight:700'>${x.body_color||"—"}</span>`},
-      {l:"لون الإشارة",v:x.ear_color||"—"},{l:"الميلاد",v:x.birth_date?.split("T")[0]||"—"},
-      {l:"الأم",v:x.mother_number?`<span style='color:var(--gold);cursor:pointer;font-weight:800' onclick="goNum('${x.mother_number}')">${x.mother_number}</span>`:"أم أصلية"},
-      {l:"الأبناء",v:ch.length>0?`<span style='color:var(--green)'>${ch.length}</span>`:"لا يوجد"},
+      {l:"الصنف",v:x.animal_type||"غنم"},{l:"النوع",v:x.breed||"—"},{l:"الجنس",v:x.gender},
+      {l:"العمر",v:x.age_label||"—"},{l:"لون الجسم",v:ctext(x.body_color)},{l:"لون الإشارة",v:ctext(x.ear_color)},
+      {l:"الميلاد",v:x.birth_date?.split("T")[0]||"—"},{l:"الأبناء",v:ch.length||"لا يوجد"},
     ].map(i=>`<div class="di"><div class="dl">${i.l}</div><div class="dv">${i.v}</div></div>`).join("");
-    const nb=document.getElementById("r-nbox");
-    if(x.notes){nb.style.display="block";document.getElementById("r-ntxt").textContent=x.notes;}else{nb.style.display="none";}
-    const cs=document.getElementById("r-csec");
-    if(ch.length>0){cs.style.display="block";document.getElementById("r-clist").innerHTML=ch.map(c=>`<div class="ccard" onclick="goNum('${c.animal_number}')"><span style="font-size:18px">${c.gender==="أنثى"?"🐑":"🐏"}</span><div><div class="cn">${c.animal_number}</div><div class="ci">${c.animal_type||"غنم"} · ${c.gender} · ${albl(c.age_label)}</div></div></div>`).join("");}
-    else cs.style.display="none";
+    const nb=document.getElementById("r-notes");
+    if(x.notes){nb.style.display="block";document.getElementById("r-ntxt").textContent=x.notes;}else nb.style.display="none";
+    const ks=document.getElementById("r-kids");
+    if(ch.length>0){
+      ks.style.display="block";
+      document.getElementById("r-kids-list").innerHTML=ch.map(c=>`<span onclick="goNum('${c.animal_number}')" style="background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:8px;padding:5px 10px;font-size:12px;font-weight:800;color:var(--green);cursor:pointer;">${c.gender==="أنثى"?"🐑":"🐏"} ${c.animal_number}</span>`).join("");
+    }else ks.style.display="none";
     document.getElementById("rcard").classList.add("on");
-  }catch{ document.getElementById("nfound").classList.add("on"); }
+  }catch{document.getElementById("nfound").classList.add("on");}
 }
 
-// ═══════════════════════════════════════════
-//  ADD / EDIT
-// ═══════════════════════════════════════════
+// ═══ ADD / EDIT ═══
+function togglePreg(){const g=document.getElementById("f-gender").value;document.getElementById("f-preg-wrap").style.display=g==="أنثى"?"block":"none";}
 function openAdd(){
-  editId=null; document.getElementById("mo-title").textContent="➕ إضافة حيوان جديد";
+  editId=null;document.getElementById("mo-title").textContent="➕ إضافة حيوان";
   ["f-num","f-body","f-ear","f-notes","f-mom"].forEach(f=>document.getElementById(f).value="");
-  document.getElementById("f-born").value=""; document.getElementById("f-type").value="غنم";
-  document.getElementById("f-gender").value="أنثى"; document.getElementById("f-age").value="رخلة";
-  document.getElementById("f-preg-no").checked=true;
-  togglePregnant();
-  document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
+  document.getElementById("f-born").value="";document.getElementById("f-type").value="غنم";
+  document.getElementById("f-breed").value="";document.getElementById("f-gender").value="أنثى";
+  document.getElementById("f-age").value="رخلة";
+  document.querySelectorAll("input[name='f-preg']")[0].checked=true;
+  togglePreg();hideErr("mo-err");document.getElementById("mo-animal").classList.add("on");
 }
 function openEdit(id){
-  const x=allAnimals.find(a=>a.id===id); if(!x) return;
-  editId=id; document.getElementById("mo-title").textContent=`✏️ تعديل رقم ${x.animal_number}`;
-  document.getElementById("f-num").value=x.animal_number; document.getElementById("f-type").value=x.animal_type||"غنم";
-  document.getElementById("f-gender").value=x.gender; document.getElementById("f-age").value=x.age_label||"رخلة";
-  document.getElementById("f-body").value=x.body_color||""; document.getElementById("f-ear").value=x.ear_color||"";
-  document.getElementById("f-born").value=x.birth_date?.split("T")[0]||""; document.getElementById("f-notes").value=x.notes||"";
-  document.getElementById("f-mom").value=x.mother_number||"";
-  document.getElementById("f-breed").value=x.breed||"نجدي";
-  document.getElementById("mo-err").classList.remove("on"); document.getElementById("mo-animal").classList.add("on");
+  const x=animals.find(a=>a.id===id);if(!x) return;
+  editId=id;document.getElementById("mo-title").textContent=`✏️ تعديل رقم ${x.animal_number}`;
+  document.getElementById("f-num").value=x.animal_number;document.getElementById("f-type").value=x.animal_type||"غنم";
+  document.getElementById("f-breed").value=x.breed||"";document.getElementById("f-gender").value=x.gender;
+  document.getElementById("f-age").value=x.age_label||"رخلة";document.getElementById("f-body").value=x.body_color||"";
+  document.getElementById("f-ear").value=x.ear_color||"";document.getElementById("f-born").value=x.birth_date?.split("T")[0]||"";
+  document.getElementById("f-mom").value=x.mother_number||"";document.getElementById("f-notes").value=x.notes||"";
+  const pg=document.querySelector(`input[name='f-preg'][value='${x.pregnant||"no"}']`);if(pg)pg.checked=true;
+  togglePreg();hideErr("mo-err");document.getElementById("mo-animal").classList.add("on");
 }
-function closeMo(){ document.getElementById("mo-animal").classList.remove("on"); }
+function closeMo(id){document.getElementById(id).classList.remove("on");}
 
 async function saveAnimal(){
-  document.getElementById("mo-err").classList.remove("on");
-  const pregEl = document.querySelector('input[name="f-pregnant"]:checked');
-  const body={animal_number:document.getElementById("f-num").value.trim(),animal_type:document.getElementById("f-type").value,breed:document.getElementById("f-breed").value,age_label:document.getElementById("f-age").value,gender:document.getElementById("f-gender").value,body_color:document.getElementById("f-body").value,birth_date:document.getElementById("f-born").value||null,ear_color:document.getElementById("f-ear").value,mother_number:document.getElementById("f-mom").value.trim()||null,notes:document.getElementById("f-notes").value,pregnant:pregEl?pregEl.value:"no"};
+  hideErr("mo-err");
+  const body={
+    animal_number:document.getElementById("f-num").value.trim(),
+    animal_type:document.getElementById("f-type").value,
+    breed:document.getElementById("f-breed").value,
+    age_label:document.getElementById("f-age").value,
+    gender:document.getElementById("f-gender").value,
+    body_color:document.getElementById("f-body").value,
+    birth_date:document.getElementById("f-born").value||null,
+    ear_color:document.getElementById("f-ear").value,
+    mother_number:document.getElementById("f-mom").value.trim()||null,
+    notes:document.getElementById("f-notes").value,
+    pregnant:(document.querySelector("input[name='f-preg']:checked")||{}).value||"no"
+  };
   if(!body.animal_number){showErr("mo-err","⚠️ الرقم مطلوب");return;}
   if(!body.breed){showErr("mo-err","⚠️ النوع مطلوب");return;}
   if(!body.body_color){showErr("mo-err","⚠️ لون الجسم مطلوب");return;}
@@ -935,307 +812,160 @@ async function saveAnimal(){
   try{
     if(editId) await req("PUT",`/api/animals/${editId}`,body);
     else await req("POST","/api/animals",body);
-    closeMo(); await loadAnimals(); clearSearch();
+    closeMo("mo-animal");await loadAnimals();clearSearch();
   }catch(e){showErr("mo-err","⚠️ "+e.message);}
 }
 
 async function delAnimal(id,num){
   if(!confirm(`حذف رقم ${num}؟`)) return;
-  await req("DELETE",`/api/animals/${id}`); await loadAnimals(); clearSearch();
+  await req("DELETE",`/api/animals/${id}`);await loadAnimals();clearSearch();
 }
 
-// ═══════════════════════════════════════════
-//  DEATH / SLAUGHTER
-// ═══════════════════════════════════════════
-function openDeath(id,num){ pendId=id; document.getElementById("dt-title").textContent=`💀 وفاة — رقم ${num}`; document.getElementById("dt-reason").value=""; document.getElementById("dt-date").value=today(); document.getElementById("dt-err").classList.remove("on"); document.getElementById("mo-death").classList.add("on"); }
+// ═══ DEATH / SLAUGHTER ═══
+const today=()=>new Date().toISOString().split("T")[0];
+function openDeath(id,num){pendId=id;document.getElementById("dt-title").textContent=`💀 وفاة — رقم ${num}`;document.getElementById("dt-reason").value="";document.getElementById("dt-date").value=today();hideErr("dt-err");document.getElementById("mo-death").classList.add("on");}
 async function confDeath(){
   const r=document.getElementById("dt-reason").value.trim();
   if(!r){showErr("dt-err","⚠️ سبب الوفاة مطلوب");return;}
   await req("PATCH",`/api/animals/${pendId}/death`,{death_reason:r,death_date:document.getElementById("dt-date").value});
-  document.getElementById("mo-death").classList.remove("on"); await loadAnimals(); clearSearch();
+  closeMo("mo-death");await loadAnimals();clearSearch();
 }
 
-function openSlau(id,num){ pendId=id; document.getElementById("sl-title").textContent=`🔪 ذبح — رقم ${num}`; document.getElementById("sl-date").value=today(); document.getElementById("mo-slau").classList.add("on"); }
+function openSlau(id,num){pendId=id;document.getElementById("sl-title").textContent=`🔪 ذبح — رقم ${num}`;document.getElementById("sl-date").value=today();document.getElementById("mo-slau").classList.add("on");}
 async function confSlau(){
   await req("PATCH",`/api/animals/${pendId}/slaughter`,{slaughter_reason:document.getElementById("sl-reason").value,slaughter_date:document.getElementById("sl-date").value});
-  document.getElementById("mo-slau").classList.remove("on"); await loadAnimals(); clearSearch();
+  closeMo("mo-slau");await loadAnimals();clearSearch();
 }
 
-// ═══════════════════════════════════════════
-//  REPORT
-// ═══════════════════════════════════════════
+// ═══ REPORT ═══
 async function buildReport(){
-  const n=new Date(); document.getElementById("rep-date").textContent=`${n.getFullYear()}/${n.getMonth()+1}/${n.getDate()} ${n.toLocaleTimeString("ar")}`;
+  const n=new Date();
+  document.getElementById("rep-date").textContent=`${n.getFullYear()}/${n.getMonth()+1}/${n.getDate()}`;
   try{
-    const r=await req("GET","/api/report"), t=r.totals;
+    const r=await req("GET","/api/report"),t=r.totals;
     document.getElementById("rg1").innerHTML=[
-      {i:"🐑",l:"الأحياء",v:t.alive,c:"var(--gold)"},{i:"🗂️",l:"الإجمالي",v:t.total,c:"var(--muted)"},
-      {i:"🐏",l:"الأمهات",v:t.mothers,c:"var(--purple)"},{i:"♂",l:"ذكور أحياء",v:t.males,c:"var(--blue)"},
-      {i:"♀",l:"إناث أحياء",v:t.females,c:"var(--green)"},{i:"✅",l:"جاهزات للإنجاب",v:r.ready.length,c:"var(--green)"},
+      {i:"🐑",l:"الأحياء",v:t.alive,c:"var(--green)"},{i:"📦",l:"الإجمالي",v:t.total,c:"var(--muted)"},
+      {i:"🐏",l:"الأمهات",v:t.mothers,c:"#8b5cf6"},{i:"♂",l:"ذكور",v:t.males,c:"var(--blue)"},
+      {i:"♀",l:"إناث",v:t.females,c:"var(--green)"},{i:"✅",l:"جاهزات للإنجاب",v:r.ready?.length||0,c:"var(--green)"},
     ].map(x=>`<div class="ri"><div class="ril">${x.i} ${x.l}</div><div class="riv" style="color:${x.c}">${x.v}</div></div>`).join("");
     document.getElementById("rg2").innerHTML=[
-      {i:"🍼",l:"المواليد",v:t.kids,c:"var(--orange)"},{i:"📅",l:"آخر 3 أشهر",v:r.kids3m,c:"var(--blue)"},
+      {i:"🍼",l:"المواليد",v:t.kids,c:"#f59332"},{i:"📅",l:"آخر 3 أشهر",v:r.kids3m||0,c:"var(--blue)"},
     ].map(x=>`<div class="ri"><div class="ril">${x.i} ${x.l}</div><div class="riv" style="color:${x.c}">${x.v}</div></div>`).join("");
-    document.getElementById("d-count").innerHTML=`<span style="font-size:20px;font-weight:900;color:#94a3b8">${t.dead}</span> <span style="color:var(--muted);font-size:12px">حالة وفاة</span>`;
-    document.getElementById("d-tbody").innerHTML=r.dead.length?r.dead.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.gender}</td><td>${x.age_label||"—"}</td><td style="color:var(--red)">${x.death_reason||"—"}</td><td style="color:var(--muted)">${x.death_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px">لا توجد حالات وفاة</td></tr>`;
-    document.getElementById("s-count").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--orange)">${t.slaughtered}</span> <span style="color:var(--muted);font-size:12px">ذبيحة</span>`;
-    document.getElementById("s-tbody").innerHTML=r.slau.length?r.slau.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.age_label||"—"}</td><td style="color:var(--orange)">${x.slaughter_reason||"—"}</td><td style="color:var(--muted)">${x.slaughter_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد ذبائح</td></tr>`;
-    document.getElementById("br-tbody").innerHTML=r.breeds.map(b=>`<tr><td style="font-weight:700">${b.breed||"—"}</td><td style="color:${b.gender==="أنثى"?"var(--purple)":"var(--blue)"}">${b.gender}</td><td style="color:var(--gold);font-weight:800">${b.cnt}</td><td style="color:var(--muted)">${((b.cnt/t.alive)*100).toFixed(1)}%</td></tr>`).join("");
-    document.getElementById("mt-tbody").innerHTML=r.moms.map(m=>`<tr><td class="nc">🐑 ${m.animal_number}</td><td>${m.breed||"—"}</td><td style="color:var(--green);font-weight:800">${m.kids_count}</td><td style="color:var(--muted)">${m.last_birth?.split("T")[0]||"—"}</td></tr>`).join("");
-    document.getElementById("rf-tbody").innerHTML=r.ready.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td style="color:var(--purple);font-weight:700">${albl(x.age_label)}</td><td>${x.breed||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join("");
+    document.getElementById("d-cnt").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--muted)">${t.dead}</span> <span style="font-size:12px;color:var(--muted)">حالة وفاة</span>`;
+    document.getElementById("d-tbody").innerHTML=(r.dead||[]).length?(r.dead||[]).map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.gender}</td><td>${x.age_label||"—"}</td><td style="color:var(--red)">${x.death_reason||"—"}</td><td style="color:var(--muted)">${x.death_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:16px">لا توجد حالات وفاة</td></tr>`;
+    document.getElementById("s-cnt").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--gold)">${t.slaughtered}</span> <span style="font-size:12px;color:var(--muted)">ذبيحة</span>`;
+    document.getElementById("s-tbody").innerHTML=(r.slau||[]).length?(r.slau||[]).map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.age_label||"—"}</td><td style="color:var(--gold)">${x.slaughter_reason||"—"}</td><td style="color:var(--muted)">${x.slaughter_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد ذبائح</td></tr>`;
+    document.getElementById("br-tbody").innerHTML=(r.breeds||[]).map(b=>`<tr><td style="font-weight:700">${b.breed||"—"}</td><td style="color:${b.gender==="أنثى"?"#8b5cf6":"var(--blue)"}">${b.gender}</td><td style="color:var(--green);font-weight:800">${b.cnt}</td><td style="color:var(--muted)">${t.alive?((b.cnt/t.alive)*100).toFixed(1)+"%":"—"}</td></tr>`).join("");
+    document.getElementById("rf-tbody").innerHTML=(r.ready||[]).map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td style="color:#8b5cf6;font-weight:700">${x.age_label||"—"}</td><td>${x.breed||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join("");
   }catch(e){console.error(e);}
 }
 
-// ═══════════════════════════════════════════
-//  MEMBERS
-// ═══════════════════════════════════════════
-async function loadMembers(){
+// ═══ MEMBERS ═══
+async function loadMbrs(){
   const m=await req("GET","/api/members");
   document.getElementById("mbr-grid").innerHTML=m.map(u=>`
-    <div class="uc2">
-      <div class="uav2" style="background:${u.role==="admin"?"rgba(61,214,140,.12)":"rgba(91,164,245,.12)"}">${u.role==="admin"?"🛠️":"👁️"}</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:800">${u.full_name||u.username}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${u.username} · ${u.role==="admin"?"مشرف":"عضو"}</div></div>
-      <button class="btn brd" style="padding:4px 9px;font-size:11px" onclick="delMember(${u.id},'${u.username}')">حذف</button>
+    <div class="mbr-card">
+      <div class="mbr-av" style="background:${u.role==="admin"?"var(--green3)":"var(--blue3)"}">${u.role==="admin"?"🛠️":"👁️"}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:800">${u.full_name||u.username}</div><div style="font-size:11px;color:var(--muted)">${u.username} · ${u.role==="admin"?"مشرف":"عضو"}</div></div>
+      <button class="btn-red-sm" onclick="delMbr(${u.id},'${u.username}')">حذف</button>
     </div>`).join("");
 }
-
-function openAddMember(){ ["mbr-name","mbr-login","mbr-pass"].forEach(f=>document.getElementById(f).value=""); document.getElementById("mbr-role").value="member"; document.getElementById("mbr-err").classList.remove("on"); document.getElementById("mo-member").classList.add("on"); }
-
-async function saveMember(){
-  document.getElementById("mbr-err").classList.remove("on");
+function openAddMbr(){["mb-name","mb-user","mb-pass"].forEach(f=>document.getElementById(f).value="");document.getElementById("mb-role").value="member";hideErr("mb-err");document.getElementById("mo-mbr").classList.add("on");}
+async function saveMbr(){
+  hideErr("mb-err");
   try{
-    await req("POST","/api/members",{username:document.getElementById("mbr-login").value.trim(),password:document.getElementById("mbr-pass").value,full_name:document.getElementById("mbr-name").value.trim(),role:document.getElementById("mbr-role").value});
-    document.getElementById("mo-member").classList.remove("on"); loadMembers();
-  }catch(e){showErr("mbr-err","⚠️ "+e.message);}
+    await req("POST","/api/members",{username:document.getElementById("mb-user").value.trim(),password:document.getElementById("mb-pass").value,full_name:document.getElementById("mb-name").value.trim(),role:document.getElementById("mb-role").value});
+    closeMo("mo-mbr");loadMbrs();
+  }catch(e){showErr("mb-err","⚠️ "+e.message);}
+}
+async function delMbr(id,n){if(!confirm(`حذف ${n}؟`)) return;await req("DELETE",`/api/members/${id}`);loadMbrs();}
+
+// ═══ SETTINGS ═══
+function loadSettings(){
+  document.getElementById("set-info").innerHTML=`<div>🌾 <strong>${farmName}</strong></div><div>👤 ${userName}</div><div>🔢 رقم المزرعة: <strong style="color:var(--gold)">${farmerId}</strong></div>`;
+  const a=animals.filter(x=>x.status==="alive");
+  document.getElementById("set-stats").innerHTML=`<div>🐑 أحياء: <strong>${a.length}</strong></div><div>💀 أموات: <strong>${animals.filter(x=>x.status==="dead").length}</strong></div><div>🔪 ذبائح: <strong>${animals.filter(x=>x.status==="slaughtered").length}</strong></div>`;
 }
 
-async function delMember(id,n){ if(!confirm(`حذف العضو ${n}؟`)) return; await req("DELETE",`/api/members/${id}`); loadMembers(); }
+async function changeFarmPass(){
+  hideErr("cp-err");hideErr("cp-ok");
+  const o=document.getElementById("cp-old").value,n=document.getElementById("cp-new").value,c=document.getElementById("cp-conf").value;
+  if(!o||!n||!c){showErr("cp-err","⚠️ جميع الحقول مطلوبة");return;}
+  if(n!==c){showErr("cp-err","⚠️ كلمتا المرور غير متطابقتين");return;}
+  if(n.length<6){showErr("cp-err","⚠️ 6 أحرف على الأقل");return;}
+  try{
+    await req("POST","/api/farmer/change-password",{old_password:o,new_password:n});
+    document.getElementById("cp-ok").textContent="✅ تم التغيير!";document.getElementById("cp-ok").classList.add("on");
+    ["cp-old","cp-new","cp-conf"].forEach(f=>document.getElementById(f).value="");
+  }catch(e){showErr("cp-err","⚠️ "+e.message);}
+}
 
-// ═══════════════════════════════════════════
-//  SUPER ADMIN
-// ═══════════════════════════════════════════
+// ═══ SUPER ADMIN ═══
 async function loadFarmers(){
   const f=await req("GET","/api/super/farmers");
   document.getElementById("farms-list").innerHTML=f.map(x=>`
     <div class="farm-card">
       <div class="farm-icon">🌾</div>
-      <div class="farm-info">
-        <div class="farm-name">${x.farm_name}</div>
-        <div class="farm-sub">${x.owner_name} · ${x.email} · ${x.animal_count} حيوان · سُجِّل ${x.created_at?.split("T")[0]||"—"}</div>
-      </div>
-      <span class="${x.status==="active"?"sbactive":x.status==="pending"?"sbpending":"sbsusp"}">${x.status==="active"?"نشط":x.status==="pending"?"في الانتظار":"موقوف"}</span>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        ${x.status==="pending"?`<button class="btn bgr" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'active')">✅ قبول</button>`:""}
-        ${x.status==="active"?`<button class="btn bor" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'suspended')">⏸ وقف</button>`:""}
-        ${x.status==="suspended"?`<button class="btn bgr" style="padding:5px 10px;font-size:12px" onclick="setStatus(${x.id},'active')">▶ تفعيل</button>`:""}
-        <button class="btn brd" style="padding:5px 10px;font-size:12px" onclick="delFarmer(${x.id},'${x.farm_name}')">🗑️</button>
+      <div style="flex:1"><div style="font-size:14px;font-weight:800;color:var(--green)">${x.farm_name}</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">${x.owner_name} · ${x.email} · ${x.animal_count} حيوان</div></div>
+      <span class="${x.status==="active"?"sbactive":x.status==="pending"?"sbpend":"sbsusp"}">${x.status==="active"?"نشط":x.status==="pending"?"انتظار":"موقوف"}</span>
+      <div style="display:flex;gap:5px;flex-wrap:wrap">
+        ${x.status==="pending"?`<button class="btn-sm btn-green" style="width:auto;padding:5px 10px;font-size:11px" onclick="setFarmerStatus(${x.id},'active')">✅ قبول</button>`:""}
+        ${x.status==="active"?`<button class="btn-gold-sm" onclick="setFarmerStatus(${x.id},'suspended')">⏸</button>`:""}
+        ${x.status==="suspended"?`<button class="btn-sm btn-green" style="width:auto;padding:5px 10px;font-size:11px" onclick="setFarmerStatus(${x.id},'active')">▶</button>`:""}
+        <button class="btn-red-sm" onclick="delFarmer(${x.id},'${x.farm_name}')">🗑️</button>
       </div>
     </div>`).join("");
 }
-
-async function setStatus(id,status){ await req("PATCH",`/api/super/farmers/${id}/status`,{status}); loadFarmers(); }
-async function delFarmer(id,n){ if(!confirm(`حذف مزرعة ${n} وكل بياناتها؟`)) return; await req("DELETE",`/api/super/farmers/${id}`); loadFarmers(); }
+async function setFarmerStatus(id,s){await req("PATCH",`/api/super/farmers/${id}/status`,{status:s});loadFarmers();}
+async function delFarmer(id,n){if(!confirm(`حذف مزرعة ${n}؟`)) return;await req("DELETE",`/api/super/farmers/${id}`);loadFarmers();}
 
 async function loadSuperStats(){
   try{
     const s=await req("GET","/api/super/stats");
     document.getElementById("super-stats").innerHTML=[
       {i:"🌾",l:"إجمالي المزارع",v:s.farmers.total,c:"var(--gold)"},
-      {i:"✅",l:"مزارع نشطة",v:s.farmers.active,c:"var(--green)"},
-      {i:"⏳",l:"في الانتظار",v:s.farmers.pending,c:"var(--orange)"},
+      {i:"✅",l:"نشطة",v:s.farmers.active,c:"var(--green)"},
+      {i:"⏳",l:"انتظار",v:s.farmers.pending,c:"var(--gold)"},
       {i:"🐑",l:"إجمالي الحيوانات",v:s.animals.total,c:"var(--blue)"},
-    ].map(x=>`<div class="sc"><div class="si2" style="background:rgba(201,169,110,.1)">${x.i}</div><div><div class="sn" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div></div>`).join("");
+    ].map(x=>`<div class="sc"><div class="si2" style="background:var(--green3)">${x.i}</div><div><div class="sn" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div></div>`).join("");
   }catch(e){}
 }
 
-// ═══════════════════════════════════════════
-//  NAV
-// ═══════════════════════════════════════════
-function goPage(id,btn){
-  document.querySelectorAll("#sc-app .page").forEach(p=>{
-    p.classList.remove("on");
-    p.style.display="none";
-  });
-  document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
-  const pg = document.getElementById("page-"+id);
-  if(pg){ pg.classList.add("on"); pg.style.display="block"; }
-  if(btn) btn.classList.add("on");
-  if(id==="rep") buildReport();
-  if(id==="mbrs") loadMembers();
-  if(id==="settings") loadSettings();
-}
-function goSuperPage(id,btn){
-  document.querySelectorAll("#sc-super-app .page").forEach(p=>p.classList.remove("on"));
-  document.querySelectorAll(".nb").forEach(b=>b.classList.remove("on"));
-  document.getElementById("sp-"+id).classList.add("on"); btn.classList.add("on");
-  if(id==="stats") loadSuperStats();
-}
-
-// ═══════════════════════════════════════════
-//  AUTO REFRESH + INIT
-// ═══════════════════════════════════════════
-
-// ─── BREED FILTER ───────────────────────────────────────────
-let breedFilters = {غنم:null, بقر:null, إبل:null};
-
-const allBreeds = ['نجدي','نعيمي','معزة','حرّي','بربري'];
-
-function toggleFilter(id){
-  const el = document.getElementById(id);
-  if(!el) return;
-  const type = id.replace('filter-','');
-  const container = document.getElementById('breed-filters-'+type);
-  if(container){
-    container.innerHTML = allBreeds.map(b=>`
-      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:700;padding:4px 0;">
-        <input type="radio" name="breed-${type}" value="${b}" ${breedFilters[type]===b?'checked':''} onchange="applyBreedFilter('${type}','${b}')">
-        ${b}
-      </label>
-    `).join('');
-  }
-  el.style.display = el.style.display==='none' ? 'block' : 'none';
-  ['غنم','بقر','إبل'].forEach(t=>{
-    if(t!==type){
-      const other = document.getElementById('filter-'+t);
-      if(other) other.style.display='none';
-    }
-  });
-}
-
-function applyBreedFilter(type, breed){
-  breedFilters[type] = breed;
-  renderTable();
-  // Close dropdown if exists
-  const dd = document.getElementById('filter-'+type);
-  if(dd) dd.style.display='none';
-  // Update button styles
-  const allBreedBtns = document.querySelectorAll('[id^="breed-"][id$="-'+type+'"]');
-  allBreedBtns.forEach(btn=>{
-    const isActive = (breed===null && btn.id==='breed-all-'+type) || 
-                     (breed && btn.id==='breed-'+breed+'-'+type);
-    btn.style.background = isActive ? 'var(--green)' : 'transparent';
-    btn.style.color = isActive ? '#fff' : 'var(--green)';
-    btn.style.border = isActive ? '2px solid var(--green)' : '1.5px solid rgba(45,122,58,.3)';
-  });
-}
-
-function clearBreedFilter(type){
-  applyBreedFilter(type, null);
-}
-
-// Close filters when clicking outside
-document.addEventListener('click', e=>{
-  if(!e.target.closest('[id^="filter-"]') && !e.target.closest('button[onclick^="toggleFilter"]')){
-    ['غنم','بقر','إبل'].forEach(t=>{
-      const el = document.getElementById('filter-'+t);
-      if(el) el.style.display='none';
-    });
-  }
-});
-
-
-// ─── SETTINGS ───────────────────────────────────────────────
-function loadSettings(){
-  // Farm info
-  const infoEl = document.getElementById("farm-info-display");
-  if(infoEl) infoEl.innerHTML = `
-    <div>🌾 <strong>اسم المزرعة:</strong> ${farmName||"—"}</div>
-    <div>👤 <strong>صاحب المزرعة:</strong> ${userName||"—"}</div>
-    <div>🔢 <strong>رقم المزرعة:</strong> ${farmerId||"—"}</div>
-  `;
-  // Quick stats
-  const statsEl = document.getElementById("settings-stats");
-  if(statsEl){
-    const alive = allAnimals.filter(x=>x.status==="alive").length;
-    const dead = allAnimals.filter(x=>x.status==="dead").length;
-    const slau = allAnimals.filter(x=>x.status==="slaughtered").length;
-    statsEl.innerHTML = `
-      <div>🐑 <strong>الأحياء:</strong> ${alive}</div>
-      <div>💀 <strong>الأموات:</strong> ${dead}</div>
-      <div>🔪 <strong>الذبائح:</strong> ${slau}</div>
-      <div>📦 <strong>الإجمالي:</strong> ${allAnimals.length}</div>
-    `;
-  }
-}
-
-async function changeFarmPass(){
-  const oldPass = document.getElementById("farm-old-pass").value;
-  const newPass = document.getElementById("farm-new-pass").value;
-  const conf   = document.getElementById("farm-confirm-pass").value;
-  const errEl  = document.getElementById("pass-err");
-  const okEl   = document.getElementById("pass-ok");
-  errEl.classList.remove("on"); okEl.classList.remove("on");
-  if(!oldPass||!newPass||!conf){errEl.textContent="⚠️ جميع الحقول مطلوبة";errEl.classList.add("on");return;}
-  if(newPass.length<6){errEl.textContent="⚠️ كلمة المرور 6 أحرف على الأقل";errEl.classList.add("on");return;}
-  if(newPass!==conf){errEl.textContent="⚠️ كلمة المرور غير متطابقة";errEl.classList.add("on");return;}
+async function changeSuperPass(){
+  hideErr("scp-err");hideErr("scp-ok");
+  const o=document.getElementById("scp-old").value,n=document.getElementById("scp-new").value,c=document.getElementById("scp-conf").value;
+  if(!o||!n||!c){showErr("scp-err","⚠️ جميع الحقول مطلوبة");return;}
+  if(n!==c){showErr("scp-err","⚠️ كلمتا المرور غير متطابقتين");return;}
   try{
-    await req("POST","/api/farmer/change-password",{old_password:oldPass,new_password:newPass});
-    okEl.textContent="✅ تم تغيير كلمة المرور!"; okEl.classList.add("on");
-    document.getElementById("farm-old-pass").value="";
-    document.getElementById("farm-new-pass").value="";
-    document.getElementById("farm-confirm-pass").value="";
-  }catch(e){errEl.textContent="⚠️ "+e.message;errEl.classList.add("on");}
+    await req("POST","/api/super/change-password",{old_password:o,new_password:n});
+    document.getElementById("scp-ok").textContent="✅ تم!";document.getElementById("scp-ok").classList.add("on");
+    ["scp-old","scp-new","scp-conf"].forEach(f=>document.getElementById(f).value="");
+  }catch(e){showErr("scp-err","⚠️ "+e.message);}
 }
 
-// دخول الإدارة السري - 5 ضغطات على الشعار
-let _lc=0,_lt;
-function logoClick(){_lc++;clearTimeout(_lt);_lt=setTimeout(()=>_lc=0,2000);if(_lc>=5){_lc=0;show('sc-super');}}
+// ═══ AUTO REFRESH + INIT ═══
+setInterval(()=>{
+  const repPage=document.getElementById("page-rep");
+  if(repPage&&repPage.classList.contains("on")) buildReport();
+},30000);
 
+// Admin login route
+if(window.location.pathname.includes("admin-login")) goTo("sc-super");
 
-function togglePregnant(){
-  const gender = document.getElementById("f-gender").value;
-  const wrap = document.getElementById("f-pregnant-wrap");
-  if(wrap) wrap.style.display = gender==="أنثى" ? "block" : "none";
-}
-
-setInterval(()=>{ if(document.getElementById("page-rep")?.classList.contains("on")) buildReport(); },30000);
-
-async function changeAdminPass(){
-  const oldPass = document.getElementById("cp-old").value;
-  const newPass = document.getElementById("cp-new").value;
-  const confirm = document.getElementById("cp-confirm").value;
-  const errEl = document.getElementById("cp-err");
-  const okEl  = document.getElementById("cp-ok");
-  errEl.classList.remove("on"); okEl.classList.remove("on");
-
-  if(!oldPass || !newPass || !confirm){
-    errEl.textContent="⚠️ جميع الحقول مطلوبة"; errEl.classList.add("on"); return;
-  }
-  if(newPass.length < 6){
-    errEl.textContent="⚠️ كلمة المرور 6 أحرف على الأقل"; errEl.classList.add("on"); return;
-  }
-  if(newPass !== confirm){
-    errEl.textContent="⚠️ كلمة المرور غير متطابقة"; errEl.classList.add("on"); return;
-  }
-  try{
-    await req("POST","/api/super/change-password",{old_password:oldPass, new_password:newPass});
-    okEl.textContent="✅ تم تغيير كلمة المرور بنجاح!"; okEl.classList.add("on");
-    document.getElementById("cp-old").value="";
-    document.getElementById("cp-new").value="";
-    document.getElementById("cp-confirm").value="";
-  }catch(e){
-    errEl.textContent="⚠️ "+e.message; errEl.classList.add("on");
-  }
-}
-
-// فحص الرابط - إذا كان admin-login افتح شاشة الإدارة
-if(window.location.pathname.includes('admin-login')){
-  show('sc-super');
-}
-
-const saved=localStorage.getItem("herd_token");
+// Restore session
+const saved=localStorage.getItem("mw_token");
 if(saved){
   try{
-    const raw=saved.split(".")[1].replace(/-/g,"+").replace(/_/g,"/").padEnd(Math.ceil(saved.split(".")[1].length/4)*4,"="); const p=JSON.parse(atob(raw));
+    const raw=saved.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");
+    const p=JSON.parse(atob(raw));
     if(Date.now()/1000<p.exp){
       token=saved;
-      if(p.type==="superadmin"){ show("sc-super-app"); setTimeout(()=>{loadFarmers(); loadSuperStats();},100); }
-      else{ userType=p.type; userRole=p.role; farmerId=p.farmer_id; farmName=p.farm_name; userName=p.owner_name||p.full_name||p.username; launchApp(); }
-    } else { localStorage.removeItem("herd_token"); }
-  }catch{ localStorage.removeItem("herd_token"); }
+      if(p.type==="superadmin"){goTo("sc-super-app");loadFarmers();loadSuperStats();}
+      else{userType=p.type;userRole=p.role;farmerId=p.farmer_id;farmName=p.farm_name;userName=p.owner_name||p.full_name||p.username;launchApp();}
+    }else localStorage.removeItem("mw_token");
+  }catch{localStorage.removeItem("mw_token");}
 }
-
-
 </script>
 </body>
 </html>
