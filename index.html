@@ -770,7 +770,26 @@ async function doSearch(){
 }
 
 // ═══ ADD / EDIT ═══
-function togglePreg(){const g=document.getElementById("f-gender").value;document.getElementById("f-preg-wrap").style.display=g==="أنثى"?"block":"none";}
+function togglePreg(){
+  const g=document.getElementById("f-gender").value;
+  const wrap=document.getElementById("f-preg-wrap");
+  const lbl=document.getElementById("f-preg-label");
+  if(g==="أنثى"){
+    wrap.style.display="block";
+    lbl.textContent="حامل؟";
+    document.querySelectorAll("input[name='f-preg']").forEach((r,i)=>{
+      r.nextSibling.textContent=i===0?" لا":" نعم 🤰";
+    });
+  } else if(g==="ذكر"){
+    wrap.style.display="block";
+    lbl.textContent="فحل؟";
+    document.querySelectorAll("input[name='f-preg']").forEach((r,i)=>{
+      r.nextSibling.textContent=i===0?" لا":" نعم 🐏";
+    });
+  } else {
+    wrap.style.display="none";
+  }
+}
 function openAdd(){
   editId=null;document.getElementById("mo-title").textContent="➕ إضافة حيوان";
   ["f-num","f-body","f-ear","f-notes","f-mom"].forEach(f=>document.getElementById(f).value="");
