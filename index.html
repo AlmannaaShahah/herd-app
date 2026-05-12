@@ -642,7 +642,7 @@ function setSession(d,type){
   token=d.token;userType=type;farmName=d.farm_name||"مزرعتي";
   userName=d.owner_name||d.full_name||d.username||"";
   userRole=d.role||"admin";
-  try{const p=JSON.parse(atob(token.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));farmerId=p.farmer_id;}catch(e){farmerId=null;}
+  try{const p=parseJWT(token);farmerId=p?p.farmer_id:null;}catch(e){farmerId=null;}
   localStorage.setItem("mw_token",token);
 }
 
@@ -983,15 +983,28 @@ setInterval(()=>{
 if(window.location.pathname.includes("admin-login")) goTo("sc-super");
 
 // Restore session
+function parseJWT(t){
+  try{
+    const raw=t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");
+    // Handle UTF-8 Arabic characters in JWT
+    const decoded=atob(raw);
+    const bytes=new Uint8Array(decoded.length);
+    for(let i=0;i<decoded.length;i++) bytes[i]=decoded.charCodeAt(i);
+    return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+  }catch(e){
+    try{return JSON.parse(atob(t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));}
+    catch(e2){return null;}
+  }
+}
+
 const saved=localStorage.getItem("mw_token");
 if(saved){
   try{
-    const raw=saved.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");
-    const p=JSON.parse(atob(raw));
-    if(Date.now()/1000<p.exp){
+    const p=parseJWT(saved);
+    if(p && Date.now()/1000<p.exp){
       token=saved;
       if(p.type==="superadmin"){goTo("sc-super-app");loadFarmers();loadSuperStats();}
-      else{userType=p.type;userRole=p.role;farmerId=p.farmer_id;farmName=p.farm_name;userName=p.owner_name||p.full_name||p.username;launchApp();}
+      else{userType=p.type;userRole=p.role;farmerId=p.farmer_id;farmName=p.farm_name||"مزرعتي";userName=p.owner_name||p.full_name||p.username||"";launchApp();}
     }else localStorage.removeItem("mw_token");
   }catch{localStorage.removeItem("mw_token");}
 }
