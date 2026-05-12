@@ -66,10 +66,13 @@ async function initDB() {
     full_name VARCHAR(100),
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('admin','member') DEFAULT 'member',
+    last_seen TIMESTAMP NULL DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (farmer_id) REFERENCES farmers(id) ON DELETE CASCADE,
     UNIQUE KEY uniq_member (farmer_id, username)
   )`);
+  try { await pool.query("ALTER TABLE members ADD COLUMN last_seen TIMESTAMP NULL DEFAULT NULL"); } catch(e) {}
+  try { await pool.query("ALTER TABLE farmers ADD COLUMN last_seen TIMESTAMP NULL DEFAULT NULL"); } catch(e) {}
   await pool.query(`CREATE TABLE IF NOT EXISTS animals (
     id INT AUTO_INCREMENT PRIMARY KEY,
     farmer_id INT NOT NULL,
@@ -421,6 +424,34 @@ app.post("/api/super/change-password", authSuper, async (req, res) => {
   const hash = await bcrypt.hash(new_password, 10);
   await pool.query("UPDATE admins SET password_hash=? WHERE username='superadmin'", [hash]);
   res.json({ success: true });
+});
+
+// ── نظام تتبع النشاط ─────────────────────────────────────
+app.post("/api/ping", authFarmer, async (req, res) => {
+  const pool = await getDB();
+  const now = new Date();
+  if(req.user.type === "farmer") {
+    await pool.query("UPDATE farmers SET last_seen=? WHERE id=?", [now, req.farmer_id]);
+  } else {
+    await pool.query("UPDATE members SET last_seen=? WHERE farmer_id=? AND username=?", [now, req.farmer_id, req.user.username]);
+  }
+  res.json({ ok: true });
+});
+
+// ── جلب حالة الأعضاء ─────────────────────────────────────
+app.get("/api/members/status", authFarmer, async (req, res) => {
+  const pool = await getDB();
+  const [rows] = await pool.query(
+    "SELECT id, username, full_name, role, last_seen FROM members WHERE farmer_id=?",
+    [req.farmer_id]
+  );
+  const now = new Date();
+  const result = rows.map(m => ({
+    ...m,
+    online: m.last_seen && (now - new Date(m.last_seen)) < 5 * 60 * 1000,
+    last_seen_ago: m.last_seen ? Math.floor((now - new Date(m.last_seen)) / 60000) : null
+  }));
+  res.json(result);
 });
 
 app.listen(PORT, async () => {
