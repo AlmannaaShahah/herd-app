@@ -668,6 +668,7 @@ function launchApp(){
     document.getElementById("view-notice").classList.add("on");
   }
   loadAnimals();
+  sendPing();
 }
 
 // ═══ ANIMALS ═══
@@ -895,11 +896,30 @@ async function buildReport(){
 
 // ═══ MEMBERS ═══
 async function loadMbrs(){
-  const m=await req("GET","/api/members");
-  document.getElementById("mbr-grid").innerHTML=m.map(u=>`
+  const m=await req("GET","/api/members/status");
+  const onlineCount = m.filter(u=>u.online).length;
+  document.getElementById("mbr-grid").innerHTML=`
+    <div style="margin-bottom:14px;padding:12px 16px;background:var(--green3);border:1px solid rgba(45,122,58,.2);border-radius:10px;font-size:13px;font-weight:800;color:var(--green);display:flex;align-items:center;gap:8px;">
+      <span style="width:8px;height:8px;background:var(--green);border-radius:50%;display:inline-block;"></span>
+      ${onlineCount} متصل الآن من أصل ${m.length} عضو
+    </div>` +
+  m.map(u=>`
     <div class="mbr-card">
-      <div class="mbr-av" style="background:${u.role==="admin"?"var(--green3)":"var(--blue3)"}">${u.role==="admin"?"🛠️":"👁️"}</div>
-      <div style="flex:1"><div style="font-size:13px;font-weight:800">${u.full_name||u.username}</div><div style="font-size:11px;color:var(--muted)">${u.username} · ${u.role==="admin"?"مشرف":"عضو"}</div></div>
+      <div style="position:relative;">
+        <div class="mbr-av" style="background:${u.role==="admin"?"var(--green3)":"var(--blue3)"}">${u.role==="admin"?"🛠️":"👁️"}</div>
+        <span style="position:absolute;bottom:0;left:0;width:10px;height:10px;border-radius:50%;background:${u.online?"#22c55e":"#d1d5db"};border:2px solid white;"></span>
+      </div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;">
+          ${u.full_name||u.username}
+          ${u.online?'<span style="font-size:10px;background:#dcfce7;color:#16a34a;padding:2px 7px;border-radius:10px;font-weight:800;">متصل</span>':''}
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">
+          ${u.username} · ${u.role==="admin"?"مشرف":"عضو"}
+          ${!u.online && u.last_seen_ago!==null ? ` · آخر ظهور: منذ ${u.last_seen_ago < 60 ? u.last_seen_ago+" دقيقة" : Math.floor(u.last_seen_ago/60)+" ساعة"}` : ""}
+          ${!u.online && u.last_seen_ago===null ? " · لم يدخل بعد" : ""}
+        </div>
+      </div>
       <button class="btn-red-sm" onclick="delMbr(${u.id},'${u.username}')">حذف</button>
     </div>`).join("");
 }
@@ -978,9 +998,19 @@ async function changeSuperPass(){
 }
 
 // ═══ AUTO REFRESH + INIT ═══
+// ── Ping كل دقيقتين ──
+async function sendPing(){
+  if(!token) return;
+  try{ await req("POST","/api/ping",{}); }catch(e){}
+}
+setInterval(sendPing, 2*60*1000);
+
 setInterval(()=>{
   const repPage=document.getElementById("page-rep");
   if(repPage&&repPage.classList.contains("on")) buildReport();
+  // تحديث حالة الأعضاء كل 30 ثانية لو الصفحة مفتوحة
+  const mbrsPage=document.getElementById("page-mbrs");
+  if(mbrsPage&&mbrsPage.classList.contains("on")) loadMbrs();
 },30000);
 
 // Admin login route
