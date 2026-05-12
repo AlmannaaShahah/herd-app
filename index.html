@@ -331,6 +331,7 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
         </div>
       </div>
       <div class="sgrid">
+        <div class="sc"><div class="si2" style="background:var(--s3);">📦</div><div><div class="sn" id="s-total" style="color:var(--text)">—</div><div class="sl">الكل</div></div></div>
         <div class="sc"><div class="si2" style="background:var(--green3);">🐑</div><div><div class="sn" id="s-alive" style="color:var(--green)">—</div><div class="sl">الأحياء</div></div></div>
         <div class="sc"><div class="si2" style="background:rgba(185,138,255,.12);">🐏</div><div><div class="sn" id="s-moms" style="color:#8b5cf6">—</div><div class="sl">الأمهات</div></div></div>
         <div class="sc"><div class="si2" style="background:var(--blue3);">♂</div><div><div class="sn" id="s-males" style="color:var(--blue)">—</div><div class="sl">ذكور</div></div></div>
@@ -678,6 +679,7 @@ async function loadAnimals(){
 
 function renderStats(){
   const a=animals.filter(x=>x.status==="alive");
+  document.getElementById("s-total").textContent=animals.length;
   document.getElementById("s-alive").textContent=a.length;
   document.getElementById("s-males").textContent=a.filter(x=>x.gender==="ذكر").length;
   document.getElementById("s-females").textContent=a.filter(x=>x.gender==="أنثى").length;
