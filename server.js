@@ -16,21 +16,17 @@ const fs = require("fs");
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
+function sendHTML(req, res) {
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
   const p = path.join(__dirname, "index.html");
   const p2 = path.join(__dirname, "public", "index.html");
   if (fs.existsSync(p)) res.sendFile(p);
   else if (fs.existsSync(p2)) res.sendFile(p2);
   else res.send("مواشيك - Server Running!");
-});
+}
 
-app.get("/admin-login", (req, res) => {
-  const p = path.join(__dirname, "index.html");
-  const p2 = path.join(__dirname, "public", "index.html");
-  if (fs.existsSync(p)) res.sendFile(p);
-  else if (fs.existsSync(p2)) res.sendFile(p2);
-  else res.send("Not found");
-});
+app.get("/", sendHTML);
+app.get("/admin-login", sendHTML);
 
 // ── اتصال قاعدة البيانات ─────────────────────────────────
 let db;
