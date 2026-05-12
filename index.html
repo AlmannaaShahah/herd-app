@@ -352,7 +352,7 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
           </div>
         </div>
         <div class="th2">
-          <h3>🐑 جدول الغنم</h3>
+          <h3>🐑 جدول الغنم &nbsp;<span id="table-count" style="font-size:13px;font-weight:700;color:var(--muted);background:var(--s3);padding:3px 10px;border-radius:20px;"></span></h3>
           <div class="tabs">
             <button class="tab on" onclick="setFilt('all',this)">الكل</button>
             <button class="tab" onclick="setFilt('f',this)">إناث</button>
@@ -703,6 +703,8 @@ function renderTable(){
   else if(curFilt==="d") d=d.filter(x=>x.status==="dead");
   else if(curFilt==="s") d=d.filter(x=>x.status==="slaughtered");
   const kc=id=>animals.filter(c=>c.mother_id===id&&c.status==="alive").length;
+  const countEl=document.getElementById("table-count");
+  if(countEl) countEl.textContent=d.length+" رأس";
   document.getElementById("tbody").innerHTML=d.map(x=>{
     const k=kc(x.id);
     const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
