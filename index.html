@@ -249,8 +249,9 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
   tbody td:nth-child(9),
   tbody td:nth-child(10){display:none;}
 
-  /* Make table font smaller */
-  table{font-size:12px;min-width:unset;}
+  /* Disable table scroll on mobile */
+  .tw{overflow-x:hidden;}
+  table{font-size:11px;min-width:unset;width:100%;}
   tbody td{padding:8px 8px;}
   thead th{padding:8px 8px;}
 
@@ -971,11 +972,16 @@ async function buildReport(){
     document.getElementById("s-cnt").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--gold)">${t.slaughtered}</span> <span style="font-size:12px;color:var(--muted)">ذبيحة</span>`;
     document.getElementById("s-tbody").innerHTML=(r.slau||[]).length?(r.slau||[]).map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.age_label||"—"}</td><td style="color:var(--gold)">${x.slaughter_reason||"—"}</td><td style="color:var(--muted)">${x.slaughter_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد ذبائح</td></tr>`;
     document.getElementById("br-tbody").innerHTML=(r.breeds||[]).map(b=>`<tr><td style="font-weight:700">${b.breed||"—"}</td><td style="color:${b.gender==="أنثى"?"#8b5cf6":"var(--blue)"}">${b.gender}</td><td style="color:var(--green);font-weight:800">${b.cnt}</td><td style="color:var(--muted)">${t.alive?((b.cnt/t.alive)*100).toFixed(1)+"%":"—"}</td></tr>`).join("");
-    // الحوامل - من البيانات المحملة
-    const pregAnimals = animals.filter(x=>x.pregnant==="yes"&&x.status==="alive");
-    document.getElementById("preg-cnt").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--red)">${pregAnimals.length}</span> <span style="font-size:12px;color:var(--muted)">حامل</span>`;
-    document.getElementById("preg-tbody").innerHTML=pregAnimals.length?pregAnimals.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.breed||"—"}</td><td style="color:#8b5cf6;font-weight:700">${x.age_label||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد حوامل</td></tr>`;
+
   }catch(e){console.error(e);}
+  // الحوامل - خارج try/catch
+  try{
+    const pregAnimals = animals.filter(x=>x.pregnant==="yes"&&x.status==="alive");
+    const pregCnt = document.getElementById("preg-cnt");
+    const pregTbody = document.getElementById("preg-tbody");
+    if(pregCnt) pregCnt.innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--red)">${pregAnimals.length}</span> <span style="font-size:12px;color:var(--muted)">حامل</span>`;
+    if(pregTbody) pregTbody.innerHTML=pregAnimals.length?pregAnimals.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.breed||"—"}</td><td style="color:#8b5cf6;font-weight:700">${x.age_label||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد حوامل</td></tr>`;
+  }catch(e2){console.error(e2);}
 }
 
 // ═══ MEMBERS ═══
