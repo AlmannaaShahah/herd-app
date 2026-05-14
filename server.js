@@ -426,6 +426,27 @@ app.post("/api/super/change-password", authSuper, async (req, res) => {
   res.json({ success: true });
 });
 
+// دخول عضو تلقائي - يبحث في كل المزارع
+app.post("/api/login/member/auto", async (req, res) => {
+  const { username, password } = req.body;
+  if(!username || !password) return res.status(400).json({error:"جميع الحقول مطلوبة"});
+  const pool = await getDB();
+  const [rows] = await pool.query(
+    "SELECT m.*, f.farm_name, f.status AS farm_status FROM members m JOIN farmers f ON f.id=m.farmer_id WHERE m.username=?",
+    [username]
+  );
+  if(!rows.length) return res.status(401).json({error:"اسم المستخدم غير موجود"});
+  const m = rows[0];
+  if(m.farm_status !== "active") return res.status(403).json({error:"المزرعة غير نشطة"});
+  if(!await bcrypt.compare(password, m.password_hash))
+    return res.status(401).json({error:"كلمة المرور غير صحيحة"});
+  const token = jwt.sign(
+    {type:"member", farmer_id:m.farmer_id, farm_name:m.farm_name, username:m.username, full_name:m.full_name, role:m.role},
+    SECRET, {expiresIn:"24h"}
+  );
+  res.json({token, farm_name:m.farm_name, full_name:m.full_name, role:m.role, type:"member"});
+});
+
 // ── نظام تتبع النشاط ─────────────────────────────────────
 app.post("/api/ping", authFarmer, async (req, res) => {
   const pool = await getDB();
