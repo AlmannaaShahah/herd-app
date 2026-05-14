@@ -253,7 +253,7 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
   .tw{overflow-x:hidden;}
   table{font-size:11px;min-width:unset;width:100%;}
   /* Hide emoji in status badges on mobile */
-  .sbdead .em, .sbslau .em, .sbpreg .em{display:none;}
+  .sbdead .em, .sbslau .em, .sbpreg .em, .alive-dot{display:none;}
   tbody td{padding:8px 8px;}
   thead th{padding:8px 8px;}
 
@@ -273,8 +273,6 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
 
   /* Members */
   .mbr-grid{grid-template-columns:1fr;}
-  /* Hide emoji in status on mobile */
-  .sbdead .em, .sbslau .em, .sbpreg .em{display:none;}
 }
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:var(--s2);}
@@ -798,8 +796,8 @@ function renderTable(){
     const k=kc(x.id);
     const mT=x.mother_number?`<span style="color:var(--gold);cursor:pointer;font-weight:700" onclick="event.stopPropagation();goNum('${x.mother_number}')">${x.mother_number}</span>`:`<span style="color:var(--muted2)">أم أصلية</span>`;
     const kT=k>0?`<span style="color:var(--green);font-weight:800">${k} 🍼</span>`:`<span style="color:var(--muted2)">—</span>`;
-    const pregLabel = x.pregnant==="yes" ? (x.gender==="أنثى" ? "🤰 حامل" : "🐏 فحل") : null;
-    const st=x.status==="dead"?`<span class="sbdead"><span class="em">💀 </span>${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau"><span class="em">🔪 </span>${x.slaughter_reason||"ذبح"}</span>`:pregLabel?`<span class="sbpreg">${pregLabel}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800">● حي</span>`;
+    const pregLabel = x.pregnant==="yes" ? (x.gender==="أنثى" ? '<span class="em">🤰 </span>حامل' : '<span class="em">🐏 </span>فحل') : null;
+    const st=x.status==="dead"?`<span class="sbdead"><span class="em">💀 </span>${x.death_reason||"وفاة"}</span>`:x.status==="slaughtered"?`<span class="sbslau"><span class="em">🔪 </span>${x.slaughter_reason||"ذبح"}</span>`:pregLabel?`<span class="sbpreg">${pregLabel}</span>`:`<span style="color:var(--green);font-size:11px;font-weight:800"><span class="alive-dot">● </span>حي</span>`;
     let ac="";
     if(canEdit){
       let b=`<button class="ab ab-edit" onclick="event.stopPropagation();openEdit(${x.id})">✏️</button>`;
