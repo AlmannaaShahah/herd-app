@@ -454,8 +454,6 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
       <div class="rsec"><div class="rst">🍼 المواليد</div><div class="rgrid" id="rg2"></div></div>
       <div class="rsec"><div class="rst">💀 الأموات</div><div id="d-cnt" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>الجنس</th><th>العمر</th><th>سبب الوفاة</th><th>التاريخ</th></tr></thead><tbody id="d-tbody"></tbody></table></div>
       <div class="rsec"><div class="rst">🔪 الذبائح</div><div id="s-cnt" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>العمر</th><th>سبب الذبح</th><th>التاريخ</th></tr></thead><tbody id="s-tbody"></tbody></table></div>
-      <div class="rsec"><div class="rst">🤰 الحوامل</div><div id="preg-cnt" style="margin-bottom:10px"></div><table class="rt3"><thead><tr><th>الرقم</th><th>النوع</th><th>العمر</th><th>الميلاد</th></tr></thead><tbody id="preg-tbody"></tbody></table></div>
-
       <div class="rsec"><div class="rst">🐑 توزيع الأنواع</div><table class="rt3"><thead><tr><th>النوع</th><th>الجنس</th><th>العدد</th><th>النسبة</th></tr></thead><tbody id="br-tbody"></tbody></table></div>
 
     </div>
@@ -973,8 +971,8 @@ async function buildReport(){
     document.getElementById("s-cnt").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--gold)">${t.slaughtered}</span> <span style="font-size:12px;color:var(--muted)">ذبيحة</span>`;
     document.getElementById("s-tbody").innerHTML=(r.slau||[]).length?(r.slau||[]).map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.age_label||"—"}</td><td style="color:var(--gold)">${x.slaughter_reason||"—"}</td><td style="color:var(--muted)">${x.slaughter_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد ذبائح</td></tr>`;
     document.getElementById("br-tbody").innerHTML=(r.breeds||[]).map(b=>`<tr><td style="font-weight:700">${b.breed||"—"}</td><td style="color:${b.gender==="أنثى"?"#8b5cf6":"var(--blue)"}">${b.gender}</td><td style="color:var(--green);font-weight:800">${b.cnt}</td><td style="color:var(--muted)">${t.alive?((b.cnt/t.alive)*100).toFixed(1)+"%":"—"}</td></tr>`).join("");
-    // الحوامل
-    const pregAnimals = (allAnimals||[]).filter(x=>x.pregnant==="yes"&&x.status==="alive");
+    // الحوامل - من البيانات المحملة
+    const pregAnimals = animals.filter(x=>x.pregnant==="yes"&&x.status==="alive");
     document.getElementById("preg-cnt").innerHTML=`<span style="font-size:20px;font-weight:900;color:var(--red)">${pregAnimals.length}</span> <span style="font-size:12px;color:var(--muted)">حامل</span>`;
     document.getElementById("preg-tbody").innerHTML=pregAnimals.length?pregAnimals.map(x=>`<tr><td class="nc">🐑 ${x.animal_number}</td><td>${x.breed||"—"}</td><td style="color:#8b5cf6;font-weight:700">${x.age_label||"—"}</td><td style="color:var(--muted)">${x.birth_date?.split("T")[0]||"—"}</td></tr>`).join(""):`<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:16px">لا توجد حوامل</td></tr>`;
   }catch(e){console.error(e);}
