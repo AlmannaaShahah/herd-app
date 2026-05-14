@@ -205,6 +205,72 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
 .sbpend{background:var(--gold3);color:var(--gold);border:1px solid rgba(184,134,11,.2);padding:3px 9px;border-radius:12px;font-size:11px;font-weight:800;}
 .sbsusp{background:var(--red3);color:var(--red);border:1px solid rgba(192,57,43,.2);padding:3px 9px;border-radius:12px;font-size:11px;font-weight:800;}
 
+
+/* === MOBILE === */
+@media (max-width: 768px) {
+
+  /* Header - stack on mobile */
+  .hdr{height:auto;padding:10px 12px;flex-wrap:wrap;gap:6px;}
+  .hdr-nav{order:3;width:100%;margin:0;border-top:1px solid var(--border);padding-top:6px;overflow-x:auto;}
+  .nav-btn{font-size:12px;padding:5px 10px;}
+  .role-badge{font-size:10px;padding:3px 8px;}
+  .logout-btn{font-size:11px;padding:4px 9px;}
+
+  /* Bottom nav for mobile */
+  .hdr-nav{
+    position:fixed;bottom:0;left:0;right:0;
+    background:var(--s1);border-top:2px solid var(--border);
+    padding:8px 4px;z-index:100;
+    display:flex;justify-content:space-around;
+    box-shadow:0 -4px 12px rgba(107,76,42,.08);
+    width:100%;margin:0;order:0;
+  }
+  .nav-btn{
+    flex:1;text-align:center;border-radius:10px;
+    font-size:11px;padding:6px 4px;
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+  }
+  #sc-app .wrap{padding-bottom:70px;}
+
+  /* Stats grid - 2 columns */
+  .sgrid{grid-template-columns:repeat(2,1fr);}
+
+  /* Hide less important table columns on mobile */
+  thead th:nth-child(2),
+  thead th:nth-child(5),
+  thead th:nth-child(7),
+  thead th:nth-child(9),
+  thead th:nth-child(10),
+  thead th:nth-child(11),
+  tbody td:nth-child(2),
+  tbody td:nth-child(5),
+  tbody td:nth-child(7),
+  tbody td:nth-child(9),
+  tbody td:nth-child(10),
+  tbody td:nth-child(11){display:none;}
+
+  /* Make table font smaller */
+  table{font-size:12px;min-width:unset;}
+  tbody td{padding:8px 8px;}
+  thead th{padding:8px 8px;}
+
+  /* Search box */
+  .srow{gap:6px;}
+  .sinput{font-size:13px;}
+
+  /* Auth cards */
+  .auth-card{padding:24px 18px;}
+
+  /* Modal */
+  .fg{grid-template-columns:1fr;}
+  .ff.full{grid-column:1;}
+
+  /* Settings */
+  .set-grid{grid-template-columns:1fr;}
+
+  /* Members */
+  .mbr-grid{grid-template-columns:1fr;}
+}
 ::-webkit-scrollbar{width:5px;height:5px;}
 ::-webkit-scrollbar-track{background:var(--s2);}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
@@ -231,11 +297,10 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
   <div class="auth-wrap">
     <div class="auth-card">
       <h2>🔐 تسجيل الدخول</h2>
-      <div class="af"><label>البريد أو اسم المستخدم</label><input id="l-val" autocomplete="username"></div>
+      <div class="af"><label>اسم المستخدم أو البريد</label><input id="l-val" autocomplete="username"></div>
       <div class="af"><label>كلمة المرور</label><input id="l-pass" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <div class="err-box" id="l-err"></div>
       <button class="btn btn-green" onclick="doLogin()">دخول →</button>
-      <div class="switch-link" onclick="goTo('sc-member-login')">دخول كـ <span>عضو في مزرعة</span></div>
       <div class="back-link" onclick="goTo('sc-land')">← رجوع</div>
     </div>
   </div>
@@ -294,10 +359,10 @@ tbody td{padding:10px 12px;white-space:nowrap;color:var(--text);}
     <div class="hdr-logo">🐑</div>
     <div><div class="hdr-name" id="hdr-farm">—</div><div class="hdr-farm" id="hdr-user">—</div></div>
     <nav class="hdr-nav">
-      <button class="nav-btn on" onclick="goPage('dash',this)">📊 الرئيسية</button>
-      <button class="nav-btn" onclick="goPage('rep',this)">📋 التقارير</button>
-      <button class="nav-btn" id="nb-mbrs" onclick="goPage('mbrs',this)" style="display:none">👥 الأعضاء</button>
-      <button class="nav-btn" id="nb-set" onclick="goPage('set',this)" style="display:none">⚙️ الإعدادات</button>
+      <button class="nav-btn on" onclick="goPage('dash',this)">📊<span>الرئيسية</span></button>
+      <button class="nav-btn" onclick="goPage('rep',this)">📋<span>التقارير</span></button>
+      <button class="nav-btn" id="nb-mbrs" onclick="goPage('mbrs',this)" style="display:none">👥<span>الأعضاء</span></button>
+      <button class="nav-btn" id="nb-set" onclick="goPage('set',this)" style="display:none">⚙️<span>الإعدادات</span></button>
     </nav>
     <div class="role-badge" id="rbdg">—</div>
     <button class="logout-btn" onclick="doLogout()">خروج</button>
@@ -584,12 +649,27 @@ function hideErr(id){document.getElementById(id).classList.remove("on");}
 // ═══ AUTH ═══
 async function doLogin(){
   hideErr("l-err");
+  const v=document.getElementById("l-val").value.trim();
+  const p=document.getElementById("l-pass").value;
+  if(!v||!p){showErr("l-err","⚠️ أدخل اسم المستخدم وكلمة المرور");return;}
+  
+  // جرّب دخول المشرف/صاحب المزرعة أولاً
   try{
-    const v=document.getElementById("l-val").value.trim();
-    const d=await req("POST","/api/login/farmer",{email:v,username:v,password:document.getElementById("l-pass").value});
+    const d=await req("POST","/api/login/farmer",{email:v,username:v,password:p});
     setSession(d,"farmer");
     launchApp();
-  }catch(e){showErr("l-err",e.message);}
+    return;
+  }catch(e1){}
+  
+  // إذا فشل، جرّب دخول العضو
+  try{
+    const d=await req("POST","/api/login/member/auto",{username:v,password:p});
+    setSession(d,"member");
+    launchApp();
+    return;
+  }catch(e2){
+    showErr("l-err","⚠️ اسم المستخدم أو كلمة المرور غير صحيحة");
+  }
 }
 
 async function doMemberLogin(){
