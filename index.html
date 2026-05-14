@@ -977,6 +977,9 @@ async function buildReport(){
 
   }catch(e){console.error(e);}
   // الحوامل - دائماً من animals المحملة
+  console.log("animals total:", animals.length);
+  console.log("pregnant animals:", animals.filter(x=>x.pregnant==="yes").length);
+  console.log("sample:", animals.slice(0,3).map(x=>({num:x.animal_number,preg:x.pregnant,status:x.status})));
   const pregAnimals = animals.filter(x=>x.pregnant==="yes"&&x.status==="alive");
   const pregCnt = document.getElementById("preg-cnt");
   const pregTbody = document.getElementById("preg-tbody");
