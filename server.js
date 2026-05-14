@@ -331,9 +331,8 @@ app.get("/api/report", authFarmer, async (req, res) => {
     FROM animals a LEFT JOIN animals c ON c.mother_id=a.id AND c.status='alive'
     WHERE a.farmer_id=? AND a.gender='أنثى' AND a.status='alive'
     GROUP BY a.id HAVING kids_count>0 ORDER BY kids_count DESC LIMIT 5`, [fid]);
-  const [ready]  = await pool.query("SELECT animal_number,age_label,breed,birth_date FROM animals WHERE farmer_id=? AND gender='أنثى' AND status='alive' AND age_label IN ('ثني','سديس','جامع') ORDER BY animal_number", [fid]);
-  const [[k3m]]  = await pool.query("SELECT COUNT(*) cnt FROM animals WHERE farmer_id=? AND mother_id IS NOT NULL AND status='alive' AND birth_date>=DATE_SUB(NOW(),INTERVAL 3 MONTH)", [fid]);
-  res.json({ totals:t, breeds, dead, slau, moms, ready, kids3m:k3m.cnt });
+  const [pregnant] = await pool.query("SELECT animal_number,age_label,breed,birth_date FROM animals WHERE farmer_id=? AND pregnant='yes' AND status='alive' ORDER BY animal_number", [fid]);
+  res.json({ totals:t, breeds, dead, slau, moms, pregnant });
 });
 
 // ════════════════════════════════════════════════════════════
